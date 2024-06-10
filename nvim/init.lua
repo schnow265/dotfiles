@@ -1,5 +1,6 @@
--- set keybinds
+-- set keybinds and nvim options
 vim.g.mapleader = ';'
+vim.o.number = true
 
 -- Lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -15,7 +16,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 
 vim.opt.rtp:prepend(lazypath)
-    
+
 require("lazy").setup("plugins")
 
 vim.cmd 'colorscheme nord'
@@ -28,4 +29,4 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 -- NeoTree
-vim.api.nvim_set_keymap('n', '<leader>f', ':Neotree filesystem toggle left<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>x', ':Neotree filesystem toggle left<CR>', { noremap = true, silent = true })
