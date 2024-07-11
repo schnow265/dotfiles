@@ -138,7 +138,6 @@
       # '';
 
       ".hl-omp.json".source = ./oh-my-posh.json;
-      ".gitconfig".source = ./.gitconfig;
     };
 
     sessionVariables = {
