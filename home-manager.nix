@@ -34,7 +34,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
     pkgs.nix-prefetch-git
-
+    pkgs.docker
     # Shell
     pkgs.zinit
     pkgs.fzf
@@ -69,11 +69,11 @@
     pkgs.nmap
     pkgs.tree
     pkgs.imagemagick
+    pkgs.jfrog-cli
 
     # Compilers & libs
     pkgs.libgcc
     pkgs.libgccjit
-    pkgs.binutils
     pkgs.glibc
     pkgs.dotnetCorePackages.sdk_9_0
     pkgs.gnumake
@@ -97,6 +97,7 @@
     pkgs.cljfmt
     pkgs.clj-kondo
     pkgs.rust-analyzer
+    pkgs.ncurses
 
     # Linters & Formatters
     pkgs.dockfmt
@@ -129,6 +130,13 @@
 
     # Ruby Gems
     pkgs.rubyPackages.rails
+
+    # doomemacs deps
+    pkgs.emacs
+    pkgs.ripgrep
+    pkgs.fd
+    pkgs.clang
+    pkgs.coreutils
   ];
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -196,10 +204,10 @@
         mode-indicator
         prefix-highlight
 	resurrect
-	contimuum
 	better-mouse-mode
       ];
     extraConfig = ''
+    set-option -sa terminal-features ",xterm*:RGB"
     # unbind C-b
     # set-option -g prefix C-Space
     # bind-key C-Space send-prefix
@@ -257,7 +265,7 @@
 
 
       # Evaluate Helperscripts
-      eval "$(oh-my-posh init zsh --config /home/nixos/.hl-omp.json)"
+      #eval "$(oh-my-posh init zsh --config /home/nixos/.hl-omp.json)"
       eval "$(fnm env --use-on-cd)"
       eval "$(fzf --zsh)"
       eval "$(atuin init zsh)"
@@ -269,20 +277,31 @@
       clear
     '';
     shellAliases = {
-      ll = "lsd -Alg";
-      ls = "lsd -g";
+      ll = "lsd -Al";
+      ls = "lsd";
       update = "sudo nixos-rebuild switch";
       update-home = "home-manager switch";
       cls = "clear";
       fzf="fzf --preview='cat {}'";
       cd="z";
-      cp = "rsync";
       emacs = "emacs -nw";
       doom = "~/.config/emacs/bin/doom";
     };
     history = {
       size = 10000;
       path = "${config.xdg.dataHome}/zsh/history";
+    };
+  };
+
+  programs.bash = {
+    initExtra = ''
+      export SDKMAN_DIR="$HOME/.sdkman"
+      [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+    '';
+    shellAliases = {
+      cls = "clear";
+      fzf = "fzf --preview='cat {}'";
+      cd = "z";
     };
   };
 }
