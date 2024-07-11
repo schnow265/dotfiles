@@ -12,7 +12,7 @@ After removing your original home-manager config file, you can run
 bash setup.sh
 ```
 
-This script will also download [Doom Emacs](https://github.com/doomemacs/doomemacs). 
+This script will also download doomemacs and SDKMAN.
 
 ## What is included?
 
