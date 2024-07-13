@@ -1,5 +1,7 @@
 # My Dotfiles
 
+[![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
+
 > This config assumes that you have the [Nix Package Manager](https://nixos.org/download) and [home-manager](https://nix-community.github.io/home-manager/index.xhtml#sec-install-standalone) installed on your system and the ``git``, ``curl``, ``zip`` and ``unzip`` avaliable in your PATH
 
 ## Getting started
