@@ -23,7 +23,7 @@ This script will also download doomemacs and SDKMAN.
 - my git config. Please update it to your name and email.
 - modified oh-my-posh prompt to not show the git repo status since it would lag the hell out of my prompt.
 - [SDKMAN](https://sdkman.io/) configured for use
-- Using ``emacs-git`` for emacs, replace it with ``emacs`` if you don't want to compile emacs from source. (I like dev builds, this is why I use the master commit. Also I trust the master branch to have a somewhat-stable commit)
+- Use ``emacs-git`` when you want the latest build, else use ``emacs`` if you don't want to compile emacs from source.
 
 ## My "special" configs
 

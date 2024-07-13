@@ -18,112 +18,142 @@
     # release notes.
     stateVersion = "24.05"; # Please read the comment before changing.
 
-    packages = [
-      pkgs.nix-prefetch-git
-
-      pkgs.docker
-      # Shell
-      pkgs.zinit
-      pkgs.fzf
-      pkgs.zoxide
-      pkgs.atuin
-      pkgs.oh-my-posh
-
-      # Manuals
-      pkgs.tlrc
-      pkgs.man
-      pkgs.man-pages
-      pkgs.manix
-      pkgs.mandown
-      pkgs.nvimpager
+    packages = with pkgs; [
+      # Nix Tools
+        nix-prefetch-git
 
       # Tools
-      pkgs.lsd
-      pkgs.traceroute
-      pkgs.btop
-      pkgs.bitwarden-cli
-      pkgs.inetutils
-      pkgs.fnm
-      pkgs.nodePackages_latest.pnpm
-      pkgs.jq
-      pkgs.yt-dlp
-      pkgs.gnupg
-      pkgs.python311
-      pkgs.bun
-      pkgs.dig
-      pkgs.nmap
-      pkgs.ruby
-      pkgs.nmap
-      pkgs.tree
-      pkgs.imagemagick
-      pkgs.jfrog-cli
+        ## CLI Tools
+          coreutils
 
-      # Compilers & libs
-      pkgs.libgcc
-      pkgs.libgccjit
-      pkgs.glibc
-      pkgs.dotnetCorePackages.sdk_9_0
-      pkgs.gnumake
-      pkgs.cmake
-      pkgs.ansible
-      pkgs.crystal
-      pkgs.icr
-      pkgs.flutter
-      pkgs.fpm
-      pkgs.mu
-      pkgs.zig
-      pkgs.rustc
-      pkgs.cargo
-      pkgs.python311Packages.pytest
-      pkgs.python311Packages.nose
-      pkgs.pipenv
-      pkgs.python312Packages.isort
-      pkgs.python311Packages.pyflakes
-      pkgs.python312Packages.black
-      pkgs.faust
-      pkgs.cljfmt
-      pkgs.clj-kondo
-      pkgs.rust-analyzer
-      pkgs.ncurses
+          ### Artifacts
+            jfrog-cli
 
-      # Linters & Formatters
-      pkgs.dockfmt
-      pkgs.editorconfig-core-c
-      pkgs.tenv
-      pkgs.clang-tools
-      pkgs.libxml2
-      pkgs.fprettify
-      pkgs.html-tidy
-      pkgs.jsbeautifier
-      pkgs.rstfmt
-      pkgs.shfmt
-      pkgs.shellcheck
-      pkgs.nixfmt-rfc-style
-      pkgs.ktlint
+          ### Automation
+            docker
 
-      # Funny Stuff (TM)
-      pkgs.hollywood
-      pkgs.direnv
-      pkgs.isync
+          ### Shell Tools
+            zinit
+            atuin
+            oh-my-posh
+            btop
+            lsd
 
-      # Frameworks and even older compilers
-      pkgs.php
+            #### File Traversal & searches
+              fzf
+              zoxide
+              tree
+              fd
+              ripgrep
 
-      # Ocaml. For some reason.
-      pkgs.ocamlPackages.ocamlformat
-      pkgs.ocamlPackages.utop
-      pkgs.ocamlPackages.ocp-indent
-      pkgs.dune_3
+          ### Authentication & encryption
+            bitwarden-cli
+            gnupg
 
-      # Ruby Gems
-      pkgs.rubyPackages.rails
+          ### Network
+            inetutils
+            nmap
+            dig
 
-      # doomemacs deps
-      pkgs.emacs
-      pkgs.ripgrep
-      pkgs.fd
-      pkgs.clang
-      pkgs.coreutils
+          ### Node Package Managers & JS compilers
+            fnm
+            nodePackages_latest.pnpm
+            bun
+
+          ### Parsers
+            jq
+
+          ### backups
+            borgbackup
+
+          ### Downoaders
+            yt-dlp
+
+          ### Convertors
+            imagemagick
+
+          ### Environment Manager
+            direnv
+            tenv
+
+          ### Syncs
+            #### MBox
+              isync
+              mu
+
+      # Programming Tools
+        ## Rust
+          cargo
+          rustc
+          rust-analyzer
+          rstfmt
+        ## PHP
+          php
+        ## Ruby
+          ruby
+          ### Gems
+            rubyPackages.rails
+        ## Python stuff and pip packages
+          python311
+          pipenv
+
+          ### Python 3.11 Packages
+            python311Packages.pytest
+            python311Packages.nose
+
+          ### Python 3.12 Packages
+            python312Packages.isort
+            python311Packages.pyflakes
+            python312Packages.black
+        ## The C family (someone will hate this.)
+          ### C#
+            dotnetCorePackages.sdk_9_0
+            #### F#
+              fprettify
+          ### C/C++
+            clang
+            gnumake
+            cmake
+            # Libraries
+              libgcc
+              libgccjit
+              glibc
+              libxml2
+              ncurses
+        ## Web development
+          html-tidy
+          jsbeautifier
+        ## Java/Kotlin
+          ktlint
+        ## Shell Scripts
+          shellcheck
+          shfmt
+        ## Nix
+          nixfmt-rfc-style
+        ## Languages with too little packages for an own category
+          cljfmt
+          clj-kondo
+
+      # Documentation
+        man
+        man-pages
+        manix
+        mandown
+
+        ## Man-Browsers
+          tlrc
+
+      # Build Tools
+        fpm
+        dockfmt
+
+      # Editors
+        editorconfig-core-c
+        emacs
+        nvimpager
+
+      # Fun
+        hollywood
     ];
 
     file = {
@@ -162,14 +192,16 @@
   };
 
   # Config files located in .config/
-  xdg.configFile = {
-    nvim = {
-      source = ./nvim;
-      recursive = true;
-    };
-    doom = {
-      source = ./doom;
-      recursive = true;
+  xdg = {
+    configFile = {
+      nvim = {
+        source = ./nvim;
+        recursive = true;
+      };
+      doom = {
+        source = ./doom;
+        recursive = true;
+      };
     };
   };
 
@@ -206,9 +238,6 @@
       ];
       extraConfig = ''
         set-option -sa terminal-features ",xterm*:RGB"
-        # unbind C-b
-        # set-option -g prefix C-Space
-        # bind-key C-Space send-prefix
 
         set -g @session-wizard 'T'
 
@@ -281,7 +310,7 @@
         cd="z";
         emacs = "emacs -nw";
         doom = "~/.config/emacs/bin/doom";
-	rsync = "rsync --progress";
+	      rsync = "rsync --progress";
       };
       history = {
         size = 10000;
