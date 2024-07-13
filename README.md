@@ -18,7 +18,7 @@ This script will also download doomemacs and SDKMAN.
 
 - zsh is the default shell with some [aliases](#aliases) and using zinit as the plugin manager.
 - tmux with 'a few' plugins
-- my neovim config
+- my [neovim config](#neovim)
 - [Doom Emacs](https://github.com/doomemacs/doomemacs) as the emacs distro used.
 - my git config. Please update it to your name and email.
 - modified oh-my-posh prompt to not show the git repo status since it would lag the hell out of my prompt.
@@ -29,19 +29,46 @@ This script will also download doomemacs and SDKMAN.
 
 ### The Prompt
 
-![My Prompt based on the half-life design](assets/prompt.png)
+![My Prompt based on the half-life design`, but with other colors. And there _should_ be a snowflake symbol.](assets/prompt.png)
+
+### NeoVim
+
+#### Plugins
+
+- LuaLine
+- lazy-lsp
+- Nord color scheme
+- nvim-telescope
+- neo-tree
+- which-key
+
+#### Keybinds
+
+- Leader is ``;``
+- NeoTree can be toggled with ``; x``
+- Telescope Bindings
+  - ``; ff`` to find files
+  - ``; fg`` to do live grep
+  - ``; fb`` to search the opened buffers
+  - ``; fh`` to search help tags (no idea what that is)
+
+#### Other Configs
+
+```lua
+vim.o.number = true -- show line numbers
+```
 
 ### Aliases
 
-| Alias | original command |
-| ----- | ---------------- |
-| ll | lsd -Al |
-| ls | lsd |
-| update | sudo nixos-rebuild switch & nix store gc |
-| update-home | home-manager switch & nix store gc |
-| cls | clear |
-| fzf | fzf --preview='cat {}' |
-| cd | z |
-| emacs | emacs -nw |
-| doom | ~/.config/emacs/bin/doom |
-| rsync | rsync --progress |
+| Alias           | original command                             |
+| --------------- | -------------------------------------------- |
+| ``ll``          | ``lsd -Al``                                  |
+| ``ls``          | ``lsd``                                      |
+| ``update``      | ``sudo nixos-rebuild switch & nix store gc`` |
+| ``update-home`` | ``home-manager switch & nix store gc``       |
+| ``cls``         | ``clear``                                    |
+| ``fzf``         | ``fzf --preview='cat {}'``                   |
+| ``cd``          | ``z``                                        |
+| ``emacs``       | ``emacs -nw``                                |
+| ``doom``        | ``~/.config/emacs/bin/doom``                 |
+| ``rsync``       | ``rsync --progress``                         |
