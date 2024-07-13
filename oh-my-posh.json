@@ -28,7 +28,7 @@
         {
           "foreground": "#00d7d7",
           "style": "plain",
-          "template": "❄   ",
+          "template": "❅ ",
           "type": "text"
         }
       ],
