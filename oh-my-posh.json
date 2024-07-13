@@ -5,7 +5,7 @@
       "alignment": "left",
       "segments": [
         {
-          "foreground": "#7E46B6",
+          "foreground": "#308898",
           "style": "plain",
           "template": "{{ .UserName }} ",
           "type": "session"
@@ -17,7 +17,7 @@
           "type": "text"
         },
         {
-          "foreground": "#87FF00",
+          "foreground": "#0d65ae",
           "properties": {
             "style": "full"
           },
@@ -26,9 +26,9 @@
           "type": "path"
         },
         {
-          "foreground": "#D75F00",
+          "foreground": "#00d7d7",
           "style": "plain",
-          "template": "λ ",
+          "template": "❄   ",
           "type": "text"
         }
       ],

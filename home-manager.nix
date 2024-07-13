@@ -119,7 +119,7 @@
       pkgs.rubyPackages.rails
 
       # doomemacs deps
-      pkgs.emacs-git
+      pkgs.emacs
       pkgs.ripgrep
       pkgs.fd
       pkgs.clang
@@ -137,7 +137,7 @@
       #   org.gradle.daemon.idletimeout=3600000
       # '';
 
-      ".hl-omp.json".source = ./oh-my-posh.json;
+      ".schnowprompt.json".source = ./oh-my-posh.json;
     };
 
     sessionVariables = {
@@ -260,7 +260,7 @@
 
 
         # Evaluate Helperscripts
-        eval "$(oh-my-posh init zsh --config /home/nixos/.hl-omp.json)"
+        eval "$(oh-my-posh init zsh --config /home/nixos/.schnowprompt.json)"
         eval "$(fnm env --use-on-cd)"
         eval "$(fzf --zsh)"
         eval "$(atuin init zsh)"

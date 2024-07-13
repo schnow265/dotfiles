@@ -1,5 +1,5 @@
 {
-  description = "A little flake to have fun with the kernel.";
+  description = "A little flake to have fun with C code.";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -10,27 +10,28 @@
     in
     {
       devShell.${system} = pkgs.mkShell {
-        buildInputs = [
-          pkgs.bc
-          pkgs.binutils
-          pkgs.bison
-          pkgs.dwarfs
-	  pkgs.elfutils
-          pkgs.flex
-          pkgs.gcc
-          pkgs.git
-          pkgs.gnupg24
-          pkgs.gzip
-          pkgs.libelf
-          pkgs.ncurses5
-          pkgs.openssl.dev
-          pkgs.openssl
-          pkgs.pahole
-          pkgs.perl
-          pkgs.rsync
-          pkgs.gnutar
-          pkgs.xz
-	  pkgs.zlib
+        buildInputs = with pkgs; [
+          autoconf
+          bc
+          binutils
+          bison
+          dwarfs
+	        elfutils
+          flex
+          gcc
+          git
+          gnupg24
+          gzip
+          libelf
+          ncurses5
+          openssl.dev
+          openssl
+          pahole
+          perl
+          rsync
+          gnutar
+          xz
+	        zlib
         ];
       };
     };
