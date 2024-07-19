@@ -5,6 +5,12 @@ categories:
         - name: ORF.at
           desc: ""
           url: https://rss.orf.at/news.xml
+    - name: Tech News
+      desc: Specifically Tech news
+    
+    - name: Release Feeds
+      desc: Releases that I would need to follow
+
     - name: Hermitcraft
       desc: The (in my opinion) most plesant Minecraft multiplayer server
       subscriptions:
@@ -92,3 +98,6 @@ categories:
         - name: Hermitcraft Recap
           desc: "Welcome to the Hermitcraft Recap, my name is Pixelrifs, our writer is SloyXP, captions in this video were provided by Liarah."
           url: https://www.youtube.com/feeds/videos.xml?channel_id=UC32w6uX5qtmUtF4QQQ2PKaQ
+
+    - name: My podcasts
+      desc: Podcasts that I follow
