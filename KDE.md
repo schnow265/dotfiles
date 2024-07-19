@@ -1,6 +1,6 @@
 # KDE configuration
 
-> if you know how I can shatr my kde config here, but still be able to modify it - please tell me.
+> if you know how I can share my kde config here, but still be able to modify it - please tell me.
 
 ## Theme
 
