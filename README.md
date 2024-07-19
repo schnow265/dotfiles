@@ -27,6 +27,11 @@ This script will also download doomemacs and SDKMAN.
 - [SDKMAN](https://sdkman.io/) configured for use
 - Use ``emacs-git`` when you want the latest build, else use ``emacs`` if you don't want to compile emacs from source.
 
+## What you kinda need to do yourself
+
+- my ![KDE config](KDE.md)
+
+
 ## My "special" configs
 
 ### The Prompt
