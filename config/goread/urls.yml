@@ -1,0 +1,94 @@
+categories:
+    - name: News
+      desc: News from around the world
+      subscriptions:
+        - name: ORF.at
+          desc: ""
+          url: https://rss.orf.at/news.xml
+    - name: Hermitcraft
+      desc: The (in my opinion) most plesant Minecraft multiplayer server
+      subscriptions:
+        - name: BdoubleO100
+          desc: ""
+          url: http://www.youtube.com/feeds/videos.xml?channel_id=UClu2e7S8atp6tG2galK9hgg
+        - name: cubfan135
+          desc: ""
+          url: http://www.youtube.com/feeds/videos.xml?channel_id=UC9lJXqw4QZw-HWaZH6sN-xw
+        - name: docm77
+          desc: "Grind, Optimize, Automate, Thrive!"
+          url: http://www.youtube.com/feeds/videos.xml?channel_id=UC4O9HKe9Jt5yAhKuNv3LXpQ
+        - name: EthosLab
+          desc: ""
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UCFKDEp9si4RmHFWJW1vYsMA
+        - name: FalseSymmetry
+          desc: ""
+          url: http://www.youtube.com/feeds/videos.xml?channel_id=UCuQYHhF6on6EXXO-_i_ClHQ
+        - name: GeminiTay
+          desc: ""
+          url: http://www.youtube.com/feeds/videos.xml?channel_id=UCUBsjvdHcwZd3ztdY1Zadcw
+        - name: Grian
+          desc: "Please hold!"
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UCR9Gcq0CMm6YgTzsDxAxjOQ
+        - name: Hypnotizd
+          desc: ""
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UChi5MyXJLQuPni3dM19Ar3g
+        - name: impulseSV
+          desc: ""
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UCuMJPFqazQI4SofSFEd-5zA
+        - name: iskall85
+          desc: ""
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UCZ9x-z3iOnIbJxVpm1rsu2A
+        - name: iJevin
+          desc: "iJustine's relative"
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UCrEtZMErQXaSYy_JDGoU5Qw
+        - name: JoeHillsTSD
+          desc: ""
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UCtWObtiLCNI_BTBHwEOZNqg
+        - name: Keralis
+          desc: ""
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UCcJgOennb0II4a_qi9OMkRA
+        - name: Mumbo Jumbo
+          desc: "His name is Mumbo Jumbo"
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UChFur_NwVSbUozOcF_F2kMg,
+        - name: PearlescentMoon
+          desc: "Why is your house mirord?"
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UC1GJ5aeqpEWklMBQ3oXrPQQ
+        - name: rendog
+          desc: "Doc's husband (at lest on the server)"
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UCDpdtiUfcdUCzokpRWORRqA
+        - name: GoodTimesWithScar
+          desc: "HOTGUY!"
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UCodkNmk9oWRTIYZdr_HuSlg
+        - name: MCSkizzleman
+          desc: ""
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UCYdXHOv7srjm-ZsNsTcwbBw
+        - name: SmallishBeans
+          desc: ""
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UC4qdHN4zHhd4VvNy3zNgXPA
+        - name: Stressmonster101
+          desc: ""
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UC24lkOxZYna9nlXYBcJ9B8Q
+        - name: Tango Tek
+          desc: "Mr. Decked Out"
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UC4YUKOBld2PoOLzk0YZ80lw
+        - name: VintageBeef
+          desc: "Mr. Salmon"
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UCu17Sme-KE87ca9OTzP0p7g
+        - name: Welsknight
+          desc: ""
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UCKEJZ-dqIA03evnzEy1_owg
+        - name: xBCrafted
+          desc: ""
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UC_MkjhQr_D_lGlO3uu-GxyA
+        - name: xisumavoid
+          desc: "JEFF SE MINION"
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UCU9pX8hKcrx06XfOB-VQLdw
+        - name: ZedaphPlays
+          desc: ""
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UCPK5G4jeoVEbUp5crKJl6CQ
+        - name: ZombieCleo
+          desc: ""
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UCjI5qxhtyv3srhWr60HemRw
+        - name: Hermitcraft Recap
+          desc: "Welcome to the Hermitcraft Recap, my name is Pixelrifs, our writer is SloyXP, captions in this video were provided by Liarah."
+          url: https://www.youtube.com/feeds/videos.xml?channel_id=UC32w6uX5qtmUtF4QQQ2PKaQ

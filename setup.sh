@@ -1,3 +1,7 @@
+# add nixpkgs-unstable as a seperate channel as a non-root user
+nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs-unstable
+nix-channel --update
+
 # Symlink home-manager config.
 # Please back up your original config file. Otherwise the script will move it to a .bak file.
 [ -f ~/.config/home-manager/home.nix ] && mv ~/.config/home-manager/home.nix ~/.config/home-manager/home.nix.bak

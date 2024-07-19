@@ -1,4 +1,7 @@
 { inputs, lib, config, pkgs, ... }:
+let
+  pkgsUnstable = import <nixpkgs-unstable> {};
+in
 {
   nixpkgs.overlays = [
     (import (builtins.fetchTarball https://github.com/nix-community/emacs-overlay/archive/master.tar.gz))
@@ -18,145 +21,85 @@
     # release notes.
     stateVersion = "24.05"; # Please read the comment before changing.
 
-    packages = with pkgs; [
+    packages = with pkgsUnstable;  [
       zip
       unzip
-      # Nix Tools
-        nix-prefetch-git
-
-      # Tools
-        ## CLI Tools
-          coreutils
-
-          ### Artifacts
-            jfrog-cli
-
-          ### Automation
-            docker
-
-          ### Shell Tools
-            zinit
-            atuin
-            oh-my-posh
-            btop
-            lsd
-
-            #### File Traversal & searches
-              fzf
-              zoxide
-              tree
-              fd
-              ripgrep
-
-          ### Authentication & encryption
-            bitwarden-cli
-            gnupg
-
-          ### Network
-            inetutils
-            nmap
-            dig
-
-          ### Node Package Managers & JS compilers
-            fnm
-            nodePackages_latest.pnpm
-            bun
-            nodejs_18
-          ### Parsers
-            jq
-
-          ### backups
-            borgbackup
-
-          ### Downoaders
-            yt-dlp
-
-          ### Convertors
-            imagemagick
-
-          ### Environment Manager
-            direnv
-            tenv
-
-          ### Syncs
-            #### MBox
-              isync
-              mu
-
-      # Programming Tools
-        ## Rust
-          cargo
-          rustc
-          rust-analyzer
-          rstfmt
-        ## PHP
-          php
-        ## Ruby
-          ruby
-          ### Gems
-            rubyPackages.rails
-        ## Python stuff and pip packages
-          python311
-          pipenv
-
-          ### Python 3.11 Packages
-            python311Packages.pytest
-            python311Packages.nose
-
-          ### Python 3.12 Packages
-            python312Packages.isort
-            python311Packages.pyflakes
-            python312Packages.black
-        ## The C family (someone will hate this.)
-          ### C#
-            dotnetCorePackages.sdk_9_0
-            #### F#
-              fprettify
-          ### C/C++
-            clang
-            gnumake
-            cmake
-            # Libraries
-              libgcc
-              libgccjit
-              glibc
-              libxml2
-              ncurses
-        ## Web development
-          html-tidy
-          jsbeautifier
-        ## Java/Kotlin
-          ktlint
-        ## Shell Scripts
-          shellcheck
-          shfmt
-        ## Nix
-          nixfmt-rfc-style
-        ## Languages with too little packages for an own category
-          cljfmt
-          clj-kondo
-
-      # Documentation
-        man
-        man-pages
-        manix
-        mandown
-
-        ## Man-Browsers
-          tlrc
-
-      # Build Tools
-        fpm
-        dockfmt
-
-      # Editors
-        editorconfig-core-c
-        emacs
-        nvimpager
-	vscode
-
-      # Fun
-        hollywood
+      nix-prefetch-git
+      coreutils
+      jfrog-cli
+      docker
+      zinit
+      atuin
+      oh-my-posh
+      btop
+      lsd
+      fzf
+      zoxide
+      tree
+      fd
+      ripgrep
+      bitwarden-cli
+      gnupg
+      inetutils
+      nmap
+      dig
+      fnm
+      nodePackages_latest.pnpm
+      bun
+      nodejs_18
+      jq
+      borgbackup
+      yt-dlp
+      imagemagick
+      direnv
+      tenv
+      isync
+      mu
+      cargo
+      rustc
+      rust-analyzer
+      rstfmt
+      php
+      ruby
+      rubyPackages.rails
+      python311
+      pipenv
+      python311Packages.pytest
+      python311Packages.nose
+      python312Packages.isort
+      python311Packages.pyflakes
+      python312Packages.black
+      dotnetCorePackages.sdk_9_0
+      fprettify
+      clang
+      gnumake
+      cmake
+      libgcc
+      libgccjit
+      glibc
+      libxml2
+      ncurses
+      html-tidy
+      jsbeautifier
+      ktlint
+      shellcheck
+      shfmt
+      nixfmt-rfc-style
+      cljfmt
+      clj-kondo
+      man
+      man-pages
+      manix
+      mandown
+      tlrc
+      fpm
+      dockfmt
+      editorconfig-core-c
+      emacs
+      nvimpager
+      vscode
+      hollywood
+      goread
     ];
 
     file = {
@@ -207,7 +150,11 @@
       };
       btop = {
         source = ./config/btop;
-	recursive = true;
+	      recursive = true;
+      };
+      goread = {
+        source = ./config/goread;
+        recursive = true;
       };
     };
   };
