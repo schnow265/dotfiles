@@ -8,8 +8,8 @@
   # environment.
   home = {
     # Home Manager needs a bit of information about you and the paths it should manage.
-    username = "nixos"; # IMPORTANT: Change these lines for your own config.
-    homeDirectory = "/home/nixos";
+    username = "schnow265"; # IMPORTANT: Change these lines for your own config.
+    homeDirectory = "/home/schnow265";
 
     # This value determines the Home Manager release that your configuration is compatible with. This helps avoid breakage when a new Home Manager release
     # introduces backwards incompatible changes.
@@ -19,6 +19,8 @@
     stateVersion = "24.05"; # Please read the comment before changing.
 
     packages = with pkgs; [
+      zip
+      unzip
       # Nix Tools
         nix-prefetch-git
 
@@ -59,7 +61,7 @@
             fnm
             nodePackages_latest.pnpm
             bun
-
+            nodejs_18
           ### Parsers
             jq
 
@@ -151,6 +153,7 @@
         editorconfig-core-c
         emacs
         nvimpager
+	vscode
 
       # Fun
         hollywood
@@ -195,12 +198,16 @@
   xdg = {
     configFile = {
       nvim = {
-        source = ./nvim;
+        source = ./config/nvim;
         recursive = true;
       };
       doom = {
-        source = ./doom;
+        source = ./config/doom;
         recursive = true;
+      };
+      btop = {
+        source = ./config/btop;
+	recursive = true;
       };
     };
   };
@@ -289,7 +296,7 @@
 
 
         # Evaluate Helperscripts
-        eval "$(oh-my-posh init zsh --config /home/nixos/.schnowprompt.json)"
+        eval "$(oh-my-posh init zsh --config /home/schnow265/.schnowprompt.json)"
         eval "$(fnm env --use-on-cd)"
         eval "$(fzf --zsh)"
         eval "$(atuin init zsh)"
@@ -329,5 +336,5 @@
         cd = "z";
       };
     };
-  };
+  };  
 }
