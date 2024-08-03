@@ -7,9 +7,71 @@ categories:
           url: https://rss.orf.at/news.xml
     - name: Tech News
       desc: Specifically Tech news
-    
+
     - name: Release Feeds
-      desc: Releases that I would need to follow
+      desc: Releases that I follow
+      subscriptions:
+        - name: Linux Kernel
+          desc: "The Linux Kernel Release Feed"
+          url: https://www.kernel.org/feeds/kdist.xml
+        - name: tmux
+          desc: "A Terminal MUltipleXer"
+          url: https://github.com/tmux/tmux/releases.atom
+        - name: nix
+          desc: The purley functional package manager
+          url: https://github.com/NixOS/nix/tags.atom
+        - name: yabai
+          desc: A tiling WM for macOS
+          url: https://github.com/koekeishiya/yabai/releases.atom
+        - name: WSL2 Linux Kernel
+          desc: "The MS Linux Kernel Fork for WSL2"
+          url: https://github.com/microsoft/WSL2-Linux-Kernel/releases.atom
+        - name: nvm
+          desc: "Node Version Manager"
+          url: https://github.com/nvm-sh/nvm/releases.atom
+        - name: systemD
+          desc: "The systemd System and Service Manager"
+          url: https://github.com/systemd/systemd/releases.atom
+        - name: kmon
+          desc: "The Linux Kernel Manager and Activity Monitor"
+          url: https://github.com/orhun/kmon/releases.atom
+        - name: sdkman-cli
+          desc: "The Java-based SDK manager"
+          url: https://github.com/sdkman/sdkman-cli/releases.atom
+        - name: apx
+          desc: The VanillaOS Package Manager
+          url: https://github.com/Vanilla-OS/apx/releases.atom
+        - name: Stellarium
+          desc: "Stellarium is a free GPL software which renders realistic skies in real time with OpenGL."
+          url: https://github.com/Stellarium/stellarium/releases.atom
+        - name: manim
+          desc: "A community-maintained Python framework for creating mathematical animations."
+          url: https://github.com/ManimCommunity/manim/releases.atom
+        - name: Insomnia
+          desc: "The open-source, cross-platform API client for GraphQL, REST, WebSockets, SSE and gRPC. With Cloud, Local and Git storage."
+          url: https://github.com/Kong/insomnia/releases.atom
+        - name: immich
+          desc: "High performance self-hosted photo and video management solution."
+          url: https://github.com/immich-app/immich/releases.atom
+        - name: slides
+          desc: "Terminal based presentation tool"
+          url: https://github.com/maaslalani/slides/releases.atom
+        - name: Floorp
+          desc: "the most Advanced and Fastest Firefox derivative"
+          url: https://github.com/Floorp-Projects/Floorp/releases.atom
+        - name: ollama
+          desc: "Get up and running with Llama 3.1, Mistral, Gemma 2, and other large language models. Locally."
+          url: https://github.com/ollama/ollama/releases.atom
+        - name: maven
+          desc: "Apache Maven is a software project management and comprehension tool"
+          url: https://github.com/apache/maven/releases.atom
+        - name: rsync
+          desc: "An open source utility that provides fast incremental file transfer."
+          url: https://github.com/RsyncProject/rsync/tags.atom
+        - name: lazygit
+          desc: "simple terminal UI for git commands"
+          url: https://github.com/jesseduffield/lazygit/releases.atom
+
 
     - name: Hermitcraft
       desc: The (in my opinion) most plesant Minecraft multiplayer server
@@ -96,8 +158,8 @@ categories:
           desc: ""
           url: https://www.youtube.com/feeds/videos.xml?channel_id=UCjI5qxhtyv3srhWr60HemRw
         - name: Hermitcraft Recap
-          desc: "Welcome to the Hermitcraft Recap, my name is Pixelrifs, our writer is SloyXP, captions in this video were provided by Liarah."
+          desc: "Welcome to the Hermitcraft Recap, my name is Pixelrifs, our writer is SloyXP, captions on this video were provided by Liarah."
           url: https://www.youtube.com/feeds/videos.xml?channel_id=UC32w6uX5qtmUtF4QQQ2PKaQ
 
-    - name: My podcasts
+    - name: Podcasts
       desc: Podcasts that I follow
