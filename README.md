@@ -79,8 +79,8 @@ vim.o.number = true -- show line numbers
 | --------------- | -------------------------------------------- |
 | ``ll``          | ``lsd -Al``                                  |
 | ``ls``          | ``lsd``                                      |
-| ``update``      | ``sudo nixos-rebuild switch & nix store gc`` |
-| ``update-home`` | ``home-manager switch & nix store gc``       |
+| ``update``      | ``sudo nixos-rebuild switch; nix store gc``  |
+| ``update-home`` | ``home-manager switch; nix store gc``        |
 | ``cls``         | ``clear``                                    |
 | ``fzf``         | ``fzf --preview='cat {}'``                   |
 | ``cd``          | ``z``                                        |

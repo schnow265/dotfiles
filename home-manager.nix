@@ -266,8 +266,8 @@ in
         ll = "lsd -Al";
         ls = "lsd";
         rsync = "rsync --progress";
-        update = "sudo nixos-rebuild switch";
-        update-home = "home-manager switch";
+        update = "sudo nixos-rebuild switch; nix store gc";
+        update-home = "home-manager switch; nix store gc";
       };
       history = {
         size = 10000;
