@@ -1,0 +1,1 @@
+return {'matbme/JABS.nvim'}
