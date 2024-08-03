@@ -48,10 +48,18 @@ This script will also download doomemacs and SDKMAN.
 - nvim-telescope
 - neo-tree
 - which-key
+- neogit
+- barbar
+- automkdir
+- cheatsheet.nvim
+- alpha-nvim dashboard
+- JABS.nvim
+- oil.nvim
+- usage-tracker
 
 #### Keybinds
 
-- Leader is ``;``
+- Leader is ``;`` (also openes which-key)
 - NeoTree can be toggled with ``; x``
 - Telescope Bindings
   - ``; ff`` to find files
