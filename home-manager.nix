@@ -1,4 +1,4 @@
-{ inputs, lib, config, ... }:
+{ config, ... }:
 let
   pkgsUnstable = import <nixpkgs-unstable> { overlays = [ (import (builtins.fetchTarball https://github.com/nix-community/emacs-overlay/archive/master.tar.gz)) ]; };
 in  
@@ -18,7 +18,7 @@ in
     stateVersion = "24.05"; # Please read the comment before changing.
 
     packages = with pkgsUnstable;  [
-      ansible_2_15  
+      ansible_2_15
       atuin
       bitwarden-cli
       borgbackup
@@ -56,7 +56,9 @@ in
       jfrog-cli
       jq
       jsbeautifier
+      kmon
       ktlint
+      lazygit
       libgcc
       libgccjit
       libxml2
