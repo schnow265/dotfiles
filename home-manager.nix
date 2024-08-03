@@ -1,12 +1,8 @@
-{ inputs, lib, config, pkgs, ... }:
+{ inputs, lib, config, ... }:
 let
-  pkgsUnstable = import <nixpkgs-unstable> {};
-in
+  pkgsUnstable = import <nixpkgs-unstable> { overlays = [ (import (builtins.fetchTarball https://github.com/nix-community/emacs-overlay/archive/master.tar.gz)) ]; };
+in  
 {
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball https://github.com/nix-community/emacs-overlay/archive/master.tar.gz))
-  ];
-
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home = {
@@ -22,84 +18,89 @@ in
     stateVersion = "24.05"; # Please read the comment before changing.
 
     packages = with pkgsUnstable;  [
-      zip
-      unzip
-      nix-prefetch-git
-      coreutils
-      jfrog-cli
-      docker
-      zinit
+      ansible_2_15  
       atuin
-      oh-my-posh
-      btop
-      lsd
-      fzf
-      zoxide
-      tree
-      fd
-      ripgrep
       bitwarden-cli
-      gnupg
-      inetutils
-      nmap
-      dig
-      fnm
-      nodePackages_latest.pnpm
-      bun
-      nodejs_18
-      jq
       borgbackup
-      yt-dlp
-      imagemagick
-      direnv
-      tenv
-      isync
-      mu
+      btop
+      bun
       cargo
-      rustc
-      rust-analyzer
-      rstfmt
-      php
-      ruby
-      rubyPackages.rails
-      python311
-      pipenv
-      python311Packages.pytest
-      python311Packages.nose
-      python312Packages.isort
-      python311Packages.pyflakes
-      python312Packages.black
-      dotnetCorePackages.sdk_9_0
-      fprettify
       clang
-      gnumake
+      clj-kondo
+      cljfmt
       cmake
-      libgcc
-      libgccjit
+      coreutils
+      dig
+      direnv
+      docker
+      dockfmt
+      dotnetCorePackages.sdk_9_0
+      editorconfig-core-c
+      emacs-git
+      fd
+      fnm
+      fpm
+      fprettify
+      fzf
       glibc
-      libxml2
-      ncurses
+      gnumake
+      gnupg
+      go
+      goread
+      hollywood
       html-tidy
+      imagemagick
+      inetutils
+      isync
+      jetbrains-toolbox
+      jfrog-cli
+      jq
       jsbeautifier
       ktlint
+      libgcc
+      libgccjit
+      libxml2
+      lsd
+      man-pages
+      mandown
+      manix
+      mu
+      ncurses
+      nix-prefetch-git
+      nixfmt-rfc-style
+      nmap
+      nodejs_18
+      nodePackages_latest.pnpm
+      nvimpager
+      oh-my-posh
+      php
+      php83Packages.composer
+      pipenv
+      python311
+      python311Packages.nose
+      python311Packages.pyflakes
+      python311Packages.pytest
+      python312Packages.black
+      python312Packages.isort
+      ripgrep
+      rstfmt
+      ruby
+      rubyPackages.rails
+      rust-analyzer
+      rustc
       shellcheck
       shfmt
-      nixfmt-rfc-style
-      cljfmt
-      clj-kondo
-      man
-      man-pages
-      manix
-      mandown
+      stylelint
+      stylelint-lsp
+      tenv
       tlrc
-      fpm
-      dockfmt
-      editorconfig-core-c
-      emacs
-      nvimpager
+      tree
+      unzip
       vscode
-      hollywood
-      goread
+      yt-dlp
+      zinit
+      zip
+      zoxide
     ];
 
     file = {
@@ -140,20 +141,20 @@ in
   # Config files located in .config/
   xdg = {
     configFile = {
-      nvim = {
-        source = ./config/nvim;
-        recursive = true;
+      btop = {
+        source = ./config/btop;
+	      recursive = true;
       };
       doom = {
         source = ./config/doom;
         recursive = true;
       };
-      btop = {
-        source = ./config/btop;
-	      recursive = true;
-      };
       goread = {
         source = ./config/goread;
+        recursive = true;
+      };
+      nvim = {
+        source = ./config/nvim;
         recursive = true;
       };
     };
@@ -168,27 +169,27 @@ in
 
     neovim = {
       enable = true;
-      plugins = with pkgs.vimPlugins; [
+      plugins = with pkgsUnstable.vimPlugins; [
         nvim-treesitter.withAllGrammars
       ];
     };
 
     tmux = {
       enable = true;
-      shell = "${pkgs.zsh}/bin/zsh";
+      shell = "${pkgsUnstable.zsh}/bin/zsh";
       terminal = "tmux-256color";
       historyLimit = 100000;
-      plugins = with pkgs.tmuxPlugins; [
-          nord
-          sensible
+      plugins = with pkgsUnstable.tmuxPlugins; [
           better-mouse-mode
-          weather
-          session-wizard
-          tmux-fzf
+          better-mouse-mode
           mode-indicator
+          nord
           prefix-highlight
           resurrect
-          better-mouse-mode
+          sensible
+          session-wizard
+          tmux-fzf
+          weather
       ];
       extraConfig = ''
         set-option -sa terminal-features ",xterm*:RGB"
@@ -224,7 +225,7 @@ in
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       initExtra = ''
-        source ${pkgs.zinit}/share/zinit/zinit.zsh
+        source ${pkgsUnstable.zinit}/share/zinit/zinit.zsh
 
         zinit light zsh-users/zsh-syntax-highlighting
         zinit light zsh-users/zsh-completions
@@ -255,16 +256,16 @@ in
         clear
       '';
       shellAliases = {
+        cd="z";
+        cls = "clear";
+        doom = "~/.config/emacs/bin/doom";
+        emacs = "emacs -nw";
+        fzf="fzf --preview='cat {}'";
         ll = "lsd -Al";
         ls = "lsd";
-        update = "sudo nixos-rebuild switch & nix store gc";
-        update-home = "home-manager switch & nix store gc";
-        cls = "clear";
-        fzf="fzf --preview='cat {}'";
-        cd="z";
-        emacs = "emacs -nw";
-        doom = "~/.config/emacs/bin/doom";
-	      rsync = "rsync --progress";
+        rsync = "rsync --progress";
+        update = "sudo nixos-rebuild switch";
+        update-home = "home-manager switch";
       };
       history = {
         size = 10000;
@@ -278,9 +279,9 @@ in
         [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
       '';
       shellAliases = {
+        cd = "z";
         cls = "clear";
         fzf = "fzf --preview='cat {}'";
-        cd = "z";
       };
     };
   };  
