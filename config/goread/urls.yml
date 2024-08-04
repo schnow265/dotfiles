@@ -5,8 +5,19 @@ categories:
         - name: ORF.at
           desc: ""
           url: https://rss.orf.at/news.xml
+        - name: The Verge
+          desc: ""
+          url: https://www.theverge.com/rss/index.xml
+
     - name: Tech News
       desc: Specifically Tech news
+
+    - name: Game News
+      desc: Update news from Games that I play often
+      subscriptions:
+        - name: SCS Blog
+          desc: "The creators of truly the best Sim game (in my opinion)"
+          url: https://feeds.feedburner.com/ScsSoftwaresBlog
 
     - name: Release Feeds
       desc: Releases that I follow
@@ -71,7 +82,6 @@ categories:
         - name: lazygit
           desc: "simple terminal UI for git commands"
           url: https://github.com/jesseduffield/lazygit/releases.atom
-
 
     - name: Hermitcraft
       desc: The (in my opinion) most plesant Minecraft multiplayer server
