@@ -34,14 +34,20 @@ vim.api.nvim_set_keymap('n', '<leader>x', ':Neotree filesystem toggle left<CR>',
 -- UsageTracker
 vim.api.nvim_set_keymap('n', '<leader>ul', ':UsageTrackerShowFilesLifetime<CR>', {noremap = true, silent = true})
 
--- NeoGit
-vim.api.nvim_set_keymap('n', '<leader>gg', ':Neogit<CR>', {noremap = true, silent = true})    
-vim.api.nvim_set_keymap('n', '<leader>gf', ':Neogit cwd=%:p:h<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>gc', ':Neogit commit<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>gm', ':Neogit merge<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>gr', ':Neogit rebase<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>gd', ':Neogit diff<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>gs', ':Neogit stash<CR>', {noremap = true, silent = true})
+vim.g['test#neovim#start_normal'] = 1
+
+-- autoclose
+vim.g['closetag_filenames'] = '*.html,*.erb'
+
+-- vim-test strategy
+vim.g['test#strategy'] = 'vimux'
+
+-- vim-test keybinds
+vim.cmd("let test#strategy = 'vimux'")
+vim.keymap.set('n', '<leader>tt', '<cmd>TestNearest<CR>', { desc = "Test nearest" })
+vim.keymap.set('n', '<leader>tl', '<cmd>TestLast<CR>', { desc = "Test last" })
+vim.keymap.set('n', '<leader>tf', '<cmd>TestFile<CR>', { desc = "Test file" })
+vim.keymap.set('n', '<leader>ts', '<cmd>TestSuite<CR>', {desc = "Test suite" })
 
 -- whichkey additions
 local wk = require("which-key")
@@ -56,11 +62,12 @@ wk.add({
 
   { "<leader>u", group = "Usage Tracker" }, -- Usage Tracker
 
-  { "<leader>g", group = "Git" }, -- neogit group
-  { "<leader>gg", desc = "NeoGit" },
-  { "<leader>gf", desc = "Repo of current file" }, 
-  { "<leader>gm", desc = "Merge" },
-  { "<leader>gr", desc = "Rebase" },
-  { "<leader>gd", desc = "Diff" },
-  { "<leader>gs", desc = "Stash" },
+  { "<leader>l", group = "Git" },
+  { "<leader>lg", desc = "LazyGit" },
+
+  { "<leader>t", group = "Testing" }, -- vim-test
+  { "<leader>tt", desc = "Test nearest" },
+  { "<leader>tl", desc = "Test last" },
+  { "<leader>tf", desc = "Test file" },
+  { "<leader>ts", desc = "Test suite" }
 })
