@@ -106,6 +106,7 @@ in
       tlrc
       tree
       unzip
+      vitetris
       vscode
       yt-dlp
       zinit

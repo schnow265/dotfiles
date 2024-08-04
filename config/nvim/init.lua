@@ -29,7 +29,8 @@ vim.keymap.set('n', '<leader>fb', telescopeFuncts.buffers, {})
 vim.keymap.set('n', '<leader>fh', telescopeFuncts.help_tags, {})
 
 -- NeoTree
-vim.api.nvim_set_keymap('n', '<leader>x', ':Neotree filesystem toggle left<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>xt', ':Neotree filesystem toggle left<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>xf', ':Neotree focus<CR>', { noremap = true, silent = true })
 
 -- UsageTracker
 vim.api.nvim_set_keymap('n', '<leader>ul', ':UsageTrackerShowFilesLifetime<CR>', {noremap = true, silent = true})
@@ -58,7 +59,9 @@ wk.add({
   { "<leader>fb", desc = "Search Buffers" },
   { "<leader>fh", desc = "Help Tags" },
 
-  { "<leader>x", desc = "Toggle NeoTree" },
+  { "<leader>x", group = "NeoTree" },
+  { "<leader>xt", desc = "Toggle NeoTree" },
+  { "<leader>xf", desc = "Focus NeoTree" },
 
   { "<leader>u", group = "Usage Tracker" }, -- Usage Tracker
 
