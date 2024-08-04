@@ -21,11 +21,13 @@ This script will also download doomemacs and SDKMAN.
 - zsh is the default shell with some [aliases](#aliases) and using zinit as the plugin manager.
 - tmux with 'a few' plugins
 - my [neovim config](#neovim)
+- emacs-git (currently uncommented)
+  - Use ``emacs-git`` when you want the latest build, else use ``emacs`` if you don't want to compile emacs from source.
 - [Doom Emacs](https://github.com/doomemacs/doomemacs) as the emacs distro used.
 - my git config. Please update it to your name and email.
 - modified oh-my-posh prompt to not show the git repo status since it would lag the hell out of my prompt.
 - [SDKMAN](https://sdkman.io/) configured for use
-- Use ``emacs-git`` when you want the latest build, else use ``emacs`` if you don't want to compile emacs from source.
+- Firefox Nightly
 
 ## What you kinda need to do yourself
 
@@ -36,7 +38,7 @@ This script will also download doomemacs and SDKMAN.
 
 ### The Prompt
 
-![My Prompt based on the half-life design`, but with other colors. And there _should_ be a snowflake symbol.](assets/prompt.png)
+![My Prompt based on the half-life design, but with other colors. And there _should_ be a snowflake symbol.](assets/prompt.png)
 
 ### NeoVim
 

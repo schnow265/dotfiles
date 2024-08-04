@@ -1,7 +1,14 @@
 { config, ... }:
 let
-  pkgsUnstable = import <nixpkgs-unstable> { overlays = [ (import (builtins.fetchTarball https://github.com/nix-community/emacs-overlay/archive/master.tar.gz)) ]; };
-in  
+  pkgsUnstable = import <nixpkgs-unstable> {
+    overlays = [
+      (import (
+        builtins.fetchTarball "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz"
+      ))
+      (import (builtins.fetchTarball "https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz"))
+    ];
+  };
+in
 {
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -17,7 +24,8 @@ in
     # release notes.
     stateVersion = "24.05"; # Please read the comment before changing.
 
-    packages = with pkgsUnstable;  [
+    packages = with pkgsUnstable; [
+      # emacs-git
       ansible_2_15
       atuin
       bitwarden-cli
@@ -36,7 +44,6 @@ in
       dockfmt
       dotnetCorePackages.sdk_9_0
       editorconfig-core-c
-      emacs-git
       fd
       fnm
       fpm
@@ -58,6 +65,7 @@ in
       jsbeautifier
       kmon
       ktlint
+      latest.firefox-nightly-bin
       lazygit
       libgcc
       libgccjit
@@ -145,12 +153,12 @@ in
     configFile = {
       btop = {
         source = ./config/btop;
-	      recursive = true;
-      };
-      doom = {
-        source = ./config/doom;
         recursive = true;
       };
+      # doom = {
+      #   source = ./config/doom;
+      #   recursive = true;
+      # };
       goread = {
         source = ./config/goread;
         recursive = true;
@@ -171,9 +179,7 @@ in
 
     neovim = {
       enable = true;
-      plugins = with pkgsUnstable.vimPlugins; [
-        nvim-treesitter.withAllGrammars
-      ];
+      plugins = with pkgsUnstable.vimPlugins; [ nvim-treesitter.withAllGrammars ];
     };
 
     tmux = {
@@ -182,16 +188,16 @@ in
       terminal = "tmux-256color";
       historyLimit = 100000;
       plugins = with pkgsUnstable.tmuxPlugins; [
-          better-mouse-mode
-          better-mouse-mode
-          mode-indicator
-          nord
-          prefix-highlight
-          resurrect
-          sensible
-          session-wizard
-          tmux-fzf
-          weather
+        better-mouse-mode
+        better-mouse-mode
+        mode-indicator
+        nord
+        prefix-highlight
+        resurrect
+        sensible
+        session-wizard
+        tmux-fzf
+        weather
       ];
       extraConfig = ''
         set-option -sa terminal-features ",xterm*:RGB"
@@ -215,8 +221,12 @@ in
       userName = "schnow265";
       userEmail = "thesnowbox@icloud.com";
       extraConfig = {
-        credential = { helper = "store"; };
-        init = { defaultBranch = "master"; };
+        credential = {
+          helper = "store";
+        };
+        init = {
+          defaultBranch = "master";
+        };
       };
     };
 
@@ -258,11 +268,11 @@ in
         clear
       '';
       shellAliases = {
-        cd="z";
+        cd = "z";
         cls = "clear";
         doom = "~/.config/emacs/bin/doom";
         emacs = "emacs -nw";
-        fzf="fzf --preview='cat {}'";
+        fzf = "fzf --preview='cat {}'";
         ll = "lsd -Al";
         ls = "lsd";
         rsync = "rsync --progress";
@@ -286,5 +296,5 @@ in
         fzf = "fzf --preview='cat {}'";
       };
     };
-  };  
+  };
 }
