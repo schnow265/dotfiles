@@ -32,5 +32,12 @@ return {
         config = function ()
             require'alpha'.setup(require'alpha.themes.theta'.config)
         end
-      }
+    },
+    {
+      'VonHeikemen/fine-cmdline.nvim',
+      dependencies = {
+        'MunifTanjim/nui.nvim'
+      },
+      init = function() vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', {noremap = true}) end,
+    },
 }
