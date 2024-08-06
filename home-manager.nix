@@ -25,7 +25,6 @@ in
     stateVersion = "24.05"; # Please read the comment before changing.
 
     packages = with pkgsUnstable; [
-      # emacs-git
       ansible_2_15
       atuin
       bitwarden-cli
@@ -44,6 +43,7 @@ in
       dockfmt
       dotnetCorePackages.sdk_9_0
       editorconfig-core-c
+      emacs-git
       fd
       fnm
       fpm
@@ -156,10 +156,10 @@ in
         source = ./config/btop;
         recursive = true;
       };
-      # doom = {
-      #   source = ./config/doom;
-      #   recursive = true;
-      # };
+      doom = {
+        source = ./config/doom;
+        recursive = true;
+      };
       goread = {
         source = ./config/goread;
         recursive = true;
@@ -257,7 +257,7 @@ in
 
 
         # Evaluate Helperscripts
-        eval "$(oh-my-posh init zsh --config /home/schnow265/.schnowprompt.json)"
+        eval "$(oh-my-posh init zsh --config ~/.schnowprompt.json)"
         eval "$(fnm env --use-on-cd)"
         eval "$(fzf --zsh)"
         eval "$(atuin init zsh)"
