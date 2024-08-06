@@ -5,7 +5,6 @@ let
       (import (
         builtins.fetchTarball "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz"
       ))
-      (import (builtins.fetchTarball "https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz"))
     ];
   };
 in
@@ -65,7 +64,6 @@ in
       jsbeautifier
       kmon
       ktlint
-      latest.firefox-nightly-bin
       lazygit
       libgcc
       libgccjit
