@@ -9,6 +9,10 @@ let
   };
 in
 {
+  imports = [
+    <plasma-manager/modules>
+  ];
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home = {
@@ -178,7 +182,7 @@ in
 
     neovim = {
       enable = true;
-      plugins = with pkgsUnstable.vimPlugins; [ nvim-treesitter.withAllGrammars ];
+      #plugins = with pkgsUnstable.vimPlugins.nvim-treesitter; [ withAllGrammars ];
     };
 
     tmux = {
