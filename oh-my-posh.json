@@ -25,6 +25,12 @@
           "template": "{{ .Path }} ",
           "type": "path"
         },
+	{
+          "type": "nix-shell",
+	  "style": "plain",
+	  "foreground": "blue",
+	  "template": "{{ if .IsActive }}(nix-{{ .Type }}){{ end }}"
+	},
         {
           "foreground": "#00d7d7",
           "style": "plain",
