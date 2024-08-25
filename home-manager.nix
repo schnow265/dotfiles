@@ -38,13 +38,15 @@ in
       cmake
       coreutils
       dig
+      devenv
       direnv
       docker
       dockfmt
       dotnetCorePackages.sdk_9_0
       editorconfig-core-c
-      emacs-git
+      emacs
       fd
+      flutter
       fnm
       fpm
       fprettify
@@ -81,11 +83,10 @@ in
       nmap
       nodejs_18
       nodePackages_latest.pnpm
-      nvimpager
       oh-my-posh
       php
-      php83Packages.composer
       pipenv
+      pulsar
       python311
       python311Packages.nose
       python311Packages.pyflakes
@@ -246,6 +247,7 @@ in
 
         zinit light atuinsh/atuin
         zinit light Aloxaf/fzf-tab
+	zinit light chisui/zsh-nix-shell
 
         zstyle ':completion:*' matcher-list 'm:{a-z}={S-Za-z}'
         zstyle ':completion:*' list-colors "§{(s.:.)LS_COLORS}"
@@ -277,7 +279,7 @@ in
         ll = "lsd -Al";
         ls = "lsd";
         rsync = "rsync --progress";
-        update = "sudo nixos-rebuild switch; nix store gc";
+        update = "nixos-rebuild switch --use-remote-sudo; nix store gc";
         update-home = "home-manager switch; nix store gc";
       };
       history = {
