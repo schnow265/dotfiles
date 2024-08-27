@@ -1,4 +1,4 @@
-{ config, ... }:
+ { config, ... }:
 let
   pkgsUnstable = import <nixpkgs-unstable> {
     overlays = [
@@ -8,8 +8,18 @@ let
       (import (builtins.fetchTarball "https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz"))
     ];
   };
+
+  nixvim = import (builtins.fetchGit {
+    url = "https://github.com/nix-community/nixvim";
+    # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
+    # ref = "nixos-24.05";
+  });
 in
 {
+
+  imports = [
+    nixvim.homeManagerModules.nixvim
+  ];
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home = {
@@ -165,10 +175,10 @@ in
         source = ./config/goread;
         recursive = true;
       };
-      nvim = {
-        source = ./config/nvim;
-        recursive = true;
-      };
+      #nvim = {
+      #  source = ./config/nvim;
+      #  recursive = true;
+      #};
     };
   };
 
@@ -179,9 +189,38 @@ in
       enable = true;
     };
 
-    neovim = {
+    #neovim = {
+    #  enable = true;
+    #  plugins = with pkgsUnstable.vimPlugins; [ nvim-treesitter.withAllGrammars ];
+    #};
+
+    nixvim = {
       enable = true;
-      plugins = with pkgsUnstable.vimPlugins; [ nvim-treesitter.withAllGrammars ];
+      colorschemes.nord.enable = true;
+
+      plugins = [
+        lualine.enable = true;
+        oil.enable = true;
+        neo-tree.enable = true;
+        which-key.enable = true;
+
+
+        lsp = [
+          enable = true;
+          inlayHints = true;
+          servers = [
+            nixd = [
+              enable = true;
+            ];
+          ];
+        ];
+      ];
+
+      extraPlugins = with pkgsUnstable.vimPlugins; [
+        nvim-treesitter.withAllGrammars
+        nord-nvim
+        vim-automkdir
+      ];
     };
 
     tmux = {
@@ -247,7 +286,7 @@ in
 
         zinit light atuinsh/atuin
         zinit light Aloxaf/fzf-tab
-	zinit light chisui/zsh-nix-shell
+	      zinit light chisui/zsh-nix-shell
 
         zstyle ':completion:*' matcher-list 'm:{a-z}={S-Za-z}'
         zstyle ':completion:*' list-colors "§{(s.:.)LS_COLORS}"
@@ -279,8 +318,8 @@ in
         ll = "lsd -Al";
         ls = "lsd";
         rsync = "rsync --progress";
-        update = "nixos-rebuild switch --use-remote-sudo; nix store gc";
-        update-home = "home-manager switch; nix store gc";
+        update = "nixos-rebuild switch --use-remote-sudo; nix-collect-garbage -d";
+        update-home = "home-manager switch";
       };
       history = {
         size = 10000;
