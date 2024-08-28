@@ -1,25 +1,24 @@
- { config, ... }:
+{ config, ... }:
 let
   pkgsUnstable = import <nixpkgs-unstable> {
     overlays = [
       (import (
         builtins.fetchTarball "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz"
       ))
-      (import (builtins.fetchTarball "https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz"))
     ];
   };
 
-  nixvim = import (builtins.fetchGit {
-    url = "https://github.com/nix-community/nixvim";
-    # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
-    # ref = "nixos-24.05";
-  });
+  nixvim = import (
+    builtins.fetchGit {
+      url = "https://github.com/nix-community/nixvim";
+      # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
+      # ref = "nixos-24.05";
+    }
+  );
 in
 {
 
-  imports = [
-    nixvim.homeManagerModules.nixvim
-  ];
+  imports = [ nixvim.homeManagerModules.nixvim ];
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home = {
@@ -77,7 +76,6 @@ in
       jsbeautifier
       kmon
       ktlint
-      latest.firefox-nightly-bin
       lazygit
       libgcc
       libgccjit
@@ -198,29 +196,22 @@ in
       enable = true;
       colorschemes.nord.enable = true;
 
-      plugins = [
-        lualine.enable = true;
-        oil.enable = true;
-        neo-tree.enable = true;
-        which-key.enable = true;
-
-
-        lsp = [
-          enable = true;
-          inlayHints = true;
-          servers = [
-            nixd = [
-              enable = true;
-            ];
-          ];
-        ];
-      ];
-
       extraPlugins = with pkgsUnstable.vimPlugins; [
         nvim-treesitter.withAllGrammars
         nord-nvim
         vim-automkdir
       ];
+
+      plugins.lualine.enable = true;
+      plugins.oil.enable = true;
+      plugins.neo-tree.enable = true;
+      plugins.which-key.enable = true;
+
+      plugins.lsp.enable = true;
+      plugins.lsp.inlayHints = true;
+
+      # Language Servers
+      plugins.lsp.servers.nixd.enable = true;
     };
 
     tmux = {
@@ -278,36 +269,36 @@ in
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       initExtra = ''
-        source ${pkgsUnstable.zinit}/share/zinit/zinit.zsh
+                source ${pkgsUnstable.zinit}/share/zinit/zinit.zsh
 
-        zinit light zsh-users/zsh-syntax-highlighting
-        zinit light zsh-users/zsh-completions
-        zinit light zsh-users/zsh-autosuggestions
+                zinit light zsh-users/zsh-syntax-highlighting
+                zinit light zsh-users/zsh-completions
+                zinit light zsh-users/zsh-autosuggestions
 
-        zinit light atuinsh/atuin
-        zinit light Aloxaf/fzf-tab
-	      zinit light chisui/zsh-nix-shell
+                zinit light atuinsh/atuin
+                zinit light Aloxaf/fzf-tab
+        	      zinit light chisui/zsh-nix-shell
 
-        zstyle ':completion:*' matcher-list 'm:{a-z}={S-Za-z}'
-        zstyle ':completion:*' list-colors "§{(s.:.)LS_COLORS}"
-        zstyle ':completion:*' menu no
-        zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+                zstyle ':completion:*' matcher-list 'm:{a-z}={S-Za-z}'
+                zstyle ':completion:*' list-colors "§{(s.:.)LS_COLORS}"
+                zstyle ':completion:*' menu no
+                zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
-        autoload -U compinit && compinit
-        zinit cdreplay -q
+                autoload -U compinit && compinit
+                zinit cdreplay -q
 
 
-        # Evaluate Helperscripts
-        eval "$(oh-my-posh init zsh --config ~/.schnowprompt.json)"
-        eval "$(fnm env --use-on-cd)"
-        eval "$(fzf --zsh)"
-        eval "$(atuin init zsh)"
-        eval "$(zoxide init zsh)"
+                # Evaluate Helperscripts
+                eval "$(oh-my-posh init zsh --config ~/.schnowprompt.json)"
+                eval "$(fnm env --use-on-cd)"
+                eval "$(fzf --zsh)"
+                eval "$(atuin init zsh)"
+                eval "$(zoxide init zsh)"
 
-        export SDKMAN_DIR="$HOME/.sdkman"
-        [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+                export SDKMAN_DIR="$HOME/.sdkman"
+                [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-        clear
+                clear
       '';
       shellAliases = {
         cd = "z";
