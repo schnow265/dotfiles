@@ -28,6 +28,7 @@ in
       ansible_2_15
       atuin
       bitwarden-cli
+      bitwarden-desktop
       borgbackup
       btop
       bun
@@ -51,6 +52,7 @@ in
       fpm
       fprettify
       fzf
+      gh
       glibc
       gnumake
       gnupg
