@@ -1,10 +1,10 @@
 # PATH expansion
-
 [[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
 
 [[ -d "$HOME/.aspire/bin" ]] && export PATH="$HOME/.aspire/bin:$PATH"
 [[ -d "$HOME/.local/share/gem/ruby/3.4.0/bin" ]] && export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"
 [[ -d "$HOME/.dotnet/tools" ]] && export PATH="$PATH:$HOME/.dotnet/tools"
+[[ -d "$HOME/.lmstudio/bin" ]] && export PATH="$HOME/.lmstudio/bin:$PATH"
 
 # pnpm
 if [ -d "$HOME/.local/share/pnpm" ]; then
@@ -14,4 +14,3 @@ if [ -d "$HOME/.local/share/pnpm" ]; then
     *) export PATH="$PNPM_HOME:$PATH" ;;
   esac
 fi
-# pnpm end.

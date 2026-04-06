@@ -13,8 +13,10 @@
 
 {{- $cc := "" -}}
 {{- $cxx := "" -}}
+{{- $linkflags := "" -}}
 {{- if eq .chezmoi.os "linux" -}}
     {{- if lookPath "clang" -}}
+        {{- $linkflags = "-flto=thin" -}}
         {{- $cc = "clang" -}}
         {{- if lookPath "clang++" -}}
             {{- $cxx = "clang++" -}}
@@ -27,6 +29,7 @@
     {{- end -}}
 {{- else if eq .chezmoi.os "darwin" -}}
     {{- if lookPath "clang" -}}
+        {{- $linkflags = "-flto=thin" -}}
         {{- $cc = "clang" -}}
         {{- if lookPath "clang++" -}}
             {{- $cxx = "clang++" -}}
@@ -42,6 +45,7 @@
         {{- $cc = "cl" -}}
         {{- $cxx = "cl" -}}
     {{- else if lookPath "clang" -}}
+        {{- $linkflags = "-flto=thin" -}}
         {{- $cc = "clang" -}}
         {{- if lookPath "clang++" -}}
             {{- $cxx = "clang++" -}}
@@ -78,7 +82,7 @@
     ccflags = ""
     cxxflags = ""
 
-    linkerflags = ""
+    linkerflags = "{{ $linkflags }}"
 
 [data.dev.directories]
     clone_dir = "{{ $cloneDir }}"

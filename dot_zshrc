@@ -1,17 +1,2 @@
 ZSH_CFG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}/zsh"
 source "${ZSH_CFG_HOME}/config.zsh"
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/scaletto/.lmstudio/bin"
-# End of LM Studio CLI section
-
-
-# pnpm
-export PNPM_HOME="/Users/scaletto/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-. "$HOME/.local/bin/env"

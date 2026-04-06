@@ -6,3 +6,4 @@ command -v lsd >/dev/null 2>&1 && alias ll="lsd -Al"
 command -v zk >/dev/null 2>&1 && alias kasten="zk --notebook-dir=$HOME/Documents/zettelkasten"
 command -v bat >/dev/null 2>&1 && alias cat=bat
 command -v terraform >/dev/null 2>&1 && alias tf=terraform
+command -v neovide >/dev/null 2>&1 && alias nvy="neovide --fork"
