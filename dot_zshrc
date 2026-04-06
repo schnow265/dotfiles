@@ -1,5 +1,4 @@
 ZSH_CFG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}/zsh"
-[ ! -d $ZSH_CFG_HOME/.git ] && git clone https://github.com/schnow265/zsh.conf.git "$ZSH_CFG_HOME"
 source "${ZSH_CFG_HOME}/config.zsh"
 
 # Added by LM Studio CLI (lms)
