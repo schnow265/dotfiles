@@ -1,0 +1,181 @@
+#!/usr/bin/env zsh
+set -e
+set -o pipefail
+
+SKIP_UPDATE=false
+SKIP_INSTALL=false
+SHALLOW_CLONE=false
+FORCE_NEW=false
+
+LLVM_TARGETS=host
+LLVM_PROJECTS="clang"   # default
+
+CFLAGS=""
+CXXFLAGS=""
+CC="gcc"
+CXX="g++"
+
+# Argument parsing
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --skip-update)
+      SKIP_UPDATE=true
+      shift
+      ;;
+    --force-new)
+      FORCE_NEW=true
+      shift
+      ;;
+    --no-install)
+      SKIP_INSTALL=true
+      shift
+      ;;
+    --shallow)
+      SHALLOW_CLONE=true
+      SKIP_UPDATE=true
+      shift
+      ;;
+    --all-arches)
+      LLVM_TARGETS=all
+      shift
+      ;;
+    --projects)
+      if [[ -z "$2" || "$2" == --* ]]; then
+        print -u2 "Error: --projects requires a semicolon-separated value"
+        exit 1
+      fi
+      LLVM_PROJECTS="$2"
+      shift 2
+      ;;
+    --c-flags)
+      if [[ -z "$2" || "$2" == --* ]]; then
+        print -u2 "Error: --cfalgs requires a string"
+        exit 1
+      fi
+      CFLAGS="$2"
+      shift 2
+      ;;
+    --cxx-flags)
+      if [[ -z "$2" || "$2" == --* ]]; then
+        print -u2 "Error: --cxxfalgs requires a string"
+        exit 1
+      fi
+      CXXFLAGS="$2"
+      shift 2
+      ;;
+    -cc)
+      if [[ -z "$2" || "$2" == --* ]]; then
+        print -u2 "Error: -cc requires a string"
+        exit 1
+      fi
+      CC="$2"
+      shift 2
+      ;;
+    -cxx)
+      if [[ -z "$2" || "$2" == --* ]]; then
+        print -u2 "Error: -cxx requires a string"
+        exit 1
+      fi
+      CXX="$2"
+      shift 2
+      ;;
+    *)
+      print -u2 "Unknown argument: $1"
+      exit 1
+      ;;
+  esac
+done
+
+clone_dir="$HOME/Documents/clones"
+repo_dir="$clone_dir/llvm-project"
+
+mkdir -p "$clone_dir"
+cd "$clone_dir"
+
+updated=0
+
+if [[ -d "$repo_dir/.git" ]]; then
+  cd "$repo_dir"
+  if [[ "$SKIP_UPDATE" == false ]]; then
+    if git rev-parse --is-shallow-repository | grep -q true; then
+      git fetch --unshallow
+    fi
+    git pull
+    updated=1
+  fi
+else
+  if [[ "$SHALLOW_CLONE" == true ]]; then
+    git clone git@github.com:llvm/llvm-project.git --depth=1
+  else
+    git clone git@github.com:llvm/llvm-project.git
+  fi
+  cd "$repo_dir"
+fi
+
+if [[ "$FORCE_NEW" == true ]]; then
+  echo "Removing llvm build directory..."
+  rm -rf build
+fi
+
+mkdir -p build
+cd build
+
+cmake_cmd=(
+  cmake
+  -G Ninja
+  -D CMAKE_BUILD_TYPE=RelWithDebInfo
+  -D CMAKE_C_COMPILER=$CC
+  -D CMAKE_CXX_COMPILER=$CXX
+  -D CMAKE_C_FLAGS="$CFLAGS"
+  -D CMAKE_CXX_FLAGS="$CXXFLAGS"
+  -D CMAKE_INSTALL_PREFIX="$HOME/.local/share/zinit/polaris/"
+  -D LLVM_TARGETS_TO_BUILD="$LLVM_TARGETS"
+  -D LLVM_ENABLE_PROJECTS="$LLVM_PROJECTS"
+  -D LLVM_PARALLEL_COMPILE_JOBS="15"
+  -D LLVM_PARALLEL_LINK_JOBS=2
+  -D LLVM_PARALLEL_TABLEGEN_JOBS=2
+  -D LLVM_CCACHE_BUILD=true
+  -D LLVM_BUILD_BENCHMARKS=false
+  -D LLVM_INCLUDE_BENCHMARKS=false
+  -D LLVM_BUILD_EXAMPLES=true
+  -D LLVM_BUILD_TOOLS=false
+  -D LLVM_ENABLE_BINDINGS=false
+  -D LLVM_ENABLE_LIBCXX=false
+  -D LLVM_BUILD_DOCS=true
+  -D LLVM_ENABLE_LTO=Thin
+  -D LLVM_ENABLE_ZLIB=FORCE_ON
+  -D LLVM_ENABLE_ZSTD=FORCE_ON
+  -D LLDB_ENABLE_LIBEDIT=true
+  -D LLDB_ENABLE_CURSES=true
+  -D LLDB_ENABLE_LZMA=false
+  -D LLDB_ENABLE_LIBXML2=false
+  -D LLDB_ENABLE_PYTHON=true
+  -D LLDB_ENABLE_LUA=true
+  ../llvm
+)
+
+cmd_file="cmake.cmd.txt"
+current_cmd="${(j: :)cmake_cmd}"
+
+run_cmake=true
+
+if [[ -f "$cmd_file" ]]; then
+  stored_cmd="$(<"$cmd_file")"
+  if [[ "$stored_cmd" == "$current_cmd" ]]; then
+    run_cmake=false
+    if [[ "$updated" == "1"]]; then
+        run_cmake=true
+    fi
+  fi
+fi
+
+if [[ "$run_cmake" == true ]]; then
+  print "$current_cmd" > "$cmd_file"
+  "${cmake_cmd[@]}"
+fi
+
+if [[ "$SKIP_INSTALL" == false ]]; then
+  ninja install
+else
+  ninja
+fi

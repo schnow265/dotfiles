@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DIR="${1:-.}"
+DIR="$(realpath "$DIR")"
+BASENAME="$(basename "$DIR")"
+OUTPUT="$DIR/../$BASENAME.mp3"
+
+TMPFILE="$(mktemp)"
+
+find "$DIR" -maxdepth 1 -type f -iname "*.mp3" -print0 \
+  | sort -z \
+  | while IFS= read -r -d '' file; do
+        printf "file '%s'\n" "$file"
+    done > "$TMPFILE"
+
+ffmpeg -f concat -safe 0 -i "$TMPFILE" -c copy "$OUTPUT"
+
+rm "$TMPFILE"
+
+echo "Created: $OUTPUT"

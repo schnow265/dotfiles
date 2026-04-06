@@ -1,0 +1,114 @@
+#!/usr/bin/env zsh
+set -e
+set -o pipefail
+
+SKIP_UPDATE=false
+INSTALL=false
+SHALLOW_CLONE=false
+FORCE_NEW=false
+
+CFLAGS="-march=native"
+CXXFLAGS="-march=native"
+CC="gcc"
+CXX="g++"
+
+# Argument parsing
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --skip-update)
+      SKIP_UPDATE=true
+      shift
+      ;;
+    --force-new)
+      FORCE_NEW=true
+      shift
+      ;;
+    --install)
+      INSTALL=true
+      shift
+      ;;
+    --shallow)
+      SHALLOW_CLONE=true
+      SKIP_UPDATE=true
+      shift
+      ;;
+    --c-flags)
+      if [[ -z "$2" || "$2" == --* ]]; then
+        print -u2 "Error: --cfalgs requires a string"
+        exit 1
+      fi
+      CFLAGS="$2"
+      shift 2
+      ;;
+    --cxx-flags)
+      if [[ -z "$2" || "$2" == --* ]]; then
+        print -u2 "Error: --cxxfalgs requires a string"
+        exit 1
+      fi
+      CXXFLAGS="$2"
+      shift 2
+      ;;
+    -cc)
+      if [[ -z "$2" || "$2" == --* ]]; then
+        print -u2 "Error: -cc requires a string"
+        exit 1
+      fi
+      CC="$2"
+      shift 2
+      ;;
+    -cxx)
+      if [[ -z "$2" || "$2" == --* ]]; then
+        print -u2 "Error: -cxx requires a string"
+        exit 1
+      fi
+      CXX="$2"
+      shift 2
+      ;;
+    *)
+      print -u2 "Unknown argument: $1"
+      exit 1
+      ;;
+  esac
+done
+
+clone_dir="$HOME/Documents/clones/"
+repo_dir="$clone_dir/neovim"
+
+mkdir -p "$clone_dir"
+cd "$clone_dir"
+
+if [[ -d "$repo_dir/.git" ]]; then
+  cd "$repo_dir"
+  if [[ "$SKIP_UPDATE" == false ]]; then
+    if git rev-parse --is-shallow-repository | grep -q true; then
+      git fetch --unshallow
+    fi
+    git pull
+  fi
+else
+  if [[ "$SHALLOW_CLONE" == true ]]; then
+    git clone git@github.com:neovim/neovim.git --depth=1
+  else
+    git clone git@github.com:neovim/neovim.git
+  fi
+  cd "$repo_dir"
+fi
+
+if [[ "$FORCE_NEW" == true ]]; then
+  echo "Pruning clone..."
+  git clean -fdX .
+  git reset --hard
+fi
+
+CMAKE_CC_COMPILER_LAUNCHER=ccache \
+    CMAKE_CXX_COMPILER_LAUNCHER=ccache \
+    CC=$CC \
+    CXX=$CXX \
+    make \
+    CMAKE_BUILD_TYPE=RelWithDebInfo \
+    CMAKE_CXX_FLAGS="$CXXFLAGS" \
+    CMAKE_CC_FLAGS="$CFLAGS"
+
+if [[ "$INSTALL" == true ]]; then
+    make CMAKE_INSTALL_PREFIX=$HOME/.local/ install
+fi

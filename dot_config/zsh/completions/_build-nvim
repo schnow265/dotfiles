@@ -1,0 +1,11 @@
+#compdef build-nvim
+
+_arguments -s \
+  '--skip-update[Skip updating the LLVM repository]' \
+  '--install[Install build into HOME/.local]' \
+  '--shallow[Perform a shallow clone and skip updates]' \
+    '--force-new[Remove the build directory and start the build from scratch]' \
+    '--c-flags[Flags passed to CC]' \
+    '--cxx-flags[Flags passed to CXX]' \
+    '-cc[The C Compiler to use]' '-cxx[The C++ Compiler to use]'
+}

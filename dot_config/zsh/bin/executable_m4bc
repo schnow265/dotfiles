@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+INPUT_DIR="${1:-.}"
+OUTPUT_FILE="${2:-audiobook.m4b}"
+
+TMP_DIR="$(mktemp -d)"
+trap 'rm -rf "$TMP_DIR"' EXIT
+
+FILE_LIST="$TMP_DIR/files.txt"
+METADATA="$TMP_DIR/metadata.txt"
+
+# Collect and sort mp3 files
+mapfile -t FILES < <(find "$INPUT_DIR" -maxdepth 1 -type f -iname "*.mp3" | sort)
+
+if [[ ${#FILES[@]} -eq 0 ]]; then
+  echo "No mp3 files found."
+  exit 1
+fi
+
+# Create concat list
+for f in "${FILES[@]}"; do
+  printf "file '%s'\n" "$(realpath "$f")" >> "$FILE_LIST"
+done
+
+# Metadata header
+echo ";FFMETADATA1" > "$METADATA"
+
+START_MS=0
+
+for f in "${FILES[@]}"; do
+  DURATION=$(ffprobe -v error -show_entries format=duration \
+    -of default=noprint_wrappers=1:nokey=1 "$f")
+
+  DURATION_MS=$(awk "BEGIN {printf \"%d\", $DURATION * 1000}")
+  END_MS=$((START_MS + DURATION_MS))
+
+  BASENAME="$(basename "$f" .mp3)"
+  TITLE="${BASENAME#* - }"
+
+  {
+    echo "[CHAPTER]"
+    echo "TIMEBASE=1/1000"
+    echo "START=$START_MS"
+    echo "END=$END_MS"
+    echo "title=$TITLE"
+  } >> "$METADATA"
+
+  START_MS=$END_MS
+done
+
+echo "---------- Encoding ----------"
+
+# Encode to AAC and explicitly force MP4 container
+ffmpeg \
+  -f concat -safe 0 -i "$FILE_LIST" \
+  -f ffmetadata -i "$METADATA" \
+  -map 0:a \
+  -map_metadata 1 \
+  -c:a aac -b:a 192k \
+  -movflags +faststart \
+  -f mp4 \
+  "$OUTPUT_FILE"
+
+echo "Created $OUTPUT_FILE with chapters."
