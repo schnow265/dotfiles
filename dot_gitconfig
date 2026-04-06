@@ -1,0 +1,57 @@
+[user]
+	name = schnow265
+	email = schnow265@schnow265.dev
+
+[alias]
+	l = !lazygit
+	a = "add -p"
+[diff]
+	colorMoved = default
+
+[init]
+	defaultbranch = master
+
+[core]
+	autocrlf = input
+	pager = delta
+
+[checkout]
+	workers = 15
+
+[fetch]
+	parallel = 15
+
+[grep]
+	threads = 15
+
+[index]
+	threads = 15
+
+[pack]
+	threads = 15
+
+[submodule]
+	fetchJobs = 15
+
+[lfs]
+	concurrenttransfers = 15
+
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+	line-numbers = true
+	hyperlinks = true
+	side-by-side = true
+
+[merge]
+    conflictStyle = zdiff3
+[push]
+	autoSetupRemote = 1
