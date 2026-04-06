@@ -1,22 +1,87 @@
+{{- $cpuCores := 1 -}}
+{{- $cpuThreads := 1 -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $cpuCores = (output "sysctl" "-n" "hw.physicalcpu_max") | trim | atoi -}}
+{{-   $cpuThreads = (output "sysctl" "-n" "hw.logicalcpu_max") | trim | atoi -}}
+{{- else if eq .chezmoi.os "linux" -}}
+{{-   $cpuCores = (output "sh" "-c" "lscpu --online --parse | grep --invert-match '^#' | sort --field-separator=',' --key='2,4' --unique | wc --lines") | trim | atoi -}}
+{{-   $cpuThreads = (output "sh" "-c" "lscpu --online --parse | grep --invert-match '^#' | wc --lines") | trim | atoi -}}
+{{- else if eq .chezmoi.os "windows" -}}
+{{-   $cpuCores = (output "pwsh.exe" "-NoProfile" "-NonInteractive" "-Command" "(Get-CimInstance -ClassName 'Win32_Processor').NumberOfCores") | trim | atoi -}}
+{{-   $cpuThreads = (output "pwsh.exe" "-NoProfile" "-NonInteractive" "-Command" "(Get-CimInstance -ClassName 'Win32_Processor').NumberOfLogicalProcessors") | trim | atoi -}}
+{{- end -}}
+
+{{- $cc := "" -}}
+{{- $cxx := "" -}}
+{{- if eq .chezmoi.os "linux" -}}
+    {{- if lookPath "clang" -}}
+        {{- $cc = "clang" -}}
+        {{- if lookPath "clang++" -}}
+            {{- $cxx = "clang++" -}}
+        {{- end -}}
+    {{- else if lookPath "gcc" -}}
+        {{- $cc = "gcc" -}}
+        {{- if lookPath "g++" -}}
+            {{- $cxx = "g++" -}}
+        {{- end -}}
+    {{- end -}}
+{{- else if eq .chezmoi.os "darwin" -}}
+    {{- if lookPath "clang" -}}
+        {{- $cc = "clang" -}}
+        {{- if lookPath "clang++" -}}
+            {{- $cxx = "clang++" -}}
+        {{- end -}}
+    {{- else if lookPath "gcc" -}}
+        {{- $cc = "gcc" -}}
+        {{- if lookPath "g++" -}}
+            {{- $cxx = "g++" -}}
+        {{- end -}}
+    {{- end -}}
+{{- else if eq .chezmoi.os "windows" -}}
+    {{- if lookPath "cl" -}}
+        {{- $cc = "cl" -}}
+        {{- $cxx = "cl" -}}
+    {{- else if lookPath "clang" -}}
+        {{- $cc = "clang" -}}
+        {{- if lookPath "clang++" -}}
+            {{- $cxx = "clang++" -}}
+        {{- end -}}
+    {{- else if lookPath "gcc" -}}
+        {{- $cc = "gcc" -}}
+        {{- if lookPath "g++" -}}
+            {{- $cxx = "g++" -}}
+        {{- end -}}
+    {{- end -}}
+{{- else -}}
+    {{- if lookPath "cc" -}}
+        {{- $cc = "cc" -}}
+    {{- end -}}
+    {{- if lookPath "c++" -}}
+        {{- $cxx = "c++" -}}
+    {{- end -}}
+{{- end -}}
+
+{{- $cloneDir := printf "%s/Documents/clones/" .chezmoi.homeDir -}}
+{{- if eq .chezmoi.hostname "Lucas-MBP" -}}
+    {{- $cloneDir = printf "%s/clones" .chezmoi.homeDir -}}
+{{- end -}}
+
 [git]
     autoCommit = true
 
 [diff]
     command = "delta"
 
-{{- $cpuCores := 1 }}
-{{- $cpuThreads := 1 }}
-{{- if eq .chezmoi.os "darwin" }}
-{{-   $cpuCores = (output "sysctl" "-n" "hw.physicalcpu_max") | trim | atoi }}
-{{-   $cpuThreads = (output "sysctl" "-n" "hw.logicalcpu_max") | trim | atoi }}
-{{- else if eq .chezmoi.os "linux" }}
-{{-   $cpuCores = (output "sh" "-c" "lscpu --online --parse | grep --invert-match '^#' | sort --field-separator=',' --key='2,4' --unique | wc --lines") | trim | atoi }}
-{{-   $cpuThreads = (output "sh" "-c" "lscpu --online --parse | grep --invert-match '^#' | wc --lines") | trim | atoi }}
-{{- else if eq .chezmoi.os "windows" }}
-{{-   $cpuCores = (output "pwsh.exe" "-NoProfile" "-NonInteractive" "-Command" "(Get-CimInstance -ClassName 'Win32_Processor').NumberOfCores") | trim | atoi }}
-{{-   $cpuThreads = (output "pwsh.exe" "-NoProfile" "-NonInteractive" "-Command" "(Get-CimInstance -ClassName 'Win32_Processor').NumberOfLogicalProcessors") | trim | atoi }}
-{{- end }}
-
 [data.cpu]
-cores = {{ $cpuCores }}
-threads = {{ $cpuThreads }}
+    cores = {{ $cpuCores }}
+    threads = {{ $cpuThreads }}
+
+[data.dev.compilers]
+    cc = "{{ $cc }}"
+    cxx = "{{ $cxx }}"
+
+    ccflags = ""
+    cxxflags = ""
+
+[data.dev.directories]
+    clone_dir = "{{ $cloneDir }}"

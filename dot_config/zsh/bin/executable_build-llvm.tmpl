@@ -10,10 +10,10 @@ FORCE_NEW=false
 LLVM_TARGETS=host
 LLVM_PROJECTS="clang"   # default
 
-CFLAGS=""
-CXXFLAGS=""
-CC="gcc"
-CXX="g++"
+CFLAGS="{{ .dev.compilers.ccflags }}"
+CXXFLAGS="{{ .dev.compilers.cxxflags }}"
+CC="{{ .dev.compilers.cc }}"
+CXX="{{ .dev.compilers.cxx }}"
 
 # Argument parsing
 while [[ $# -gt 0 ]]; do
@@ -86,7 +86,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-clone_dir="$HOME/Documents/clones"
+clone_dir="{{ .dev.directories.clone_dir }}"
 repo_dir="$clone_dir/llvm-project"
 
 mkdir -p "$clone_dir"
