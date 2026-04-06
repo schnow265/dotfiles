@@ -7,10 +7,10 @@ INSTALL=false
 SHALLOW_CLONE=false
 FORCE_NEW=false
 
-CFLAGS="-march=native"
-CXXFLAGS="-march=native"
-CC="gcc"
-CXX="g++"
+CFLAGS="{{ .dev.compilers.ccflags }}"
+CXXFLAGS="{{ .dev.compilers.cxxflags }}"
+CC="{{ .dev.compilers.cc }}"
+CXX="{{ .dev.compilers.cxx }}"
 
 # Argument parsing
 while [[ $# -gt 0 ]]; do
@@ -71,7 +71,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-clone_dir="$HOME/Documents/clones/"
+clone_dir="{{ .dev.directories.clone_dir }}"
 repo_dir="$clone_dir/neovim"
 
 mkdir -p "$clone_dir"

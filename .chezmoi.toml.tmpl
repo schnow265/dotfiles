@@ -46,11 +46,6 @@
         {{- if lookPath "clang++" -}}
             {{- $cxx = "clang++" -}}
         {{- end -}}
-    {{- else if lookPath "gcc" -}}
-        {{- $cc = "gcc" -}}
-        {{- if lookPath "g++" -}}
-            {{- $cxx = "g++" -}}
-        {{- end -}}
     {{- end -}}
 {{- else -}}
     {{- if lookPath "cc" -}}
@@ -83,5 +78,8 @@
     ccflags = ""
     cxxflags = ""
 
+    linkerflags = ""
+
 [data.dev.directories]
     clone_dir = "{{ $cloneDir }}"
+    source_install_dir = "{{ printf "%s/.local/" .chezmoi.homeDir }}"
