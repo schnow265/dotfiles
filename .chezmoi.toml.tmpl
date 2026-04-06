@@ -4,7 +4,6 @@
 [diff]
     command = "delta"
 
-
 {{- $cpuCores := 1 }}
 {{- $cpuThreads := 1 }}
 {{- if eq .chezmoi.os "darwin" }}
@@ -21,4 +20,3 @@
 [data.cpu]
 cores = {{ $cpuCores }}
 threads = {{ $cpuThreads }}
-

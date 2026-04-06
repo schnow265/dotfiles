@@ -16,25 +16,25 @@
 	pager = delta
 
 [checkout]
-	workers = 15
+	workers = {{ .cpu.threads }}
 
 [fetch]
-	parallel = 15
+	parallel = {{ .cpu.threads }}
 
 [grep]
-	threads = 15
+	threads = {{ .cpu.threads }}
 
 [index]
-	threads = 15
+	threads = {{ .cpu.threads }}
 
 [pack]
-	threads = 15
+	threads = {{ .cpu.threads }}
 
 [submodule]
-	fetchJobs = 15
+	fetchJobs = {{ .cpu.threads }}
 
 [lfs]
-	concurrenttransfers = 15
+	concurrenttransfers = {{ .cpu.threads }}
 
 [filter "lfs"]
 	required = true
