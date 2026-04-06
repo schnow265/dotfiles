@@ -1,0 +1,18 @@
+*schnow265_config*
+
+This is my config. I will leave some comments here rather than in the lua files directly.
+
+
+*schnow265_config.health*
+
+This config ships with healthchecks. You can access these by using `:checkhealth schnow265_config`
+
+These check availability of commands and modules since I have copied the same code into multiple configs.
+
+
+*schnow265_config.lsp*
+
+You can configure LSP servers by editing the file `lua/config/serverconfig.lua`. This allows easy installation and configuration of LSP servers. Syntax highlighting is set to `download_missing = true`.
+
+
+ vim:tw=78:ts=8:ft=help:norl:
