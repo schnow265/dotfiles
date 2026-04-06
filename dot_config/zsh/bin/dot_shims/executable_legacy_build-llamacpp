@@ -1,2 +1,0 @@
-#!/usr/bin/env zsh
-exec "/Users/scaletto/.config/zsh/bin/legacy/build-llamacpp" "$@"
