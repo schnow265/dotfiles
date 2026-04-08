@@ -119,6 +119,25 @@ M.check = function()
             checkVersion(command)
         end
     end
+
+    vim.health.start "Library functions"
+
+    if canRequire 'schnow265.lib' then
+        local lib = require 'schnow265.lib'
+
+        local count = 0
+        for _, _ in pairs(lib) do
+            count = count + 1
+        end
+
+        if count == 0 then
+            vim.health.warning("No functions/exports found in library.")
+        else
+            vim.health.ok(string.format('Found %d exports', count))
+        end
+    else
+        vim.health.error "Could not require 'schnow265.lib'. Please make sure it is actually there."
+    end
 end
 
 return M

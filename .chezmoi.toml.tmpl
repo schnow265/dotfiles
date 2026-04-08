@@ -61,7 +61,7 @@
 {{- end -}}
 
 {{- $cloneDir := printf "%s/Documents/clones/" .chezmoi.homeDir -}}
-{{- if eq .chezmoi.hostname "Lucas-MBP" -}}
+{{- if eq .chezmoi.hostname "Lucas-MacBook-Pro" -}}
     {{- $cloneDir = printf "%s/clones" .chezmoi.homeDir -}}
 {{- end -}}
 
@@ -70,6 +70,7 @@
 
 [diff]
     command = "delta"
+    args = ["--paging", "never"]
 
 [data.cpu]
     cores = {{ $cpuCores }}
