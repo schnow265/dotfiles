@@ -1,57 +1,47 @@
 [user]
 	name = schnow265
 	email = schnow265@schnow265.dev
-
 [alias]
 	l = !lazygit
 	a = "add -p"
 [diff]
 	colorMoved = default
-
 [init]
 	defaultbranch = master
-
 [core]
 	autocrlf = input
 	pager = delta
-
-[checkout]
-	workers = {{ .cpu.threads }}
-
-[fetch]
-	parallel = {{ .cpu.threads }}
-
-[grep]
-	threads = {{ .cpu.threads }}
-
-[index]
-	threads = {{ .cpu.threads }}
-
-[pack]
-	threads = {{ .cpu.threads }}
-
-[submodule]
-	fetchJobs = {{ .cpu.threads }}
-
-[lfs]
-	concurrenttransfers = {{ .cpu.threads }}
-
-[filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-
+[merge]
+    conflictStyle = zdiff3
+[push]
+	autoSetupRemote = 1
 [interactive]
     diffFilter = delta --color-only
-
 [delta]
     navigate = true  # use n and N to move between diff sections
 	line-numbers = true
 	hyperlinks = true
 	side-by-side = true
-
-[merge]
-    conflictStyle = zdiff3
-[push]
-	autoSetupRemote = 1
+[checkout]
+	workers = {{ .cpu.threads }}
+[fetch]
+	parallel = {{ .cpu.threads }}
+[grep]
+	threads = {{ .cpu.threads }}
+[index]
+	threads = {{ .cpu.threads }}
+[pack]
+	threads = {{ .cpu.threads }}
+[submodule]
+	fetchJobs = {{ .cpu.threads }}
+[lfs]
+	concurrenttransfers = {{ .cpu.threads }}
+[lfs "customtransfer.xet"]
+	path = git-xet
+	args = transfer
+	concurrent = true
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
