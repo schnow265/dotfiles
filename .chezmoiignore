@@ -1,2 +1,3 @@
 .config/zsh/bin/.shims/
 .config/nvim/doc/tags
+.config/nvim/lazy-lock.json
