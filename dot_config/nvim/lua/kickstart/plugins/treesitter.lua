@@ -4,7 +4,7 @@ return {
     build = ':TSUpdate',
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'elixir', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = require('config.serverconfig').treesitter.parsers,
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -12,9 +12,9 @@ return {
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
+        additional_vim_regex_highlighting = require('config.serverconfig').treesitter.nvim_highlight,
       },
-      indent = { enable = true, disable = { 'ruby' } },
+      indent = { enable = true, disable = require('config.serverconfig').treesitter.nvim_indent },
     },
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
