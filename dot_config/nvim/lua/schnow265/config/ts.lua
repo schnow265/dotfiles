@@ -5,6 +5,7 @@ vim.notify(string.format("Auto-Loading parsers: '%s'", table.concat(ts_requires.
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = ts_requires.parsers,
 	callback = function()
+		vim.notify("We are staring up boiiis.", "debug")
 		-- syntax highlighting, provided by Neovim
 		vim.treesitter.start()
 		-- folds, provided by Neovim
