@@ -4,14 +4,18 @@
 [[ -z ${CC:-} ]] && export CC="{{ .dev.compilers.cc }}"
 [[ -z ${CXX:-} ]] && export CXX="{{ .dev.compilers.cxx }}"
 
-# flags applicable for c and C++ compilers.
-COMMON_FLAGS="-march=native -O2 -flto=thin"
-
 # explicit exports of flags
-[[ -z ${CFLAGS:-} ]] && export CFLAGS="${COMMON_FLAGS}"
-[[ -z ${CXXFLAGS:-} ]] && export CXXFLAGS="${COMMON_FLAGS}"
-[[ -z ${CPPFLAGS:-} ]] && export CPPFLAGS="${COMMON_FLAGS}"
+[[ -z ${CFLAGS:-} ]] && export CFLAGS="{{ .dev.compilers.ccflags }}"
+[[ -z ${CXXFLAGS:-} ]] && export CXXFLAGS="{{ .dev.compilers.cxxflags }}"
+[[ -z ${CPPFLAGS:-} ]] && export CPPFLAGS="{{ .dev.compilers.cxxflags }}"
 
 [[ -f ~zpfx/bin/nvim ]] && alias nvy="neovide --neovim-bin ~zpfx/bin/nvim" 
 
 [[ -z ${MANPAGER:-} ]] && export MANPAGER='nvim +Man!'
+
+# CMake env vars
+
+export CMAKE_C_COMPILER_LAUNCHER=ccache
+export CMAKE_CXX_COMPILER_LAUNCHER=ccache
+export CMAKE_GENRATOR=Ninja
+export CMAKE_INSTALL_PREFIX="{{ .dev.directories.source_install_dir }}"

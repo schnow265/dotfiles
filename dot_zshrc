@@ -1,2 +1,4 @@
 ZSH_CFG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}/zsh"
 source "${ZSH_CFG_HOME}/config.zsh"
+
+eval "$(direnv hook zsh)"

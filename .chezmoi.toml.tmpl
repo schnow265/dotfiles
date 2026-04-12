@@ -61,8 +61,8 @@
 {{- end -}}
 
 {{- $cloneDir := printf "%s/Documents/clones/" .chezmoi.homeDir -}}
-{{- if eq .chezmoi.hostname "Lucas-MacBook-Pro" -}}
-    {{- $cloneDir = printf "%s/clones" .chezmoi.homeDir -}}
+{{- if eq .chezmoi.os "darwin" -}}
+    {{- $cloneDir = printf "%s/Projects/clones" .chezmoi.homeDir -}}
 {{- end -}}
 
 [git]
