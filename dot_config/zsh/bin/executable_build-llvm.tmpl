@@ -163,8 +163,8 @@ if [[ -f "$cmd_file" ]]; then
   stored_cmd="$(<"$cmd_file")"
   if [[ "$stored_cmd" == "$current_cmd" ]]; then
     run_cmake=false
-    if [[ "$updated" == "1"]]; then
-        run_cmake=true
+    if [[ "$updated" == "1" ]]; then
+      run_cmake=true
     fi
   fi
 fi

@@ -14,3 +14,9 @@ if [ -d "$HOME/.local/share/pnpm" ]; then
     *) export PATH="$PNPM_HOME:$PATH" ;;
   esac
 fi
+
+[[ -f "{{ .dev.directories.source_install_dir }}" ]] && export PATH="{{ .dev.directories.source_install_dir }}:$PATH"
+
+{{- if eq .chezmoi.os "darwin" -}}
+  [[ -d "/opt/homebrew/opt/ccache/libexec" ]] && export PATH="/opt/homebrew/opt/ccache/libexec:$PATH"
+{{- end -}}
