@@ -66,9 +66,11 @@ M.treesitter = {}
 M.treesitter.parsers = {
 	"bash",
 	"c",
+	"c_sharp",
 	"diff",
 	"elixir",
 	"html",
+	"java",
 	"javascript",
 	"llvm",
 	"lua",
