@@ -59,6 +59,8 @@ M.lspconfig = {
 			},
 		},
 	},
+	kotlin_lsp = {},
+	jdtls = {},
 }
 
 M.treesitter = {}
