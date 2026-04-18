@@ -62,6 +62,10 @@ M.lspconfig = {
 	jdtls = {},
 }
 
+M.dapServers = {
+	'delve'
+}
+
 M.treesitter = {}
 
 M.treesitter.parsers = {
