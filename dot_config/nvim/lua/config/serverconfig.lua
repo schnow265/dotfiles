@@ -59,7 +59,6 @@ M.lspconfig = {
 			},
 		},
 	},
-	kotlin_lsp = {},
 	jdtls = {},
 }
 
