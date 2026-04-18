@@ -2,6 +2,7 @@ local M = {}
 
 M.lspconfig = {
 	elixirls = {},
+	jdtls = {},
 	lua_ls = {
 		Lua = {
 			workspace = {
@@ -16,8 +17,6 @@ M.lspconfig = {
 	},
 	csharp_ls = {},
 	clangd = {},
-	bacon_ls = {},
-	asm_lsp = {},
 	codebook = {
 		filetypes = {
 			"c",
@@ -44,13 +43,6 @@ M.lspconfig = {
 		},
 		root_markers = { ".git", "codebook.toml", ".codebook.toml" },
 	},
-	zk = {
-		filetyles = {
-			"markdown",
-			"text",
-		},
-	},
-	zls = {},
 	yamlls = {
 		yaml = {
 			schemas = {
@@ -59,7 +51,6 @@ M.lspconfig = {
 			},
 		},
 	},
-	jdtls = {},
 }
 
 M.dapServers = {
