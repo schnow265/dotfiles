@@ -33,4 +33,4 @@ bindkey '^/' undo
 bindkey '^?' backward-delete-char
 bindkey '^[/' redo
 
-source /usr/share/fzf/key-bindings.zsh
+[[ -f /usr/share/fzf/key-bindings.zsh ]] && source /usr/share/fzf/key-bindings.zsh
