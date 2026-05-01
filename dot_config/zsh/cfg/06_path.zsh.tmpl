@@ -6,7 +6,7 @@
 [[ -d "$HOME/.dotnet/tools" ]] && export PATH="$PATH:$HOME/.dotnet/tools"
 [[ -d "$HOME/.lmstudio/bin" ]] && export PATH="$HOME/.lmstudio/bin:$PATH"
 
-# pnpm
+{{ if eq .chezmoi.os "linux" }}
 if [ -d "$HOME/.local/share/pnpm" ]; then
   export PNPM_HOME="$HOME/.local/share/pnpm"
   case ":$PATH:" in
@@ -14,9 +14,18 @@ if [ -d "$HOME/.local/share/pnpm" ]; then
     *) export PATH="$PNPM_HOME:$PATH" ;;
   esac
 fi
+{{ else if eq .chezmoi.os "darwin" }}
+if [ -d "$HOME/Library/pnpm" ]; then
+    export PNPM_HOME="$HOME/Library/pnpm"
+    case ":$PATH:" in
+    *":$PNPM_HOME/bin:"*) ;;
+    *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+    esac
+fi
+{{ end }}
 
 [[ -f "{{ .dev.directories.source_install_dir }}" ]] && export PATH="{{ .dev.directories.source_install_dir }}:$PATH"
 
-{{- if eq .chezmoi.os "darwin" -}}
+{{ if eq .chezmoi.os "darwin" }}
   [[ -d "/opt/homebrew/opt/ccache/libexec" ]] && export PATH="/opt/homebrew/opt/ccache/libexec:$PATH"
-{{- end -}}
+{{ end }}
