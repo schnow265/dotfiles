@@ -257,7 +257,8 @@ max_concurrency = 10
 
 # Additional git repositories to pull or fetch
 repos = [
-    "~/Projects/*/"
+    "~/Projects/*/",
+    "{{ .dev.directories.clone_dir }}/*/"
 ]
 
 # Set to `false` to skip pulling/fetching the predefined git repos
