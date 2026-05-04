@@ -9,7 +9,7 @@
 [[ -z ${CXXFLAGS:-} ]] && export CXXFLAGS="{{ .dev.compilers.cxxflags }}"
 [[ -z ${CPPFLAGS:-} ]] && export CPPFLAGS="{{ .dev.compilers.cxxflags }}"
 
-[[ -f ~zpfx/bin/nvim ]] && alias nvy="neovide --neovim-bin ~zpfx/bin/nvim" 
+[[ -f ~zpfx/bin/nvim ]] && alias nvy="neovide --neovim-bin ~zpfx/bin/nvim"
 
 [[ -z ${MANPAGER:-} ]] && export MANPAGER='nvim +Man!'
 
@@ -19,3 +19,8 @@ export CMAKE_C_COMPILER_LAUNCHER=ccache
 export CMAKE_CXX_COMPILER_LAUNCHER=ccache
 export CMAKE_GENRATOR=Ninja
 export CMAKE_INSTALL_PREFIX="{{ .dev.directories.source_install_dir }}"
+
+export UV_TORCH_BACKEND=auto
+
+# FUCK XET! MY ISP DOES NOT LIKE XET.
+export HF_HUB_DISABLE_XET=1
