@@ -1,0 +1,8 @@
+-f b
+--remote-components ejs:github
+-P ~/YouTube/
+--sponsorblock-mark all
+--sponsorblock-remove sponsor
+
+--audio-quality 0
+--audio-format vorbis
