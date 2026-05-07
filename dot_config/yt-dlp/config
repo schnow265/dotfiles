@@ -1,8 +1,22 @@
 -f b
 --remote-components ejs:github
 -P ~/YouTube/
+
 --sponsorblock-mark all
 --sponsorblock-remove sponsor
 
 --audio-quality 0
 --audio-format vorbis
+
+--write-subs
+--no-write-auto-subs
+--sub-format ass/srt/best
+
+--write-thumbnail
+
+--embed-subs
+--embed-thumbnail
+--embed-chapters
+
+--downloader aria2c
+--downloader "dash,m3u8:native"

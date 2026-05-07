@@ -1,0 +1,41 @@
+# /// script
+# requires-python = ">=3.14"
+# dependencies = [
+#     "pandas>=3.0.2",
+#     "pyarrow>=24.0.0",
+# ]
+# ///
+
+import pandas as pd
+import sys
+import os
+
+def convert_parquet_to_csv(parquet_file_path: str, csv_file_path: str) -> None:
+    """Reads a Parquet file and saves it as a CSV file."""
+    if not os.path.exists(parquet_file_path):
+        print(f"Error: The file {parquet_file_path} does not exist.")
+        sys.exit(1)
+
+    try:
+        # Load the parquet file into a pandas DataFrame
+        df: pd.DataFrame = pd.read_parquet(parquet_file_path)
+        
+        # Save the DataFrame to a CSV file
+        df.to_csv(csv_file_path, index=False)
+        print(f"Successfully converted '{parquet_file_path}' to '{csv_file_path}'.")
+        
+    except Exception as e:
+        print(f"An error occurred during conversion: {e}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    args: list[str] = sys.argv
+
+    if len(args) != 3:
+        print("Usage: python parquet_to_csv.py <input_file.parquet> <output_file.csv>")
+        sys.exit(1)
+
+    input_parquet: str = args[1]
+    output_csv: str = args[2]
+
+    convert_parquet_to_csv(input_parquet, output_csv)

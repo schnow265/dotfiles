@@ -11,23 +11,23 @@ if [ -d "$repo_dir" ]; then
     cd "$repo_dir"
     git pull
 else
-    git clone git@github.com:ggml-org/llama.cpp.git
+    git clone git@github.com:ggml-org/llama.cpp.git --depth=1
     cd "$repo_dir"
 fi
 
-source ~/vulkan/1.4.341.1/setup-env.sh
+#source ~/vulkan/1.4.341.1/setup-env.sh
 
 cmake_cmd=(
-    cmake 
+    cmake
     -S .
     -B build
     -D CMAKE_C_COMPILER_LAUNCHER=ccache
     -D CMAKE_CXX_COMPILER_LAUNCHER=ccache
     -D GGML_HIP=OFF
     -D GGML_HIP_ROCWMMA_FATTN=ON
-    -D GGML_BLAS=ON
+    -D GGML_BLAS=OFF
     -D GGML_BLAS_VENDOR=OpenBLAS
-    -D GGML_VULKAN=ON
+    -D GGML_VULKAN=OFF
     -D AMDGPU_TARGETS=gfx1030
     -D CMAKE_BUILD_TYPE=Release
     -D CMAKE_INSTALL_PREFIX="{{ .dev.directories.source_install_dir }}"
