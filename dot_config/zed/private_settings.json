@@ -1,0 +1,79 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "debugger": {
+    "dock": "bottom"
+  },
+  "git_panel": {
+    "show_count_badge": true,
+    "file_icons": true,
+    "tree_view": true
+  },
+  "proxy": "",
+  "document_symbols": "on",
+  "document_folding_ranges": "on",
+  "buffer_font_family": "JetBrains Mono",
+  "ui_font_family": ".ZedSans",
+  "terminal": {
+    "font_family": "JetBrains Mono",
+    "font_size": 11.0
+  },
+  "diagnostics": {
+    "inline": {
+      "enabled": true
+    }
+  },
+  "semantic_tokens": "combined",
+  "collaboration_panel": {
+    "button": false
+  },
+  "project_panel": {
+    "hide_hidden": false,
+    "hide_root": false,
+    "git_status_indicator": true,
+    "diagnostic_badges": true,
+    "show_diagnostics": "all",
+    "scrollbar": {
+      "horizontal_scroll": true
+    },
+    "bold_folder_labels": true,
+    "git_status": true,
+    "folder_icons": true,
+    "file_icons": true,
+    "entry_spacing": "standard",
+    "hide_gitignore": false,
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "right"
+  },
+  "agent": {
+    "button": false,
+    "sidebar_side": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "disable_ai": true,
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "vim_mode": true,
+  "icon_theme": "Catppuccin Mocha",
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "One Dark",
+  },
+}
