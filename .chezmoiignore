@@ -2,3 +2,4 @@
 .config/nvim/doc/tags
 .config/zed/prompts
 .config/zed/themes
+.zed/
