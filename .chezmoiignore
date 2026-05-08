@@ -3,3 +3,7 @@
 .config/zed/prompts
 .config/zed/themes
 .zed/
+
+{{ if ne .chezmoi.os "darwin" }}
+.config/topgrade.d/macos.toml
+{{ end }}
