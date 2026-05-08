@@ -1,0 +1,2 @@
+[post_commands]
+"Remove all of brew" = "brew cleanup --prune=all"

@@ -1,0 +1,4 @@
+[misc]
+first = ["chezmoi"]
+disable = ["system", "shell", "vim", "pnpm"]
+ignore_failures = ["powershell"]

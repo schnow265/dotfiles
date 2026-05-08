@@ -18,16 +18,26 @@
 # (default: false)
 # pre_sudo = false
 
+# Periodically runs `sudo -v` or `please -w` to avoid password re-prompts during updates (default: false)
+# WARNING: This is a potential security risk; if you walk away from the computer while topgrade is running,
+# another person can come by, CTRL+C, and gain access to a sudo session.
+# sudo_loop = true
+# sudo_loop_interval = 240 # 4 minutes (240s); default if sudo_loop enabled
+
 # Sudo command to be used
 # sudo_command = "sudo"
 
-first = ["chezmoi"]
-
 # Disable specific steps - same options as the command line flag
-disable = ["system", "shell", "containers", "vim", "pnpm"]
+# disable = ["system", "emacs"]
+
+# Run these steps before all others
+# first = ["chezmoi"]
+
+# Run these steps after all others
+# last = ["system"]
 
 # Ignore failures for these steps
-ignore_failures = ["powershell"]
+# ignore_failures = ["powershell"]
 
 # List of remote machines with Topgrade installed on them
 # remote_topgrades = ["toothless", "pi", "parnas"]
@@ -48,13 +58,13 @@ ignore_failures = ["powershell"]
 # display_time = true
 
 # Don't ask for confirmations (no default value)
-assume_yes = true
+# assume_yes = true
 
 # Whether to ask what to do after a step fails (default: true)
 # ask_retry = true
 
 # Number of times to automatically retry a step when it fails (default: 0)
-auto_retry = 1
+# auto_retry = 0
 
 # Same as ask_retry = false (default: false) - legacy
 # no_retry = true
@@ -73,14 +83,14 @@ auto_retry = 1
 # tmux_session_mode = "attach_if_not_in_session"
 
 # Cleanup temporary or old files (default: false)
-cleanup = true
+# cleanup = true
 
 # Send a notification for every step (default: false)
 # notify_each_step = false
 
 # When to send a notification at the end of a run
 # (default: "always", allowed values: "always", "never", "on_failure")
-notify_end = "on_failure"
+# notify_end = "on_failure"
 
 # Deprecated: use `notify_end = "never"` instead (default: false)
 # skip_notify = true
@@ -123,7 +133,7 @@ notify_end = "on_failure"
 # Commands to run after anything
 [post_commands]
 # "Emacs Snapshot" = "rm -rf ~/.emacs.d/elpa.bak && cp -rl ~/.emacs.d/elpa ~/.emacs.d/elpa.bak"
-"Remove all of brew" = "brew cleanup --prune=all"
+
 
 # Custom commands
 [commands]
@@ -182,7 +192,7 @@ notify_end = "on_failure"
 
 # For the BrewFormula step
 # Execute `brew autoremove` after the step.
-autoremove = true
+# autoremove = true
 
 # For the BrewFormula step
 # Upgrade formulae built from the HEAD branch; `brew upgrade --fetch-HEAD`
@@ -192,8 +202,8 @@ autoremove = true
 [linux]
 # Arch Package Manager to use.
 # Allowed values:
-#   autodetect, aura, garuda_update, pacman, pamac, paru, pikaur, trizen, yay
-arch_package_manager = "paru"
+#   autodetect, aura, garuda_update, pacman, pamac, paru, pikaur, shelly, trizen, yay
+# arch_package_manager = "pacman"
 
 # Arguments to pass yay (or paru) when updating packages
 # yay_arguments = "--nodevel"
@@ -214,6 +224,8 @@ arch_package_manager = "paru"
 
 # pamac_arguments = "--no-devel"
 
+# shelly_arguments = ""
+
 # enable_tlmgr = true
 
 # emerge_sync_flags = "-q"
@@ -222,7 +234,7 @@ arch_package_manager = "paru"
 
 # redhat_distro_sync = false
 
-suse_dup = true
+# suse_dup = false
 
 # rpm_ostree = false
 
@@ -243,7 +255,7 @@ suse_dup = true
 # Enable the mandb step (to update manual entries).
 # Mandb is updated in the background by a service on most systems by default.
 # (default: false)
-enable = true
+# enable = true
 
 
 [pkgfile]
@@ -255,19 +267,19 @@ enable = true
 
 [git]
 # How many repos to pull or fetch at max in parallel
-max_concurrency = 10
+# max_concurrency = 5
 
 # Additional git repositories to pull or fetch
-repos = [
-    "~/Projects/*/",
-    "{{ .dev.directories.clone_dir }}/*/"
-]
+# repos = [
+#     "~/src/*/",
+#     "~/.config/something"
+# ]
 
 # Set to `false` to skip pulling/fetching the predefined git repos
 # pull_predefined = false
 
 # Arguments to pass Git when pulling/fetching Repositories
-arguments = "--ff-only"
+# arguments = "--rebase --autostash"
 
 # Whether to perform a `git fetch` instead of `git pull`
 # fetch_only = false
@@ -324,6 +336,10 @@ arguments = "--ff-only"
 # (default: false)
 # interactive = false
 
+[go]
+# Exclude specified binaries from `gup update`
+# gup_exclude = ["kind", "pkgsite"]
+
 
 [npm]
 # Use sudo if the NPM directory isn't owned by the current user
@@ -338,6 +354,11 @@ arguments = "--ff-only"
 [deno]
 # Upgrade deno executable to the given version.
 # version = "stable"
+
+
+[viteplus]
+# Use sudo if the Vite+ directory isn't owned by the current user
+# use_sudo = true
 
 
 [vim]
