@@ -1,0 +1,7 @@
+[
+  {
+    "label": "Push to Hub & Lab",
+    "command": "git push github && git push gitlab",
+    "hide": "on_success",
+  },
+]
