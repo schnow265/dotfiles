@@ -88,3 +88,6 @@
 [data.dev.directories]
     clone_dir = "{{ $cloneDir }}"
     source_install_dir = "{{ printf "%s/.local/" .chezmoi.homeDir }}"
+
+[data.dotfiles]
+    apply_dotfile_changes = true
