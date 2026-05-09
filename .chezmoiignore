@@ -7,3 +7,7 @@
 {{ if ne .chezmoi.os "darwin" }}
 .config/topgrade.d/macos.toml
 {{ end }}
+
+{{ if ne .chezmoi.os "linux" }}
+.config/topgrade.d/linux.toml
+{{ end }}
