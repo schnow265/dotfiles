@@ -20,3 +20,6 @@
 
 --downloader aria2c
 --downloader "dash,m3u8:native"
+
+--merge-output-format mkv
+--postprocessor-args "video:-c:v libx265"
