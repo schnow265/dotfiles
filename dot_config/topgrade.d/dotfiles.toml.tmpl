@@ -1,3 +1,6 @@
+[pre_commands]
+"Fetch all changes from remotes" = "chezmoi git fetch github & chezmoi git fetch gitlab"
+
 [post_commands]
 {{ if .dotfiles.apply_dotfile_changes }}"Apply pending chezmoi changes" = "chezmoi apply -v"{{ end }}
 "Sync chezmoi to Lab & Hub" = "chezmoi git push github & chezmoi git push gitlab"
