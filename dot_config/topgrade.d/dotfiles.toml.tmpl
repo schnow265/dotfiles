@@ -1,0 +1,3 @@
+[post_commands]
+{{ if .dotfiles.apply_dotfile_changes }}"Apply pending chezmoi changes" = "chezmoi apply -v"{{ end }}
+"Sync chezmoi to Lab & Hub" = "chezmoi git push github & chezmoi git push gitlab"
