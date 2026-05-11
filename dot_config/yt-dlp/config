@@ -1,6 +1,6 @@
--f b
+-f bestvideo+bestaudio
 --remote-components ejs:github
--P ~/YouTube/
+--paths ~/YouTube/
 
 --sponsorblock-mark all
 --sponsorblock-remove sponsor
