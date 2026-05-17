@@ -1,1 +1,7 @@
-[]
+[
+  {
+    "label": "git: commit wip",
+    "command": "git dgaf",
+    "hide": "always",
+  },
+]
