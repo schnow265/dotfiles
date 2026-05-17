@@ -1,0 +1,43 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "@playwright/mcp@latest"],
+      "enabled": false,
+      "environment": {
+        "PLAYWRIGHT_MCP_BROWSER": "webkit"
+      }
+    }
+  },
+  "provider": {
+    "lmstudio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio (local)",
+      "options": {
+        "baseURL": "http://127.0.0.1:1234/v1"
+      },
+      "models": {
+        "bartowski/mistralai_devstral-small-2-24b-instruct-2512": {
+          "name": "Devstral Small 2 (24B)"
+        },
+        "unsloth/granite-4.1-30b": {
+          "name": "Granite 4.1 (30B)"
+        },
+        "prism-ml/bonsai-8b": {
+          "name": "Bonsai (8B @ 1bit)"
+        },
+        "arcee-ai/afm-4.5b": {
+          "name": "AFM (4.5B)"
+        },
+        "deepseek/deepseek-r1-0528-qwen3-8b": {
+          "name": "DeepSeek R1 0528 Qwen (8B)"
+        },
+        "zai-org/glm-4.6v-flash": {
+          "name": "GLM 4.6 Flash (9B)"
+        }
+      }
+    }
+  },
+  "shell": "zsh"
+}
