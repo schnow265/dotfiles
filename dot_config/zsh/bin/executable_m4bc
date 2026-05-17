@@ -49,8 +49,6 @@ for f in "${FILES[@]}"; do
   START_MS=$END_MS
 done
 
-echo "---------- Encoding ----------"
-
 # Encode to AAC and explicitly force MP4 container
 ffmpeg \
   -f concat -safe 0 -i "$FILE_LIST" \
