@@ -24,7 +24,7 @@ if [ -d "$HOME/Library/pnpm" ]; then
 fi
 {{ end }}
 
-[[ -f "{{ .dev.directories.source_install_dir }}" ]] && export PATH="{{ .dev.directories.source_install_dir }}:$PATH"
+[[ -f "{{ .dev.directories.source_install_dir }}" ]] && export PATH="{{ .dev.directories.source_install_dir }}bin:$PATH"
 
 {{ if eq .chezmoi.os "darwin" }}
   [[ -d "/opt/homebrew/opt/ccache/libexec" ]] && export PATH="/opt/homebrew/opt/ccache/libexec:$PATH"
