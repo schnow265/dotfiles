@@ -1,3 +1,4 @@
+#!/usr/bin/env -S uv run --script
 # /// script
 # requires-python = ">=3.14"
 # dependencies = [
@@ -6,9 +7,11 @@
 # ]
 # ///
 
-import pandas as pd
-import sys
 import os
+import sys
+
+import pandas as pd
+
 
 def convert_parquet_to_csv(parquet_file_path: str, csv_file_path: str) -> None:
     """Reads a Parquet file and saves it as a CSV file."""
@@ -19,14 +22,15 @@ def convert_parquet_to_csv(parquet_file_path: str, csv_file_path: str) -> None:
     try:
         # Load the parquet file into a pandas DataFrame
         df: pd.DataFrame = pd.read_parquet(parquet_file_path)
-        
+
         # Save the DataFrame to a CSV file
         df.to_csv(csv_file_path, index=False)
         print(f"Successfully converted '{parquet_file_path}' to '{csv_file_path}'.")
-        
+
     except Exception as e:
         print(f"An error occurred during conversion: {e}")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     args: list[str] = sys.argv
