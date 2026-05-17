@@ -1,0 +1,167 @@
+#!/bin/bash
+set -eo pipefail
+
+clone_dir="{{ .dev.directories.clone_dir }}"
+mkdir -p "$clone_dir"
+cd "$clone_dir"
+repo_dir="$clone_dir/llama.cpp"
+
+vulkan_version="0.0.0"
+ENABLE_ROCM=false
+rocm_target="gfx1030"
+
+SKIP_UPDATE=false
+INSTALL=false
+SHALLOW_CLONE=false
+FORCE_NEW=false
+
+CFLAGS="{{ .dev.compilers.ccflags }}"
+CXXFLAGS="{{ .dev.compilers.cxxflags }}"
+CC="{{ .dev.compilers.cc }}"
+CXX="{{ .dev.compilers.cxx }}"
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --skip-update)
+      SKIP_UPDATE=true
+      shift
+      ;;
+    --force-new)
+      FORCE_NEW=true
+      shift
+      ;;
+    --install)
+      INSTALL=true
+      shift
+      ;;
+    --shallow)
+      SHALLOW_CLONE=true
+      SKIP_UPDATE=true
+      shift
+      ;;
+    --c-flags)
+      if [[ -z "$2" || "$2" == --* ]]; then
+        print -u2 "Error: --c-falgs requires a string"
+        exit 1
+      fi
+      CFLAGS="$2"
+      shift 2
+      ;;
+    --cxx-flags)
+      if [[ -z "$2" || "$2" == --* ]]; then
+        print -u2 "Error: --cxx-falgs requires a string"
+        exit 1
+      fi
+      CXXFLAGS="$2"
+      shift 2
+      ;;
+    -cc)
+      if [[ -z "$2" || "$2" == --* ]]; then
+        print -u2 "Error: -cc requires a string"
+        exit 1
+      fi
+      CC="$2"
+      shift 2
+      ;;
+    -cxx)
+      if [[ -z "$2" || "$2" == --* ]]; then
+        print -u2 "Error: -cxx requires a string"
+        exit 1
+      fi
+      CXX="$2"
+      shift 2
+      ;;
+    --vulkan-version)
+      vulkan_version="$2"
+      shift
+      ;;
+    --enable-rocm)
+      if (( ! $+commands[hipconfig] )); then
+        print -u2 "Error: hipconfig is not discoverable on the path."
+        exit 1
+      fi
+      ENABLE_ROCM=true
+      shift
+      ;;
+    --rocm-target)
+      rocm_target="$2"
+      shift
+      ;;
+    *)
+      print -u2 "Unknown argument: $1"
+      exit 1
+      ;;
+  esac
+done
+
+if [[ -d "$repo_dir/.git" ]]; then
+  cd "$repo_dir"
+  if [[ "$SKIP_UPDATE" == false ]]; then
+    if git rev-parse --is-shallow-repository | grep -q true; then
+      git fetch --unshallow
+    fi
+    git pull
+  fi
+else
+  if [[ "$SHALLOW_CLONE" == true ]]; then
+    git clone git@github.com:ggml-org/llama.cpp.git --depth=1
+  else
+    git clone git@github.com:ggml-org/llama.cpp.git
+  fi
+  cd "$repo_dir"
+fi
+
+if [[ "$FORCE_NEW" == true ]]; then
+  echo "Pruning clone..."
+  git clean -fdX .
+  git reset --hard
+fi
+
+cmake_cmd=(
+    cmake
+    -S .
+    -B build
+    -D CMAKE_C_COMPILER="$CC"
+    -D CMAKE_CXX_COMPILER="$CXX"
+    -D CMAKE_C_COMPILER_LAUNCHER=ccache
+    -D CMAKE_CXX_COMPILER_LAUNCHER=ccache
+    -D CMAKE_BUILD_TYPE=Release
+    -D CMAKE_INSTALL_PREFIX="{{ .dev.directories.source_install_dir }}"
+    -D CMAKE_CXX_FLAGS="{{ .dev.compilers.cxxflags }}"
+    -D CMAKE_CC_FLAGS="{{ .dev.compilers.ccflags }}"
+    -D CMAKE_EXE_LINKER_FLAGS="{{ .dev.compilers.linkerflags }}"
+    -G Ninja
+)
+
+if [[ -f "~/vulkan/${vulkan_version}/setup-env.sh" ]]; then
+    source ~/vulkan/${vulkan_version}/setup-env.sh
+
+    cmake_cmd=(
+        $cmake_cmd
+        -D GGML_VULKAN=ON
+    )
+fi
+
+if [[ "$ENABLE_ROCM" == true ]]; then
+
+    cmake_cmd=(
+        $cmake_cmd
+        -D GGML_HIP=ON
+        -D GGML_HIP_ROCWMMA_FATTN=ON
+        -D AMDGPU_TARGETS="$rocm_target"
+    )
+
+    HIPCXX="$(hipconfig -l)/clang" \
+        HIP_PATH="$(hipconfig -R)" \
+        "${cmake_cmd[@]}"
+
+    exit 0
+fi
+
+"${cmake_cmd[@]}"
+
+cmake --build build --config Release
+
+if [[ "$INSTALL" == "true" ]]; then
+    cmake --build build --config Release --target install
+fi
