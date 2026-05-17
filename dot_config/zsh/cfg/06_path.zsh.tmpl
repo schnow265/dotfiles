@@ -1,12 +1,22 @@
+typeset -U path
+
 # PATH expansion
-[[ -d "$HOME/.local/bin" ]] && export PATH="/Users/scaletto/.local/bin:$PATH"
+[[ -d "$HOME/.local/bin" ]] && path=("$HOME/.local/bin" $path)
 
 [[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
 
-[[ -d "$HOME/.aspire/bin" ]] && export PATH="$HOME/.aspire/bin:$PATH"
-[[ -d "$HOME/.local/share/gem/ruby/3.4.0/bin" ]] && export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"
-[[ -d "$HOME/.dotnet/tools" ]] && export PATH="$PATH:$HOME/.dotnet/tools"
-[[ -d "$HOME/.lmstudio/bin" ]] && export PATH="$HOME/.lmstudio/bin:$PATH"
+[[ -d "$HOME/.aspire/bin" ]] && path=("$HOME/.aspire/bin" $path)
+[[ -d "$HOME/.local/share/gem/ruby/3.4.0/bin" ]] && path=("$HOME/.local/share/gem/ruby/3.4.0/bin" $path)
+[[ -d "$HOME/.dotnet/tools" ]] && path=($path "$HOME/.dotnet/tools")
+[[ -d "$HOME/.lmstudio/bin" ]] && path=("$HOME/.lmstudio/bin" $path)
+[[ -f "{{ .dev.directories.source_install_dir }}" ]] && path=("{{ .dev.directories.source_install_dir }}bin" $path)
+
+{{ if eq .chezmoi.os "darwin" }}
+  [[ -d "/opt/homebrew/opt/ccache/libexec" ]] && path=("/opt/homebrew/opt/ccache/libexec" $path)
+{{ end }}
+
+export PATH
+
 
 {{ if eq .chezmoi.os "linux" }}
 if [ -d "$HOME/.local/share/pnpm" ]; then
@@ -24,10 +34,4 @@ if [ -d "$HOME/Library/pnpm" ]; then
     *) export PATH="$PNPM_HOME/bin:$PATH" ;;
     esac
 fi
-{{ end }}
-
-[[ -f "{{ .dev.directories.source_install_dir }}" ]] && export PATH="{{ .dev.directories.source_install_dir }}bin:$PATH"
-
-{{ if eq .chezmoi.os "darwin" }}
-  [[ -d "/opt/homebrew/opt/ccache/libexec" ]] && export PATH="/opt/homebrew/opt/ccache/libexec:$PATH"
 {{ end }}
