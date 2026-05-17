@@ -1,6 +1,6 @@
 [[ -z ${EDITOR:-} ]] && export EDITOR=nvim
 
-# if clang is avaliable and CC/CXX is unset, set CC/CXX to the respective compiler
+# if {{ .dev.compilers.cc }}/{{ .dev.compilers.cxx }} is avaliable and CC/CXX is unset, set CC/CXX to the specified values
 [[ -z ${CC:-} ]] && export CC="{{ .dev.compilers.cc }}"
 [[ -z ${CXX:-} ]] && export CXX="{{ .dev.compilers.cxx }}"
 
@@ -8,8 +8,6 @@
 [[ -z ${CFLAGS:-} ]] && export CFLAGS="{{ .dev.compilers.ccflags }}"
 [[ -z ${CXXFLAGS:-} ]] && export CXXFLAGS="{{ .dev.compilers.cxxflags }}"
 [[ -z ${CPPFLAGS:-} ]] && export CPPFLAGS="{{ .dev.compilers.cxxflags }}"
-
-[[ -f ~zpfx/bin/nvim ]] && alias nvy="neovide --neovim-bin ~zpfx/bin/nvim"
 
 [[ -z ${MANPAGER:-} ]] && export MANPAGER='nvim +Man!'
 
