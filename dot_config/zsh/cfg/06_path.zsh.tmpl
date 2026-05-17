@@ -1,4 +1,6 @@
 # PATH expansion
+[[ -d "$HOME/.local/bin" ]] && export PATH="/Users/scaletto/.local/bin:$PATH"
+
 [[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
 
 [[ -d "$HOME/.aspire/bin" ]] && export PATH="$HOME/.aspire/bin:$PATH"
