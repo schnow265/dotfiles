@@ -7,8 +7,9 @@ SKIP_INSTALL=false
 SHALLOW_CLONE=false
 FORCE_NEW=false
 
-LLVM_TARGETS=host
+LLVM_TARGETS=host # only build for host arcitecture (=> no cross compilers)
 LLVM_PROJECTS="clang"   # default
+LLVM_RUNTIMES=""
 
 CFLAGS="{{ .dev.compilers.ccflags }}"
 CXXFLAGS="{{ .dev.compilers.cxxflags }}"
@@ -44,8 +45,21 @@ while [[ $# -gt 0 ]]; do
         print -u2 "Error: --projects requires a semicolon-separated value"
         exit 1
       fi
-      LLVM_PROJECTS="$2"
+      LLVM_PROJECTS="${2//,/;}"
       shift 2
+      ;;
+    --runtimes)
+      if [[ -z "$2" || "$2" == --* ]]; then
+        print -u2 "Error: --runtimes requires a semicolon-separated value"
+        exit 1
+      fi
+      LLVM_RUNTIMES="${2//,/;}"
+      shift 2
+      ;;
+    --all-buildable-thingies-yes-i-know-what-i-am-doing-and-that-this-can-take-a-LONG-LONG-time)
+      LLVM_PROJECTS="bolt;clang;clang-tools-extra;cross-project-tests;lld;lldb;mlir;polly"
+      LLVM_RUNTIMES="all"
+      shift
       ;;
     --c-flags)
       if [[ -z "$2" || "$2" == --* ]]; then
@@ -128,9 +142,11 @@ cmake_cmd=(
   -D CMAKE_CXX_COMPILER=$CXX
   -D CMAKE_C_FLAGS="$CFLAGS"
   -D CMAKE_CXX_FLAGS="$CXXFLAGS"
+  -D CMAKE_C_COMPILER_LAUNCHER=ccache
   -D CMAKE_INSTALL_PREFIX="{{ .dev.directories.source_install_dir }}"
   -D LLVM_TARGETS_TO_BUILD="$LLVM_TARGETS"
   -D LLVM_ENABLE_PROJECTS="$LLVM_PROJECTS"
+  -D LLVM_ENABLE_RUNTIMES="$LLVM_RUNTIMES"
   -D LLVM_PARALLEL_COMPILE_JOBS="{{ .cpu.threads }}"
   -D LLVM_PARALLEL_LINK_JOBS=2
   -D LLVM_PARALLEL_TABLEGEN_JOBS=2
@@ -138,11 +154,11 @@ cmake_cmd=(
   -D LLVM_BUILD_BENCHMARKS=false
   -D LLVM_INCLUDE_BENCHMARKS=false
   -D LLVM_BUILD_EXAMPLES=true
-  -D LLVM_BUILD_TOOLS=false
+  -D LLVM_BUILD_TOOLS=true
   -D LLVM_ENABLE_BINDINGS=false
   -D LLVM_ENABLE_LIBCXX=false
   -D LLVM_BUILD_DOCS=true
-  -D LLVM_ENABLE_LTO=Thin
+  -D LLVM_ENABLE_LTO=Off
   -D LLVM_ENABLE_ZLIB=FORCE_ON
   -D LLVM_ENABLE_ZSTD=FORCE_ON
   -D LLDB_ENABLE_LIBEDIT=true
