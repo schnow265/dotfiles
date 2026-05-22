@@ -110,5 +110,5 @@ CMAKE_CC_COMPILER_LAUNCHER=ccache \
     CMAKE_CC_FLAGS="$CFLAGS"
 
 if [[ "$INSTALL" == true ]]; then
-    make CMAKE_INSTALL_PREFIX=$HOME/.local/ install
+    make CMAKE_INSTALL_PREFIX="{{ .dev.directories.source_install_dir }}" install
 fi

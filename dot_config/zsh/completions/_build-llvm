@@ -2,14 +2,18 @@
 
 _arguments -s \
   '--skip-update[Skip updating the LLVM repository]' \
-  '--no-install[Build only, do not install]' \
+  '--install[Install the built artifacts into the configured folder]' '--install-dir-suffix[Add a suffix to the install dir for easier management]'\
   '--shallow[Perform a shallow clone and skip updates]' \
   '--all-arches[Build all LLVM targets instead of host only]' \
     '*--projects[Enable LLVM projects (comma-separated; default=clang)]:projects:_llvm_projects' \
+    '*--runtimes[Enable LLVM runtimes (comma-separated)]:projects:_llvm_runtimes' \
     '--force-new[Remove the build directory and start the build from scratch]' \
+    '--no-build[Do NOT run any build task.]' \
     '--c-flags[Flags passed to CC]' \
     '--cxx-flags[Flags passed to CXX]' \
-    '-cc[The C Compiler to use]' '-cxx[The C++ Compiler to use]' '--all-buildable-thingies-yes-i-know-what-i-am-doing-and-that-this-can-take-a-LONG-LONG-time[Build EVERYTHING]'
+    '-cc[The C Compiler to use]' \
+    '-cxx[The C++ Compiler to use]' \
+    '--all-buildable-thingies-yes-i-know-what-i-am-doing-and-that-this-can-take-a-LONG-LONG-time[Build EVERYTHING]'
 
 _llvm_projects() {
   local -a projects
@@ -34,6 +38,7 @@ _llvm_runtimes() {
         libc
         libclc
         openmp
+        libcxx
     )
 
     _values -C -s ',' 'LLVM Runtimes' $runtimes

@@ -3,9 +3,12 @@ set -e
 set -o pipefail
 
 SKIP_UPDATE=false
-SKIP_INSTALL=false
+INSTALL=false
 SHALLOW_CLONE=false
 FORCE_NEW=false
+NO_BUILD=false
+
+INST_DIR_SUFFIX=""
 
 LLVM_TARGETS=host # only build for host arcitecture (=> no cross compilers)
 LLVM_PROJECTS="clang"   # default
@@ -27,8 +30,8 @@ while [[ $# -gt 0 ]]; do
       FORCE_NEW=true
       shift
       ;;
-    --no-install)
-      SKIP_INSTALL=true
+    --install)
+      INSTALL=true
       shift
       ;;
     --shallow)
@@ -38,6 +41,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --all-arches)
       LLVM_TARGETS=all
+      shift
+      ;;
+    --no-build)
+      NO_BUILD=true
       shift
       ;;
     --projects)
@@ -93,6 +100,14 @@ while [[ $# -gt 0 ]]; do
       CXX="$2"
       shift 2
       ;;
+    --install-dir-suffix)
+      if [[ -z "$2" || "$2" == --* ]]; then
+        print -u2 "Error: --install-dir-suffix requires a string"
+        exit 1
+      fi
+      INST_DIR_SUFFIX="$2"
+      shift 2
+      ;;
     *)
       print -u2 "Unknown argument: $1"
       exit 1
@@ -143,7 +158,7 @@ cmake_cmd=(
   -D CMAKE_C_FLAGS="$CFLAGS"
   -D CMAKE_CXX_FLAGS="$CXXFLAGS"
   -D CMAKE_C_COMPILER_LAUNCHER=ccache
-  -D CMAKE_INSTALL_PREFIX="{{ .dev.directories.source_install_dir }}"
+  -D CMAKE_INSTALL_PREFIX="{{ .dev.directories.source_install_dir }}$INST_DIR_SUFFIX"
   -D LLVM_TARGETS_TO_BUILD="$LLVM_TARGETS"
   -D LLVM_ENABLE_PROJECTS="$LLVM_PROJECTS"
   -D LLVM_ENABLE_RUNTIMES="$LLVM_RUNTIMES"
@@ -190,7 +205,12 @@ if [[ "$run_cmake" == true ]]; then
   "${cmake_cmd[@]}"
 fi
 
-if [[ "$SKIP_INSTALL" == false ]]; then
+if [[ "$NO_BUILD" == true ]]; then
+    echo "Please go to the directory '$repo_dir/build' and run ninja manually!"
+    exit 0
+fi
+
+if [[ "$INSTALL" == true ]]; then
   ninja install
 else
   ninja
