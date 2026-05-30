@@ -266,6 +266,8 @@ def encode_codec(codec, input_file, info):
 
     output = AUDIO_DIR / f"{codec}{extension}"
 
+    console.print(f"Starting with codec '{codec}'")
+
     cmd = [
         "ffmpeg",
         "-y",
@@ -323,6 +325,8 @@ def encode_codec(codec, input_file, info):
     size = output.stat().st_size
 
     rtf = info["duration"] / encode_time if encode_time > 0 else 0
+
+    console.print(f"Completed codec '{codec}'.")
 
     return {
         "codec": codec,
