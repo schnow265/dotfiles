@@ -72,6 +72,15 @@
     command = "delta"
     args = ["--paging", "never"]
 
+[merge]
+    command = "nvim"
+    args = [
+        "-d",
+        "{{`{{ .Destination }}`}}",
+        "{{`{{ .Source }}`}}",
+        "{{`{{ .Target }}`}}"
+    ]
+
 [data.cpu]
     cores = {{ $cpuCores }}
     threads = {{ $cpuThreads }}
