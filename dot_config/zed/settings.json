@@ -8,12 +8,13 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "debugger": {
-    "dock": "bottom"
+    "dock": "bottom",
   },
   "git_panel": {
+    "dock": "right",
     "show_count_badge": true,
     "file_icons": true,
-    "tree_view": true
+    "tree_view": true,
   },
   "proxy": "",
   "document_symbols": "on",
@@ -22,16 +23,17 @@
   "ui_font_family": ".ZedSans",
   "terminal": {
     "font_family": "JetBrains Mono",
-    "font_size": 11.0
+    "font_size": 11.0,
   },
   "diagnostics": {
     "inline": {
-      "enabled": true
-    }
+      "enabled": true,
+    },
   },
   "semantic_tokens": "combined",
   "collaboration_panel": {
-    "button": false
+    "dock": "left",
+    "button": false,
   },
   "project_panel": {
     "hide_hidden": false,
@@ -40,7 +42,7 @@
     "diagnostic_badges": true,
     "show_diagnostics": "all",
     "scrollbar": {
-      "horizontal_scroll": true
+      "horizontal_scroll": true,
     },
     "bold_folder_labels": true,
     "git_status": true,
@@ -48,24 +50,25 @@
     "file_icons": true,
     "entry_spacing": "standard",
     "hide_gitignore": false,
-    "dock": "left"
+    "dock": "left",
   },
   "outline_panel": {
-    "dock": "right"
+    "dock": "right",
   },
   "agent": {
+    "dock": "right",
     "button": false,
     "sidebar_side": "right",
     "favorite_models": [],
-    "model_parameters": []
+    "model_parameters": [],
   },
   "disable_ai": true,
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "session": {
-    "trust_all_worktrees": true
+    "trust_all_worktrees": true,
   },
   "vim_mode": true,
   "icon_theme": "Catppuccin Mocha",
