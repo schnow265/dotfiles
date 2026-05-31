@@ -131,6 +131,10 @@ cmake_cmd=(
     -D CMAKE_C_FLAGS="{{ .dev.compilers.ccflags }}"
     -D CMAKE_EXE_LINKER_FLAGS="{{ .dev.compilers.linkerflags }}"
     -G Ninja
+    {{ if eq .chezmoi.os "darwin" }}
+    # fuck macos library issues with llamacpp.
+    -D CMAKE_INSTALL_RPATH="@executable_path/../lib"
+    {{ end }}
 )
 
 if [[ -f "~/vulkan/${vulkan_version}/setup-env.sh" ]]; then
