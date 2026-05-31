@@ -128,7 +128,7 @@ cmake_cmd=(
     -D CMAKE_BUILD_TYPE=Release
     -D CMAKE_INSTALL_PREFIX="{{ .dev.directories.source_install_dir }}"
     -D CMAKE_CXX_FLAGS="{{ .dev.compilers.cxxflags }}"
-    -D CMAKE_CC_FLAGS="{{ .dev.compilers.ccflags }}"
+    -D CMAKE_C_FLAGS="{{ .dev.compilers.ccflags }}"
     -D CMAKE_EXE_LINKER_FLAGS="{{ .dev.compilers.linkerflags }}"
     -G Ninja
 )
