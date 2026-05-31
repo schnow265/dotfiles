@@ -143,7 +143,6 @@ if [[ -f "~/vulkan/${vulkan_version}/setup-env.sh" ]]; then
 fi
 
 if [[ "$ENABLE_ROCM" == true ]]; then
-
     cmake_cmd=(
         $cmake_cmd
         -D GGML_HIP=ON
@@ -154,11 +153,9 @@ if [[ "$ENABLE_ROCM" == true ]]; then
     HIPCXX="$(hipconfig -l)/clang" \
         HIP_PATH="$(hipconfig -R)" \
         "${cmake_cmd[@]}"
-
-    exit 0
+else
+    "${cmake_cmd[@]}"
 fi
-
-"${cmake_cmd[@]}"
 
 cmake --build build --config Release
 
