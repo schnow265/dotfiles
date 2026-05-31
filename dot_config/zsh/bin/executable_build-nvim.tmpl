@@ -100,15 +100,16 @@ if [[ "$FORCE_NEW" == true ]]; then
   git reset --hard
 fi
 
+CMAKE_BUILD_TYPE=Release \
 CMAKE_CC_COMPILER_LAUNCHER=ccache \
-    CMAKE_CXX_COMPILER_LAUNCHER=ccache \
-    CC=$CC \
-    CXX=$CXX \
-    make \
-    CMAKE_BUILD_TYPE=RelWithDebInfo \
-    CMAKE_CXX_FLAGS="$CXXFLAGS" \
-    CMAKE_CC_FLAGS="$CFLAGS"
+CMAKE_CXX_COMPILER_LAUNCHER=ccache \
+CC=$CC \
+CXX=$CXX \
+CMAKE_CXX_FLAGS="$CXXFLAGS" \
+CMAKE_CC_FLAGS="$CFLAGS" \
+make
 
 if [[ "$INSTALL" == true ]]; then
+    CMAKE_BUILD_TYPE=Release \
     make CMAKE_INSTALL_PREFIX="{{ .dev.directories.source_install_dir }}" install
 fi
