@@ -13,3 +13,5 @@
 {{ end }}
 
 .config/topgrade.d/dotfiles.toml
+
+README.md
