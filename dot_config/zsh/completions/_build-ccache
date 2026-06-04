@@ -1,0 +1,3 @@
+#compdef build-ccache
+
+_arguments -s '--skip-update[Skip updating the git repo]' '--force-new[Reset the git repo to a just-cloned state]' '--install[Install build artifacts]' '--shallow[Only fetch latest commit]' '--c-flags[Flags to be passed to your C compiler]' '--cxx-flags[Flags to be passed to your CXX Compiler]' '-cc[Path to override the C compiler]' '-cxx[Path to override the CXX compiler]'
