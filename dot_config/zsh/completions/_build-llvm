@@ -18,14 +18,14 @@ _arguments -s \
 _llvm_projects() {
   local -a projects
   projects=(
-    bolt
-    clang
-    clang-tools-extra
-    cross-project-tests
-    lld
-    lldb
-    mlir
-    polly
+    'bolt'
+    'clang[The C/C++ compiler]'
+    'clang-tools-extra'
+    'cross-project-tests'
+    'lld'
+    'lldb[Low-Level Debugger]'
+    'mlir'
+    'polly'
   )
 
   _values -C -s ',' 'LLVM projects' $projects
@@ -34,11 +34,12 @@ _llvm_projects() {
 _llvm_runtimes() {
     local -a runtimes
     runtimes=(
-        compiler-rt
-        libc
-        libclc
-        openmp
-        libcxx
+        'compiler-rt'
+        'libc'
+        'libclc'
+        'openmp'
+        'libcxx'
+        'all[Build all runtimes]'
     )
 
     _values -C -s ',' 'LLVM Runtimes' $runtimes
