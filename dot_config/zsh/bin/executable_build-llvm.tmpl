@@ -152,7 +152,7 @@ cd build
 cmake_cmd=(
   cmake
   -G Ninja
-  -D CMAKE_BUILD_TYPE=RelWithDebInfo
+  -D CMAKE_BUILD_TYPE=Release
   -D CMAKE_C_COMPILER=$CC
   -D CMAKE_CXX_COMPILER=$CXX
   -D CMAKE_C_FLAGS="$CFLAGS"
@@ -182,6 +182,7 @@ cmake_cmd=(
   -D LLDB_ENABLE_LIBXML2=false
   -D LLDB_ENABLE_PYTHON=true
   -D LLDB_ENABLE_LUA=true
+  -D LLDB_USE_SYSTEM_DEBUGSERVER=ON
   ../llvm
 )
 
