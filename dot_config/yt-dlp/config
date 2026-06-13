@@ -12,8 +12,6 @@
 --no-write-auto-subs
 --sub-format ass/srt/best
 
---write-thumbnail
-
 --embed-subs
 --embed-thumbnail
 --embed-chapters
