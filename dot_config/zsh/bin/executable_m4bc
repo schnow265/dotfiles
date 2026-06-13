@@ -1,63 +1,264 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/usr/bin/env -S uv run --script
+#
+# /// script
+# requires-python = ">=3.14"
+# dependencies = [
+#     "rich>=15.0.0",
+# ]
+# ///
 
-INPUT_DIR="${1:-.}"
-OUTPUT_FILE="${2:-audiobook.m4b}"
 
-TMP_DIR="$(mktemp -d)"
-trap 'rm -rf "$TMP_DIR"' EXIT
+from __future__ import annotations
 
-FILE_LIST="$TMP_DIR/files.txt"
-METADATA="$TMP_DIR/metadata.txt"
+import argparse
+import subprocess
+import tempfile
+from pathlib import Path
 
-# Collect and sort mp3 files
-mapfile -t FILES < <(find "$INPUT_DIR" -maxdepth 1 -type f -iname "*.mp3" | sort)
+from rich.console import Console
+from rich.progress import (
+    BarColumn,
+    Progress,
+    SpinnerColumn,
+    TextColumn,
+    TimeElapsedColumn,
+    TimeRemainingColumn,
+)
+from rich.table import Table
 
-if [[ ${#FILES[@]} -eq 0 ]]; then
-  echo "No mp3 files found."
-  exit 1
-fi
+console = Console()
 
-# Create concat list
-for f in "${FILES[@]}"; do
-  printf "file '%s'\n" "$(realpath "$f")" >> "$FILE_LIST"
-done
 
-# Metadata header
-echo ";FFMETADATA1" > "$METADATA"
+def run(cmd: list[str]) -> str:
+    result = subprocess.run(
+        cmd,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return result.stdout.strip()
 
-START_MS=0
 
-for f in "${FILES[@]}"; do
-  DURATION=$(ffprobe -v error -show_entries format=duration \
-    -of default=noprint_wrappers=1:nokey=1 "$f")
+def get_duration_ms(file: Path) -> int:
+    duration = run(
+        [
+            "ffprobe",
+            "-v",
+            "error",
+            "-show_entries",
+            "format=duration",
+            "-of",
+            "default=noprint_wrappers=1:nokey=1",
+            str(file),
+        ]
+    )
 
-  DURATION_MS=$(awk "BEGIN {printf \"%d\", $DURATION * 1000}")
-  END_MS=$((START_MS + DURATION_MS))
+    return round(float(duration) * 1000)
 
-  BASENAME="$(basename "$f" .mp3)"
-  TITLE="${BASENAME#* - }"
 
-  {
-    echo "[CHAPTER]"
-    echo "TIMEBASE=1/1000"
-    echo "START=$START_MS"
-    echo "END=$END_MS"
-    echo "title=$TITLE"
-  } >> "$METADATA"
+def build_metadata(
+    files: list[Path],
+    metadata_file: Path,
+) -> int:
+    start_ms = 0
 
-  START_MS=$END_MS
-done
+    table = Table(title="Detected Chapters")
+    table.add_column("#", justify="right")
+    table.add_column("Title")
+    table.add_column("Duration")
 
-# Encode to AAC and explicitly force MP4 container
-ffmpeg \
-  -f concat -safe 0 -i "$FILE_LIST" \
-  -f ffmetadata -i "$METADATA" \
-  -map 0:a \
-  -map_metadata 1 \
-  -c:a aac -b:a 192k \
-  -movflags +faststart \
-  -f mp4 \
-  "$OUTPUT_FILE"
+    with metadata_file.open("w", encoding="utf-8") as f:
+        f.write(";FFMETADATA1\n")
 
-echo "Created $OUTPUT_FILE with chapters."
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            BarColumn(),
+            TimeElapsedColumn(),
+            console=console,
+        ) as progress:
+            task = progress.add_task(
+                "Analyzing MP3 files...",
+                total=len(files),
+            )
+
+            for idx, mp3 in enumerate(files, start=1):
+                duration_ms = get_duration_ms(mp3)
+                end_ms = start_ms + duration_ms
+
+                title = mp3.stem.split(" - ", 1)[-1]
+
+                f.write(
+                    "\n".join(
+                        [
+                            "[CHAPTER]",
+                            "TIMEBASE=1/1000",
+                            f"START={start_ms}",
+                            f"END={end_ms}",
+                            f"title={title}",
+                            "",
+                        ]
+                    )
+                )
+
+                table.add_row(
+                    str(idx),
+                    title,
+                    f"{duration_ms / 1000:.1f}s",
+                )
+
+                start_ms = end_ms
+                progress.advance(task)
+
+    console.print(table)
+
+    return start_ms
+
+
+def create_concat_file(files: list[Path], concat_file: Path) -> None:
+    with concat_file.open("w", encoding="utf-8") as f:
+        for file in files:
+            f.write(f"file '{file.resolve()}'\n")
+
+
+def encode(
+    concat_file: Path,
+    metadata_file: Path,
+    output_file: Path,
+    total_duration_ms: int,
+) -> None:
+    cmd = [
+        "ffmpeg",
+        "-hide_banner",
+        "-y",
+        "-f",
+        "concat",
+        "-safe",
+        "0",
+        "-i",
+        str(concat_file),
+        "-f",
+        "ffmetadata",
+        "-i",
+        str(metadata_file),
+        "-map",
+        "0:a",
+        "-map_metadata",
+        "1",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "192k",
+        "-movflags",
+        "+faststart",
+        "-f",
+        "mp4",
+        "-progress",
+        "pipe:1",
+        "-nostats",
+        str(output_file),
+    ]
+
+    console.print(f"\n[bold cyan]Encoding audiobook:[/bold cyan] {output_file}")
+
+    process = subprocess.Popen(
+        cmd,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+        text=True,
+        bufsize=1,
+    )
+
+    with Progress(
+        SpinnerColumn(),
+        TextColumn("[progress.description]{task.description}"),
+        BarColumn(),
+        TextColumn("{task.percentage:>5.1f}%"),
+        TimeElapsedColumn(),
+        TimeRemainingColumn(),
+        console=console,
+    ) as progress:
+        task = progress.add_task(
+            "Encoding",
+            total=total_duration_ms,
+        )
+
+        current_ms = 0
+
+        for line in process.stdout:
+            line = line.strip()
+
+            if "=" not in line:
+                continue
+
+            key, value = line.split("=", 1)
+
+            if key == "out_time_ms":
+                current_ms = int(value)
+
+                progress.update(
+                    task,
+                    completed=min(current_ms, total_duration_ms),
+                )
+
+            elif key == "progress" and value == "end":
+                progress.update(
+                    task,
+                    completed=total_duration_ms,
+                )
+
+    returncode = process.wait()
+
+    if returncode != 0:
+        raise subprocess.CalledProcessError(returncode, cmd)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Merge MP3 files into an M4B audiobook with chapters."
+    )
+
+    parser.add_argument(
+        "input_dir",
+        nargs="?",
+        default=".",
+        help="Directory containing MP3 files",
+    )
+
+    parser.add_argument(
+        "output_file",
+        nargs="?",
+        default="audiobook.m4b",
+        help="Output audiobook filename",
+    )
+
+    args = parser.parse_args()
+
+    input_dir = Path(args.input_dir)
+    output_file = Path(args.output_file)
+
+    files = sorted(input_dir.glob("*.mp3"))
+
+    if not files:
+        console.print("[bold red]No MP3 files found.[/bold red]")
+        return 1
+
+    console.print(f"[green]Found {len(files)} MP3 files.[/green]")
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmpdir = Path(tmp)
+
+        concat_file = tmpdir / "files.txt"
+        metadata_file = tmpdir / "metadata.txt"
+
+        create_concat_file(files, concat_file)
+        build_metadata(files, metadata_file)
+        encode(concat_file, metadata_file, output_file)
+
+    console.print(f"\n[bold green]✓ Created {output_file}[/bold green]")
+
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
