@@ -66,7 +66,7 @@ language =
 # this within config files if you want to clear previously set values in
 # configuration files or on the CLI if you want to clear values set on the
 # CLI.
-font-family =
+font-family = "JetBrains Mono"
 
 font-family-bold =
 font-family-italic =
@@ -142,7 +142,7 @@ font-synthetic-style = bold,italic,bold-italic
 # [fontdrop.info](https://fontdrop.info).
 #
 # To generally disable most ligatures, use `-calt, -liga, -dlig`.
-font-feature =
+font-feature =-calt, -liga, -dlig
 
 # Font size in points. This value can be a non-integer and the nearest integer
 # pixel size will be selected. If you have a high dpi display where 1pt = 2px
