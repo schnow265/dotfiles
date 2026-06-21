@@ -1,6 +1,3 @@
 [misc]
 disable = ["system"]
 ignore_failures = ["containers", "vagrant"]
-
-[post_commands]
-"Remove all of brew" = "brew cleanup --prune=all"
