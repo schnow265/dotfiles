@@ -3,12 +3,17 @@ type = "git-repo"
 url = "git@gitlab.com:schnow265/nvim.conf.git"
 refreshPeriod = "24h"
 
-[".local/share/external/zsh/completions/_tmuxinator"]
-type = "file"
-url = "https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh"
-refreshPeriod = "168h"
-
 [".tmux/plugins/tpm"]
 type = "git-repo"
 url = "https://github.com/tmuxpack/tpack.git"
+refreshPeriod = "168h"
+
+[".local/share/tmuxinator-projects"]
+type = "git-repo"
+url = "git@gitlab.com:schnow265/tmuxinator-projects.git"
+refreshPeriod = "12h"
+
+[".local/share/external/zsh/completions/_tmuxinator"]
+type = "file"
+url = "https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh"
 refreshPeriod = "168h"
