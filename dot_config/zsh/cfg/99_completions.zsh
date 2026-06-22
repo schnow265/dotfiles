@@ -1,8 +1,8 @@
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-COMPLETION_DIR="${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/completions"
-fpath=($COMPLETION_DIR $fpath)
+COMPLETION_DIR="${HOME}/.config/zsh/completions/"
+fpath=($COMPLETION_DIR $fpath "${HOME}/.local/share/external/zsh/completions/")
 
 autoload -U compinit
 compinit
