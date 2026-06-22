@@ -7,3 +7,8 @@ refreshPeriod = "24h"
 type = "file"
 url = "https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh"
 refreshPeriod = "168h"
+
+[".tmux/plugins/tpm"]
+type = "git-repo"
+url = "https://github.com/tmuxpack/tpack.git"
+refreshPeriod = "168h"

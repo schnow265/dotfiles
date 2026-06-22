@@ -22,3 +22,6 @@ export UV_TORCH_BACKEND=auto
 
 # FUCK XET! MY ISP DOES NOT LIKE XET.
 export HF_HUB_DISABLE_XET=1
+
+# change tmuxinator's config dir to one managed by chezmoi
+export TMUXINATOR_CONFIG="{{ .chezmoi.sourceDir }}/tmuxinator/"

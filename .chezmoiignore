@@ -15,3 +15,6 @@
 .config/topgrade.d/dotfiles.toml
 
 README.md
+
+# config points towards this repo directly, just ignore it from chezmoi
+/tmuxinator
