@@ -2,3 +2,8 @@
 type = "git-repo"
 url = "git@gitlab.com:schnow265/nvim.conf.git"
 refreshPeriod = "24h"
+
+[".local/share/external/zsh/completions/_tmuxinator"]
+type = "file"
+url = "https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh"
+refreshPeriod = "168h"
