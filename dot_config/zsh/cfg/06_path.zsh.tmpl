@@ -1,6 +1,8 @@
 typeset -U path
 
 # PATH expansion
+[[ -d "$HOME/.asdf/shims" ]] && path=("$HOME/.asdf/shims" $path) # give asdf first path privilegde
+
 [[ -d "$HOME/.local/bin" ]] && path=("$HOME/.local/bin" $path)
 
 [[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"

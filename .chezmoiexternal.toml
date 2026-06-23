@@ -17,3 +17,8 @@ refreshPeriod = "12h"
 type = "file"
 url = "https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh"
 refreshPeriod = "168h"
+
+[".local/share/external/zsh/completions/_asdf"]
+type = "file"
+url = "https://raw.githubusercontent.com/asdf-vm/asdf/refs/heads/master/internal/completions/asdf.zsh"
+refreshPeriod = "168h"
