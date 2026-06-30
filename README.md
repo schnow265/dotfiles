@@ -7,7 +7,7 @@
 - zsh
 - nvim (via external repo)
 - tmux
-- tmuxinator (templates stored in this repo)
+- tmuxinator
 - btop
 - yt-dlp
 - topgrade stuff
