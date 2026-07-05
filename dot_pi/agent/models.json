@@ -1,0 +1,17 @@
+{
+  "providers": {
+    "lmstudio": {
+      "baseUrl": "http://localhost:1234/v1",
+      "api": "openai-completions",
+      "apiKey": "lmstudio",
+      "models": [
+        { "id": "bonsai-8b" },
+        { "id": "mistralai/devstral-small-2-2512" },
+        { "id": "p-e-w_gpt-oss-20b-heretic" },
+        { "id": "deepseek/deepseek-r1-0528-qwen3-8b" },
+        { "id": "qwen_qwen3.5-0.8b-heretic-mlx" },
+        { "id": "janhq_jan-v3.5-4b-heretic-mlx" }
+      ]
+    }
+  }
+}
