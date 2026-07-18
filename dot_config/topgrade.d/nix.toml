@@ -1,0 +1,5 @@
+[misc]
+ignore_failures = ["nix"]
+
+[commands]
+"Nix Profiles" = "nix profile upgrade --all"
