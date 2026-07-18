@@ -12,6 +12,5 @@ FINDER_METADATA
 ~/Library/Caches/com.apple.Spotlight*
 ~/Library/Caches/CloudKit*
 ~/.lmstudio/models
-/nix
 ~/.config/huggingface/stored_tokens
 ~/.config/huggingface/token
