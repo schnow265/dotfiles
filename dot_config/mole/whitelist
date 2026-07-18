@@ -13,3 +13,5 @@ FINDER_METADATA
 ~/Library/Caches/CloudKit*
 ~/.lmstudio/models
 /nix
+~/.config/huggingface/stored_tokens
+~/.config/huggingface/token
