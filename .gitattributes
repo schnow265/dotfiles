@@ -1,0 +1,1 @@
+chezmoi.kdbx filter=lfs diff=lfs merge=lfs -text
