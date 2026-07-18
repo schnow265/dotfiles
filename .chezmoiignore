@@ -6,6 +6,7 @@
 
 {{ if ne .chezmoi.os "darwin" }}
 .config/topgrade.d/macos.toml
+.config/mole/
 {{ end }}
 
 {{ if ne .chezmoi.os "linux" }}
