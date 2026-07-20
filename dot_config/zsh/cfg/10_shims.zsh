@@ -13,7 +13,7 @@ rm -f "$SHIM_DIR"/*(N)
 for subdir in "$BIN_DIR"/*(/); do
   name="${subdir:t}"
   for file in "$subdir"/*(.x); do
-    shim="$SHIM_DIR/${name}_${file:t}"
+    shim="$SHIM_DIR/${name}-${file:t}"
     cat > "$shim" <<EOF
 #!/usr/bin/env zsh
 exec "$file" "\$@"
