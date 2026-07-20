@@ -1,4 +1,4 @@
 [misc]
-first = ["chezmoi"]
+first = ["chezmoi", "home_manager"]
 disable = ["system", "shell", "vim", "pnpm"]
 ignore_failures = ["powershell"]
