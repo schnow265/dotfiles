@@ -1,0 +1,126 @@
+#!/usr/bin/env zsh
+set -e
+set -o pipefail
+
+FORCE_NEW=false
+
+CFLAGS="{{ .dev.compilers.ccflags }}"
+CC="{{ .dev.compilers.cc }}"
+
+usage() {
+    local prog=${${(%):-%x}:t}
+
+    echo "Usage:"
+    echo "  $prog [options] <lua-version>"
+    echo
+    echo "Example:"
+    echo "  $prog 5.4.8"
+    echo "  $prog --force-new 5.4.8"
+    exit 1
+}
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --force-new)
+            FORCE_NEW=true
+            shift
+            ;;
+        --c-flags)
+            if [[ -z "$2" || "$2" == --* ]]; then
+                print -u2 "Error: --c-flags requires a string"
+                exit 1
+            fi
+            CFLAGS="$2"
+            shift 2
+            ;;
+        -cc)
+            if [[ -z "$2" || "$2" == --* ]]; then
+                print -u2 "Error: -cc requires a compiler"
+                exit 1
+            fi
+            CC="$2"
+            shift 2
+            ;;
+        --help|-h)
+            usage
+            ;;
+        -*)
+            print -u2 "Unknown argument: $1"
+            exit 1
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
+[[ $# -eq 1 ]] || usage
+
+LUA_VERSION="$1"
+
+clone_dir="{{ .dev.directories.clone_dir }}"
+build_root="$clone_dir/lua"
+prefix="$HOME/.local_builds/lua_$LUA_VERSION"
+
+tarball="lua-$LUA_VERSION.tar.gz"
+src_dir="$build_root/lua-$LUA_VERSION"
+url="https://www.lua.org/ftp/$tarball"
+
+mkdir -p "$build_root"
+cd "$build_root"
+
+if [[ "$FORCE_NEW" == true ]]; then
+    rm -rf "$src_dir"
+    rm -f "$tarball"
+fi
+
+if [[ ! -f "$tarball" ]]; then
+    echo "Downloading Lua $LUA_VERSION..."
+    curl -LO "$url"
+fi
+
+if [[ ! -d "$src_dir" ]]; then
+    echo "Extracting..."
+    tar xf "$tarball"
+fi
+
+cd "$src_dir"
+
+echo "Building Lua $LUA_VERSION..."
+
+make clean >/dev/null 2>&1 || true
+
+case "$(uname -s)" in
+    Linux) TARGET=linux ;;
+    Darwin) TARGET=macosx ;;
+    FreeBSD) TARGET=freebsd ;;
+    *) TARGET=posix ;;
+esac
+
+make \
+    "$TARGET" \
+    CC="ccache $CC" \
+    MYCFLAGS="$CFLAGS" \
+    MYLDFLAGS="" \
+    -j"$(getconf _NPROCESSORS_ONLN)"
+
+echo "Installing into $prefix"
+
+mkdir -p "$prefix"
+
+make \
+    INSTALL_TOP="$prefix" \
+    install
+
+echo
+echo "Lua $LUA_VERSION installed successfully."
+echo "Prefix: $prefix"
+echo
+echo "Executable:"
+echo "  $prefix/bin/lua"
+echo
+echo "Compiler:"
+echo "  $CC"
+echo
+echo "CFLAGS:"
+echo "  $CFLAGS"

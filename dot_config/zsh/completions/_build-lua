@@ -1,0 +1,30 @@
+#compdef build-lua
+
+local context state line
+typeset -a lua_versions
+
+_arguments -s \
+  '--force-new[remove existing source tree and tarball before rebuilding]' \
+  '--c-flags=[override CFLAGS]:CFLAGS:' \
+  '-cc[override C compiler]:compiler:_command_names' \
+  '--help[show help]' \
+  '1:Lua version:->version' || return
+
+case $state in
+  version)
+    if _cache_invalid lua_versions || ! _retrieve_cache lua_versions; then
+      lua_versions=(
+        ${(@f)$(
+          curl -fsSL https://www.lua.org/ftp/ |
+            grep -oE 'lua-[0-9]+(\.[0-9]+)*\.tar\.gz' |
+            sed 's/^lua-//; s/\.tar\.gz$//' |
+            sort -Vu
+        )}
+      )
+
+      (( ${#lua_versions} )) && _store_cache lua_versions lua_versions
+    fi
+
+    _describe -t lua-versions 'Lua version' lua_versions
+    ;;
+esac
