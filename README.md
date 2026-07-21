@@ -8,7 +8,8 @@ Only needs nix installed. Chezmoi will be added via home-manager.
 
 ```bash
 nix run nixpkgs#chezmoi -- init https://gitlab.com/schnow265/dotfiles.git
-nix run nixpkgs#chezmoi -- apply -v
+# apply non-verbose, since the diff helper delta will be installed via home-manager
+nix run nixpkgs#chezmoi -- apply
 
 # install home-manager
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
