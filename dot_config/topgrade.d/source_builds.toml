@@ -1,3 +1,0 @@
-[commands]
-"SOURCEBUILD | ccache" = "build-ccache --install"
-"SOURCEBUILD | nvim" = "build-nvim --install"
