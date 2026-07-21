@@ -16,12 +16,12 @@
   home.stateVersion = "26.05"; # Please read the comment before changing.
 
   home.packages = [
+    pkgs.ccache
+    pkgs.chezmoi
+    pkgs.devenv
+    pkgs.neovim
     pkgs.tmux
     pkgs.tmuxinator
-    pkgs.devenv
-    pkgs.ccache
-    pkgs.neovim
-    pkgs.chezmoi
     pkgs.topgrade
   ];
 
