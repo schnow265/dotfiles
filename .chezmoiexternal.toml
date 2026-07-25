@@ -22,3 +22,8 @@ refreshPeriod = "168h"
 type = "file"
 url = "https://raw.githubusercontent.com/asdf-vm/asdf/refs/heads/master/internal/completions/asdf.zsh"
 refreshPeriod = "168h"
+
+[".local/share/external/zsh/nixos-completions"]
+type = "git-repo"
+url = "https://github.com/nix-community/nix-zsh-completions.git"
+refreshPeriod = "168h"

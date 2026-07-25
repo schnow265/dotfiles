@@ -1,8 +1,10 @@
+source $HOME/.local/share/external/zsh/nixos-completions/nix-zsh-completions.plugin.zsh # nix completions are SO weird.
+
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 COMPLETION_DIR="${HOME}/.config/zsh/completions/"
-fpath=($COMPLETION_DIR $fpath "${HOME}/.local/share/external/zsh/completions/")
+fpath=("${HOME}/.local/share/external/zsh/nixos-completions/" $COMPLETION_DIR $fpath "${HOME}/.local/share/external/zsh/completions/")
 
 autoload -U compinit
 compinit
