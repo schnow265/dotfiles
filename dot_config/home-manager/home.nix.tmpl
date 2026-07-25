@@ -49,13 +49,6 @@
     MANPAGER="nvim +Man!";
 
     # compilers
-    CC = "{{ .dev.compilers.cc }}";
-    CXX = "{{ .dev.compilers.cxx }}";
-    CFLAGS = "{{ .dev.compilers.ccflags }}";
-    CXXFLAGS = "{{ .dev.compilers.cxxflags }}";
-    CPPFLAGS = "{{ .dev.compilers.cxxflags }}";
-    CMAKE_C_COMPILER_LAUNCHER="ccache";
-    CMAKE_CXX_COMPILER_LAUNCHER="ccache";
     CMAKE_GENRATOR="Ninja";
     CMAKE_INSTALL_PREFIX="{{ .dev.directories.source_install_dir }}";
 
