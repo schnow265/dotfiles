@@ -1,8 +1,6 @@
-{ config, pkgs, scal, ... }:
+{ config, pkgs, ... }:
 
-let
-  coreutilsBin = scal.lib.coreutilsBin { inherit pkgs; };
-in {
+{
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   #
@@ -20,7 +18,24 @@ in {
   home.stateVersion = "26.05"; # Please read the comment before changing.
 
   home.packages = [
-    # PLEASE OVERWRITE IN CUSTOM CONFIG
+    # PLEASE APPEND IN CUSTOM CONFIG
+    pkgs.aria2
+    pkgs.bat
+    pkgs.btop
+    pkgs.chezmoi
+    pkgs.delta
+    pkgs.devenv
+    pkgs.direnv
+    pkgs.gh
+    pkgs.git
+    pkgs.git-lfs
+    pkgs.git-xet
+    pkgs.glab
+    pkgs.tlrc
+    pkgs.uv
+    pkgs.lsd
+    pkgs.tmux
+    pkgs.topgrade
   ];
 
   home.sessionVariables = {

@@ -50,6 +50,8 @@
           username = "scaletto";
           modules = [
             ./homes/macpro.nix
+            ./apps/emacs.nix
+            ./apps/nvim.nix
           ];
         };
         "schnow265" = mkHome {
@@ -57,6 +59,7 @@
           username = "schnow265";
           modules = [
             ./homes/steamdeck.nix
+            ./apps/nvim.nix
           ];
         };
       };
