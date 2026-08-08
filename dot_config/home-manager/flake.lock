@@ -45,11 +45,11 @@
     },
     "scal": {
       "locked": {
-        "lastModified": 1786173096,
-        "narHash": "sha256-7eFUG20vm325IA3OU0MhT7Jl+dKXbBVaw6ulfkgkBe8=",
+        "lastModified": 1786202276,
+        "narHash": "sha256-jSwT3KwQT4JDzblV3b44auXci1YsfyodVswKYrHpEuY=",
         "owner": "schnow265",
         "repo": "scaletto.nix",
-        "rev": "f41911af3e162e3c9ec624ef584f6093647dfd09",
+        "rev": "cbe704cdf4c34c7f7b79b1ce5bcdc3ad9027a263",
         "type": "github"
       },
       "original": {
