@@ -39,7 +39,23 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "scal": "scal"
+      }
+    },
+    "scal": {
+      "locked": {
+        "lastModified": 1786173096,
+        "narHash": "sha256-7eFUG20vm325IA3OU0MhT7Jl+dKXbBVaw6ulfkgkBe8=",
+        "owner": "schnow265",
+        "repo": "scaletto.nix",
+        "rev": "f41911af3e162e3c9ec624ef584f6093647dfd09",
+        "type": "github"
+      },
+      "original": {
+        "owner": "schnow265",
+        "repo": "scaletto.nix",
+        "type": "github"
       }
     }
   },

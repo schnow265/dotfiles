@@ -8,12 +8,16 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    scal = {
+      url = "github:schnow265/scaletto.nix";
+    };
   };
 
   outputs =
     {
       nixpkgs,
       home-manager,
+      scal,
       ...
     }:
     let
@@ -26,6 +30,9 @@
           home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
 
+            extraSpecialArgs = {
+              inherit scal;
+            };
 
             # Specify your home configuration modules here, for example,
             # the path to your home.nix.
