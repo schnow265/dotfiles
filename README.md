@@ -20,7 +20,6 @@ nix run home-manager/master -- switch
 - zsh
 - nvim (via external repo)
 - tmux
-- tmuxinator
 - btop
 - yt-dlp
 - topgrade stuff
