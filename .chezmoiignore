@@ -11,6 +11,7 @@
 
 {{ if ne .chezmoi.os "linux" }}
 .config/topgrade.d/linux.toml
+.config/yay/
 {{ end }}
 
 .config/topgrade.d/dotfiles.toml
