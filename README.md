@@ -2,7 +2,7 @@
 
 > terrible life descisions in dotfiles.
 
-## Install using Nix (new and fancy)
+## Install using Nix
 
 Only needs nix installed. Chezmoi will be added via home-manager.
 
