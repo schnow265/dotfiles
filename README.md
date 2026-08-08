@@ -11,10 +11,8 @@ nix run nixpkgs#chezmoi -- init https://gitlab.com/schnow265/dotfiles.git
 # apply non-verbose, since the diff helper delta will be installed via home-manager
 nix run nixpkgs#chezmoi -- apply
 
-# install home-manager
-nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-nix-channel --update
-nix-shell '<home-manager>' -A install
+# do home-manager
+nix run home-manager/master -- switch
 ```
 
 ## Contains configs for
@@ -26,3 +24,5 @@ nix-shell '<home-manager>' -A install
 - btop
 - yt-dlp
 - topgrade stuff
+- nix home-manager
+- and a lot more...
