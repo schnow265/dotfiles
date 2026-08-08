@@ -21,14 +21,12 @@
       ...
     }:
     let
-      system = "aarch64-darwin";
-      pkgs = nixpkgs.legacyPackages.${system};
-
       mkHome =
         {
           system,
           username,
           modules,
+          extraSpecialArgs ? {}
         }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
@@ -41,8 +39,8 @@
           ++ modules;
 
           extraSpecialArgs = {
-            inherit username system;
-          };
+            inherit username system scal;
+          } // extraSpecialArgs;
         };
     in
     {
