@@ -7,7 +7,6 @@ in {
   home.homeDirectory = "/Users/scaletto";
 
   home.packages = [
-    pkgs.asdf-vm
     pkgs.ccache
     pkgs.clang
     pkgs.cosign
