@@ -18,7 +18,6 @@
   home.stateVersion = "26.05"; # Please read the comment before changing.
 
   home.packages = [
-    # PLEASE APPEND IN CUSTOM CONFIG
     pkgs.aria2
     pkgs.bat
     pkgs.btop
@@ -26,11 +25,6 @@
     pkgs.delta
     pkgs.devenv
     pkgs.direnv
-    pkgs.gh
-    pkgs.git
-    pkgs.git-lfs
-    pkgs.git-xet
-    pkgs.glab
     pkgs.tlrc
     pkgs.uv
     pkgs.lsd

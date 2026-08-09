@@ -1,7 +1,7 @@
 { config, pkgs, scal, ... }:
 
 let
-  coreutilsBin = scal.lib.coreutilsBin { inherit pkgs; };
+  binExtract = scal.lib.binExtract { inherit pkgs; };
 in {
   home.username = "scaletto";
   home.homeDirectory = "/Users/scaletto";
@@ -20,6 +20,9 @@ in {
     pkgs.mole-cleaner
     pkgs.sourcegit
     pkgs.vlc-bin
+
+    # extracted binarys
+    (binExtract pkgs.android-tools "adb")
   ];
 
   home.sessionVariables = {

@@ -1,8 +1,6 @@
 { config, pkgs, scal, ... }:
 
-let
-  coreutilsBin = scal.lib.coreutilsBin { inherit pkgs; };
-in {
+{
   home.username = "schnow265";
   home.homeDirectory = "/home/schnow265";
 

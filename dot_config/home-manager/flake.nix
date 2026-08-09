@@ -35,6 +35,7 @@
 
           modules = [
             ./homes/common.nix
+            ./apps/sets/git.nix
           ]
           ++ modules;
 
