@@ -53,6 +53,7 @@
             ./homes/macpro.nix
             ./apps/emacs.nix
             ./apps/nvim.nix
+            ./apps/sets/sourcebuild.nix
           ];
         };
         "schnow265" = mkHome {
