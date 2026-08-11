@@ -1,12 +1,12 @@
 {pkgs, ...}:
 {
-  home.packages = [
-    pkgs.git
-    pkgs.delta
-    pkgs.gh
-    pkgs.git
-    pkgs.git-lfs
-    pkgs.git-xet
-    pkgs.glab
+  home.packages = with pkgs; [
+    git
+    delta
+    gh
+    git
+    git-lfs
+    git-xet
+    glab
   ];
 }

@@ -6,23 +6,21 @@ in {
   home.username = "scaletto";
   home.homeDirectory = "/Users/scaletto";
 
-  home.packages = [
-    pkgs.ccache
-    pkgs.clang
-    pkgs.cosign
-    pkgs.ffmpeg
-    pkgs.lazygit
-    pkgs.nil
-    pkgs.nixd
-    pkgs.nixfmt
+  home.packages = with pkgs; [
+    cosign
+    ffmpeg
+    lazygit
+    nil
+    nixd
+    nixfmt
 
-    pkgs.bruno
-    pkgs.mole-cleaner
-    pkgs.sourcegit
-    pkgs.vlc-bin
+    bruno
+    mole-cleaner
+    sourcegit
+    vlc-bin
 
     # extracted binarys
-    (binExtract pkgs.android-tools "adb")
+    (binExtract android-tools "adb")
   ];
 
   home.sessionVariables = {

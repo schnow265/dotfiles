@@ -17,19 +17,19 @@
   # release notes.
   home.stateVersion = "26.05"; # Please read the comment before changing.
 
-  home.packages = [
-    pkgs.aria2
-    pkgs.bat
-    pkgs.btop
-    pkgs.chezmoi
-    pkgs.delta
-    pkgs.devenv
-    pkgs.direnv
-    pkgs.tlrc
-    pkgs.uv
-    pkgs.lsd
-    pkgs.tmux
-    pkgs.topgrade
+  home.packages = with pkgs; [
+    aria2
+    bat
+    btop
+    chezmoi
+    delta
+    devenv
+    direnv
+    tlrc
+    uv
+    lsd
+    tmux
+    topgrade
   ];
 
   home.sessionVariables = {

@@ -1,15 +1,15 @@
 {pkgs, ...}:
 
 {
-  home.packages = [
-    pkgs.emacs
+  home.packages = with pkgs; [
+    emacs
 
-    pkgs.fd
-    pkgs.ripgrep
-    pkgs.ktlint
-    pkgs.plantuml
-    pkgs.graphviz
-    pkgs.shellcheck
-    pkgs.fontconfig
+    fd
+    ripgrep
+    ktlint
+    plantuml
+    graphviz
+    shellcheck
+    fontconfig
   ];
 }

@@ -1,12 +1,12 @@
 { pkgs, ... }:
 
 {
-  home.packages = [
-    pkgs.neovim
+  home.packages = with pkgs; [
+    neovim
 
-    pkgs.lua
-    pkgs.luarocks
-    pkgs.tree-sitter
-    pkgs.git
+    lua
+    luarocks
+    tree-sitter
+    git
   ];
 }
