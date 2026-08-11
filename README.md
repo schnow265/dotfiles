@@ -6,7 +6,7 @@ Contains configs for:
 
 - nix home-manager
 - zsh
-- nvim (via [external repo](https://gitlab.com/schnow265/nvim.conf.git))
+- nvim
 - tmux
 - btop
 - yt-dlp
