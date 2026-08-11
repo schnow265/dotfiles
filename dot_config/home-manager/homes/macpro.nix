@@ -8,10 +8,10 @@ in {
 
   home.packages = with pkgs; [
     cosign
-    ffmpeg
     nil
     nixd
     nixfmt
+    ffmpeg-full
 
     bruno
     mole-cleaner
