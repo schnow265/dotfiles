@@ -9,7 +9,6 @@ in {
   home.packages = with pkgs; [
     cosign
     ffmpeg
-    lazygit
     nil
     nixd
     nixfmt

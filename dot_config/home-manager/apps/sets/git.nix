@@ -8,5 +8,6 @@
     git-lfs
     git-xet
     glab
+    lazygit
   ];
 }
