@@ -65,6 +65,14 @@
             ./apps/nvim.nix
           ];
         };
+        "scal" = mkHome {
+          system = "x86_64-linux";
+          username = "scal";
+          modules = [
+            ./homes/wsl.nix
+            ./apps/nvim.nix
+          ];
+        };
       };
     };
 }
