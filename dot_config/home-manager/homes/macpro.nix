@@ -8,9 +8,6 @@ in {
 
   home.packages = with pkgs; [
     cosign
-    nil
-    nixd
-    nixfmt
     ffmpeg-full
 
     bruno
