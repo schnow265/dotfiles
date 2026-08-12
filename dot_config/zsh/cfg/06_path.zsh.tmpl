@@ -12,10 +12,6 @@ typeset -U path
 [[ -d "$HOME/.lmstudio/bin" ]] && path=("$HOME/.lmstudio/bin" $path)
 [[ -d "{{ .dev.directories.source_install_dir }}bin" ]] && path=("{{ .dev.directories.source_install_dir }}bin" $path)
 
-{{ if eq .chezmoi.os "darwin" }}
-  [[ -d "/opt/homebrew/opt/ccache/libexec" ]] && path=("/opt/homebrew/opt/ccache/libexec" $path)
-{{ end }}
-
 [[ -d "$HOME/.config/emacs/bin" ]] && path=("$HOME/.config/emacs/bin" $path)
 
 export PATH
