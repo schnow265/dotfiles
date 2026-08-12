@@ -1,6 +1,0 @@
-[pre_commands]
-"Fetch all changes from remote" = "chezmoi git fetch"
-
-[post_commands]
-{{ if .dotfiles.apply_dotfile_changes }}"Apply pending chezmoi changes" = "chezmoi apply -v"{{ end }}
-"Sync chezmoi to Remote" = "chezmoi git push"
