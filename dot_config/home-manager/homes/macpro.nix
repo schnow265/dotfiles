@@ -14,6 +14,7 @@ in {
     mole-cleaner
     sourcegit
     vlc-bin
+    yt-dlp
 
     # extracted binarys
     (binExtract android-tools "adb")
