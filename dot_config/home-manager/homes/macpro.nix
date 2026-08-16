@@ -15,6 +15,8 @@ in {
     sourcegit
     vlc-bin
     yt-dlp
+    doomrunner
+    uzdoom
 
     # extracted binarys
     (binExtract android-tools "adb")
