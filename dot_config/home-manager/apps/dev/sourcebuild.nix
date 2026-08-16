@@ -5,5 +5,6 @@
     cmake
     ninja
     ccache
+    meson
   ];
 }
