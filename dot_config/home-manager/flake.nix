@@ -56,6 +56,9 @@
 
             ./apps/dev/everything.nix
           ];
+          extraSpecialArgs = {
+            enableGitGui = true;
+          };
         };
         "schnow265" = mkHome {
           system = "x86_64-linux";

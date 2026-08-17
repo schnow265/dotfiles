@@ -25,12 +25,6 @@ in
 
     # extracted binarys
     (binExtract android-tools "adb")
-
-    (sourcegit.overrideAttrs (oldAttrs: {
-      runtimeDeps = (oldAttrs.runtimeDeps or [ ]) ++ [
-        git-lfs
-      ];
-    }))
   ];
 
   home.sessionVariables = {
