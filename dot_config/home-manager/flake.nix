@@ -57,7 +57,7 @@
             ./apps/dev/everything.nix
           ];
           extraSpecialArgs = {
-            enableGitGui = true;
+            enableGuiTools = true;
           };
         };
         "schnow265" = mkHome {

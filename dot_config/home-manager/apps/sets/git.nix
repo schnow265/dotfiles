@@ -1,6 +1,6 @@
 {
   pkgs,
-  enableGitGui ? false,
+  enableGuiTools ? false,
   ...
 }:
 {
@@ -16,7 +16,7 @@
       glab
       lazygit
     ]
-    ++ lib.optionals enableGitGui [
+    ++ lib.optionals enableGuiTools [
       (sourcegit.overrideAttrs (oldAttrs: {
         runtimeDeps = (oldAttrs.runtimeDeps or [ ]) ++ [
           git-lfs
