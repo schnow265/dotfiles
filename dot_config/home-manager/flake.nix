@@ -68,11 +68,12 @@
             ./apps/nvim.nix
           ];
         };
+        # "lite" user profile.
         "scal" = mkHome {
           system = "x86_64-linux";
           username = "scal";
           modules = [
-            ./homes/wsl.nix
+            ./homes/lite.nix
             ./apps/nvim.nix
           ];
         };
