@@ -55,9 +55,11 @@
             ./apps/nvim.nix
 
             ./apps/dev/everything.nix
+            ./apps/sets/ai.nix
           ];
           extraSpecialArgs = {
             enableGuiTools = true;
+            agenticTools = true;
           };
         };
         "schnow265" = mkHome {
