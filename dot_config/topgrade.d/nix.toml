@@ -1,5 +1,6 @@
 [misc]
 ignore_failures = ["nix"]
+disable = ["node"]
 
 [commands]
 "Nix Profiles" = "nix profile upgrade --all"
