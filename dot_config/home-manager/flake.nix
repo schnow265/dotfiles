@@ -38,6 +38,7 @@
           modules = [
             ./homes/common.nix
             ./apps/sets/git.nix
+            ./apps/nvim.nix
           ]
           ++ modules;
 
@@ -57,7 +58,6 @@
           modules = [
             ./homes/macpro.nix
             ./apps/emacs.nix
-            ./apps/nvim.nix
 
             ./apps/dev/everything.nix
             ./apps/sets/ai.nix
@@ -73,7 +73,6 @@
           username = "schnow265";
           modules = [
             ./homes/steamdeck.nix
-            ./apps/nvim.nix
           ];
         };
         # "lite" user profile.
@@ -82,7 +81,6 @@
           username = "scal";
           modules = [
             ./homes/lite.nix
-            ./apps/nvim.nix
           ];
         };
       };
