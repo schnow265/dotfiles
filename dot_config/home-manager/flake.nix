@@ -4,6 +4,7 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixmaster.url = "github:nixos/nixpkgs";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,6 +17,7 @@
   outputs =
     {
       nixpkgs,
+      nixmaster,
       home-manager,
       scal,
       ...
@@ -43,6 +45,9 @@
             inherit username system scal;
           } // extraSpecialArgs;
         };
+
+        masterPkgsDarwin = nixmaster.legacyPackages.aarch64-darwin;
+        masterPkgsLinux = nixmaster.legacyPackages.x86_64-linux;
     in
     {
       homeConfigurations = {
