@@ -1,4 +1,8 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  enableGuiTools ? false,
+  ...
+}:
 
 {
   home.packages = with pkgs; [
@@ -8,10 +12,12 @@
     luarocks
     tree-sitter
     git
+  ] ++ lib.optionals enableGuiTools [
+    neovide
   ];
 
   home.sessionVariables = {
     EDITOR = "nvim";
-    MANPAGER="nvim +Man!";
+    MANPAGER = "nvim +Man!";
   };
 }
