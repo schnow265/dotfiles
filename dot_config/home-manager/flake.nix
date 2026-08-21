@@ -64,7 +64,8 @@
           ];
           extraSpecialArgs = {
             enableGuiTools = true;
-            agenticTools = true;
+            agenticTools = false;
+
             inherit masterPkgsDarwin;
           };
         };
