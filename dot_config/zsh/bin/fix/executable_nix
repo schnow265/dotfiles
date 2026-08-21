@@ -1,0 +1,20 @@
+#!/usr/bin/env zsh
+
+ZSHRC="/etc/zshrc"
+
+if ! grep -Fq "# Nix" "$ZSHRC" || \
+   ! grep -Fq "# End Nix" "$ZSHRC"; then
+
+  cat >> "$ZSHRC" <<'EOF'
+
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+# End Nix
+EOF
+
+  echo "Nix configuration added to $ZSHRC"
+else
+  echo "Nix configuration already present in $ZSHRC"
+fi
