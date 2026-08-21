@@ -65,6 +65,7 @@
           extraSpecialArgs = {
             enableGuiTools = true;
             agenticTools = true;
+            inherit masterPkgsDarwin;
           };
         };
         "schnow265" = mkHome {

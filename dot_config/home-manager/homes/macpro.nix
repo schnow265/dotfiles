@@ -2,6 +2,7 @@
   config,
   pkgs,
   scal,
+  masterPkgsDarwin,
   ...
 }:
 
@@ -14,7 +15,7 @@ in
 
   home.packages = with pkgs; [
     ffmpeg-full
-    yt-dlp
+    masterPkgsDarwin.yt-dlp
 
     bruno
     mole-cleaner
