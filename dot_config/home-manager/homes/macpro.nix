@@ -16,11 +16,8 @@ in
     ffmpeg-full
     yt-dlp
 
-    beekeeper-studio
     bruno
-    doomrunner
     mole-cleaner
-    uzdoom
     vlc-bin
 
     # extracted binarys
