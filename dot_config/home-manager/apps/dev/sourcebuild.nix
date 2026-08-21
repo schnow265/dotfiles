@@ -7,4 +7,10 @@
     ccache
     meson
   ];
+
+  home.sessionVariables = {
+    CMAKE_GENRATOR="Ninja";
+    # IF NEEDED OVERRIDE:
+    # CMAKE_INSTALL_PREFIX="";
+  };
 }

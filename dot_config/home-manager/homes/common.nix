@@ -33,16 +33,6 @@
   ];
 
   home.sessionVariables = {
-    # basics
-    EDITOR = "nvim";
-    MANPAGER="nvim +Man!";
-
-    # compilers
-    CMAKE_GENRATOR="Ninja";
-
-    # IF NEEDED OVERRIDE:
-    # CMAKE_INSTALL_PREFIX="";
-
     # other ones
     HF_HUB_DISABLE_XET = "1";
     UV_TORCH_BACKEND="auto";

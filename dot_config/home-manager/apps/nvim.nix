@@ -9,4 +9,9 @@
     tree-sitter
     git
   ];
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    MANPAGER="nvim +Man!";
+  };
 }
