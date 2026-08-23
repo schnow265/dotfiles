@@ -143,6 +143,7 @@ format = '\[[$localipv4]($style)\]'
 
 [lua]
 format = '\[[$symbol($version)]($style)\]'
+detect_folders = []
 
 [maven]
 format = '\[[$symbol($version)]($style)\]'
