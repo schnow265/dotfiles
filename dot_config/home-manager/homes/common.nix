@@ -25,6 +25,7 @@
     delta
     devenv
     direnv
+    fastfetch
     tlrc
     uv
     lsd
