@@ -6,7 +6,7 @@
 --sponsorblock-remove sponsor
 
 --audio-quality 0
---audio-format vorbis
+--audio-format aac
 
 --write-subs
 --no-write-auto-subs
