@@ -75,6 +75,10 @@
           modules = [
             ./homes/steamdeck.nix
           ];
+
+          extraSpecialArgs = {
+            enableGuiTools = true;
+          };
         };
         # "lite" user profile.
         "scal" = mkHome {
@@ -83,6 +87,9 @@
           modules = [
             ./homes/lite.nix
           ];
+          extraSpecialArgs = {
+            enableGuiTools = false;
+          };
         };
       };
     };
