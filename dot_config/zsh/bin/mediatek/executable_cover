@@ -1,0 +1,72 @@
+#!/usr/bin/env zsh
+
+set -e
+
+# Usage:
+#   ./cover-art.zsh <directory> <glob> <cover-image>
+#
+# Example:
+#   ./cover-art.zsh ~/Music "*.flac" ~/Pictures/cover.jpg
+#   ./cover-art.zsh ~/Music "*.mp3" ~/Pictures/cover.jpg
+
+if (( $# != 3 )); then
+    print "Usage: $0 <directory> <glob> <cover-image>"
+    exit 1
+fi
+
+directory="$1"
+pattern="$2"
+cover="$3"
+
+if [[ ! -d "$directory" ]]; then
+    print -u2 "Error: directory does not exist: $directory"
+    exit 1
+fi
+
+if [[ ! -f "$cover" ]]; then
+    print -u2 "Error: cover image does not exist: $cover"
+    exit 1
+fi
+
+if ! command -v ffmpeg >/dev/null 2>&1; then
+    print -u2 "Error: ffmpeg is not installed."
+    exit 1
+fi
+
+# Enable NULL_GLOB so an unmatched glob simply produces no files.
+setopt NULL_GLOB
+
+files=("$directory"/$~pattern)
+
+if (( ${#files} == 0 )); then
+    print "No files found matching: $pattern"
+    exit 0
+fi
+
+mkdir -p "$directory/tmp"
+
+for file in "${files[@]}"; do
+    [[ -f "$file" ]] || continue
+
+    print "Embedding cover art: $file"
+
+    # Create a temporary file next to the original.
+    tmp="$directory/tmp/${file}"
+
+    ffmpeg \
+        -hide_banner \
+        -loglevel error \
+        -y \
+        -i "$file" \
+        -i "$cover" \
+        -map 0:a \
+        -map 1:0 \
+        -c:a copy \
+        -c:v mjpeg \
+        -disposition:v attached_pic \
+        "$tmp"
+
+    mv "$tmp" "$file"
+done
+
+print "Done. Processed ${#files} file(s)."

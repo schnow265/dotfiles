@@ -1,0 +1,80 @@
+#!/usr/bin/env zsh
+
+setopt NULL_GLOB
+setopt EXTENDED_GLOB
+
+# Usage:
+#   ./convert-to-aac.zsh /path/to/input /path/to/output
+#
+# Example:
+#   ./convert-to-aac.zsh ~/Music/FLAC ~/Music/AAC
+
+INPUT_DIR="${1:-.}"
+OUTPUT_DIR="${2:-./aac}"
+
+# AAC settings
+BITRATE="256k"
+
+if ! command -v ffmpeg >/dev/null 2>&1; then
+    echo "Error: ffmpeg is not installed."
+    exit 1
+fi
+
+if [[ ! -d "$INPUT_DIR" ]]; then
+    echo "Error: Input directory does not exist: $INPUT_DIR"
+    exit 1
+fi
+
+mkdir -p "$OUTPUT_DIR"
+
+find "$INPUT_DIR" -type f \( \
+    -iname '*.flac' -o \
+    -iname '*.mp3'  -o \
+    -iname '*.wav'  -o \
+    -iname '*.aiff' -o \
+    -iname '*.aif'  -o \
+    -iname '*.alac' -o \
+    -iname '*.ogg'  -o \
+    -iname '*.opus' -o \
+    -iname '*.m4a' \
+\) -print0 | while IFS= read -r -d $'\0' file; do
+
+    # Get path relative to input directory
+    relative="${file#$INPUT_DIR/}"
+
+    # Remove extension and create .m4a destination
+    relative_no_ext="${relative%.*}"
+    output="$OUTPUT_DIR/${relative_no_ext}.m4a"
+
+    # Create destination directory
+    mkdir -p "${output:h}"
+
+    # Don't overwrite existing files
+    if [[ -f "$output" ]]; then
+        echo "Skipping: $relative"
+        continue
+    fi
+
+    echo "Converting: $relative"
+    echo "       ->  ${output#$OUTPUT_DIR/}"
+
+    ffmpeg \
+        -hide_banner \
+        -loglevel error \
+        -stats \
+        -i "$file" \
+        -map_metadata 0 \
+        -map_chapters 0 \
+        -c:a aac \
+        -b:a "$BITRATE" \
+        -movflags +use_metadata_tags \
+        "$output"
+
+    if [[ $? -ne 0 ]]; then
+        echo "ERROR: Failed to convert: $file" >&2
+        rm -f "$output"
+    fi
+done
+
+echo
+echo "Conversion complete."
