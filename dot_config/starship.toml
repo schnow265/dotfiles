@@ -8,6 +8,7 @@ format = '\[[$symbol($subscription)]($style)\]'
 
 [battery]
 format = '\[[$symbol$percentage]($style)\]'
+disabled = true
 
 [buf]
 format = '\[[$symbol($version)]($style)\]'
@@ -55,10 +56,14 @@ format = '\[[$symbol$loaded/$allowed]($style)\]'
 format = '\[[$symbol$context]($style)\]'
 
 [dotnet]
-format = '\[[$symbol($version)(🎯 $tfm)]($style)\]'
+symbol = " "
+format = '\[[$symbol $version@$tfm]($style)\]'
+detect_extensions = ['csproj', 'fsproj', 'xproj', 'sln', 'slnx']
 
 [elixir]
-format = '\[[$symbol($version \(OTP $otp_version\))]($style)\]'
+symbol = ""
+format = '\[[$symbol ($version-otp-$otp_version)]($style)\]'
+version_format = "${raw}"
 
 [elm]
 format = '\[[$symbol($version)]($style)\]'
