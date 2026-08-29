@@ -13,6 +13,7 @@ typeset -U path
 [[ -d "{{ .dev.directories.source_install_dir }}bin" ]] && path=("{{ .dev.directories.source_install_dir }}bin" $path)
 
 [[ -d "$HOME/.config/emacs/bin" ]] && path=("$HOME/.config/emacs/bin" $path)
+[[ -d "$HOME/.mix/escripts" ]] && path=($path "$HOME/.mix/escripts")
 
 export PATH
 
