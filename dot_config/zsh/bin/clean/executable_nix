@@ -1,4 +1,4 @@
 #!/bin/zsh
 
-nix-store --gc
 home-manager expire-generations "-10 days"
+nix-store --gc
