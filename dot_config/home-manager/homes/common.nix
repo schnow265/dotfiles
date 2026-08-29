@@ -30,6 +30,7 @@
     uv
     lsd
     tmux
+    tmuxinator
     topgrade
   ];
 
