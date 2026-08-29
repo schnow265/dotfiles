@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+usage() {
+    echo "Usage: $0 <file.puml> [output-dir]" >&2
+    exit 1
+}
+
+[[ $# -ge 1 && $# -le 2 ]] || usage
+
+INPUT="$1"
+OUTPUT_DIR="${2:-$(dirname "$INPUT")}"
+
+if [[ ! -f "$INPUT" ]]; then
+    echo "Error: input file not found: $INPUT" >&2
+    exit 1
+fi
+
+if ! command -v plantuml >/dev/null 2>&1; then
+    echo "Error: plantuml is not installed or not in PATH." >&2
+    exit 1
+fi
+
+mkdir -p "$OUTPUT_DIR"
+
+echo "Exporting $INPUT → $OUTPUT_DIR"
+
+plantuml \
+    -tsvg \
+    -o "$OUTPUT_DIR" \
+    "$INPUT"
+
+echo "Done."
