@@ -56,13 +56,11 @@ format = '\[[$symbol$loaded/$allowed]($style)\]'
 format = '\[[$symbol$context]($style)\]'
 
 [dotnet]
-symbol = " "
 format = '\[[$symbol $version@$tfm]($style)\]'
 detect_extensions = ['csproj', 'fsproj', 'xproj', 'sln', 'slnx']
 
 [elixir]
-symbol = ""
-format = '\[[$symbol ($version-otp-$otp_version)]($style)\]'
+format = '\[[$symbol($version-otp-$otp_version)]($style)\]'
 version_format = "${raw}"
 
 [elm]
