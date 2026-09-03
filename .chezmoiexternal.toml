@@ -20,5 +20,10 @@ refreshPeriod = "168h"
 
 [".config/emacs"]
 type = "git-repo"
+url = "https://github.com/plexus/chemacs2.git"
+refreshPeriod = "168h"
+
+[".local/share/external/emacs-cfg/doom"]
+type = "git-repo"
 url = "https://github.com/doomemacs/core"
 refreshPeriod = "168h"
