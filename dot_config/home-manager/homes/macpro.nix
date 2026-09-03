@@ -15,7 +15,7 @@ in
 
   home.packages = with pkgs; [
     ffmpeg-full
-    masterPkgsDarwin.yt-dlp
+    yt-dlp
 
     bruno
     mole-cleaner
