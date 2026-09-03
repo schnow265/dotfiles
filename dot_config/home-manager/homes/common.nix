@@ -29,8 +29,6 @@
     tlrc
     uv
     lsd
-    tmux
-    tmuxinator
     topgrade
   ];
 
