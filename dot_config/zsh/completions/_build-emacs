@@ -1,0 +1,30 @@
+#compdef build-emacs
+
+local context state line
+typeset -a emacs_versions
+
+_arguments -s \
+  '--force-new[remove existing source tree and tarball before rebuilding]' \
+  '--c-flags=[override CFLAGS]:CFLAGS:' \
+  '-cc[override C compiler]:compiler:_command_names' \
+  '--help[show help]' \
+  '1:Emacs version:->version' || return
+
+case $state in
+  version)
+    if _cache_invalid emacs_versions || ! _retrieve_cache emacs_versions; then
+      emacs_versions=(
+        ${(@f)$(
+          curl -fsSL https://ftp.gnu.org/gnu/emacs/ |
+            grep -oE 'emacs-[0-9]+(\.[0-9]+)*\.tar\.xz' |
+            sed 's/^emacs-//; s/\.tar\.xz$//' |
+            sort -Vu
+        )}
+      )
+
+      (( ${#emacs_versions} )) && _store_cache emacs_versions emacs_versions
+    fi
+
+    _describe -t emacs-versions 'Emacs version' emacs_versions
+    ;;
+esac
