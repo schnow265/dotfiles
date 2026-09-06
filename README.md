@@ -36,3 +36,11 @@ nix run home-manager/master -- switch
 - A matching user config [has to be set in home-manager's `flake.nix`](./dot_config/home-manager/flake.nix)
 - zsh is not installed via home-manager, it has to be provided by your system.
 - [Doom Emacs](https://github.com/doomemacs/core/tree/master#doom-emacs) has been included and is ready to set up by running `doom sync`
+
+## Configured users in Home-Manager
+
+| Username | OS | arch |
+| --- | --- | --- |
+| scaletto | MacOS | arm64 |
+| scal | Linux |  x86_64 |
+| schnow265 | Linux | x86_64 |
