@@ -5,7 +5,7 @@ set -o pipefail
 FORCE_NEW=false
 
 CFLAGS="{{ .dev.compilers.ccflags }}"
-CC="ccache {{ .dev.compilers.cc }}"
+CC="{{ .dev.compilers.cc }}"
 
 usage() {
     local prog=${${(%):-%x}:t}
@@ -92,10 +92,7 @@ echo "Building Emacs $EMACS_VERSION..."
 
 make clean >/dev/null 2>&1 || true
 
-#export CC
-#export CFLAGS
-
-./configure \
+CFLAGS="$CFLAGS" CC="$CC" ./configure \
     --prefix="$prefix" \
     --disable-silent-rules
 
