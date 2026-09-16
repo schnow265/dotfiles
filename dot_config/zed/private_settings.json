@@ -37,6 +37,7 @@
     "button": false,
   },
   "project_panel": {
+    "folder_indicator": "icon",
     "hide_hidden": false,
     "hide_root": false,
     "git_status_indicator": true,
@@ -47,7 +48,6 @@
     },
     "bold_folder_labels": true,
     "git_status": true,
-    "folder_icons": true,
     "file_icons": true,
     "entry_spacing": "standard",
     "hide_gitignore": false,
