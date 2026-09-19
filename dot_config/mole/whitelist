@@ -4,6 +4,7 @@
 
 ~/.m2/repository/*
 FINDER_METADATA
+~/.cache/huggingface/*
 ~/Library/Application Support/JetBrains*
 ~/Library/Caches/com.apple.finder
 ~/Library/Mobile Documents*
@@ -12,5 +13,3 @@ FINDER_METADATA
 ~/Library/Caches/com.apple.Spotlight*
 ~/Library/Caches/CloudKit*
 ~/.lmstudio/models
-~/.config/huggingface/stored_tokens
-~/.config/huggingface/token
