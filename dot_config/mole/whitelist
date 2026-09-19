@@ -12,4 +12,4 @@ FINDER_METADATA
 ~/Library/Caches/com.apple.spotlight*
 ~/Library/Caches/com.apple.Spotlight*
 ~/Library/Caches/CloudKit*
-~/.lmstudio/models
+~/LLama/*
