@@ -18,6 +18,7 @@ in
     yt-dlp
 
     bruno
+    en-croissant
     mole-cleaner
     vlc-bin
 
