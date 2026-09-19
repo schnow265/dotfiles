@@ -1,10 +1,10 @@
-{ pkgs, useLLVM ? false, ... }:
+{ masterPkgs, useLLVM ? false, ... }:
 let
 
-  llvmPkgs = with pkgs; [
+  llvmPkgs = with masterPkgs; [
     llvm
   ];
-  gnuPkgs = with pkgs; [
+  gnuPkgs = with masterPkgs; [
     gcc
   ];
 
