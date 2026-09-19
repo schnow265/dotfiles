@@ -1,6 +1,7 @@
 {
   pkgs,
   enableGuiTools ? false,
+  masterPkgs,
   ...
 }:
 {
@@ -17,7 +18,7 @@
       lazygit
     ]
     ++ lib.optionals enableGuiTools [
-      (sourcegit.overrideAttrs (oldAttrs: {
+      (masterPkgs.sourcegit.overrideAttrs (oldAttrs: {
         runtimeDeps = (oldAttrs.runtimeDeps or [ ]) ++ [
           git-lfs
         ];
