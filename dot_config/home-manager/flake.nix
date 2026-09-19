@@ -30,6 +30,9 @@
           modules,
           extraSpecialArgs ? {}
         }:
+        let
+          masterPkgs = nixmaster.legacyPackages.${system};
+        in
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             inherit system;
@@ -43,12 +46,9 @@
           ++ modules;
 
           extraSpecialArgs = {
-            inherit username system scal;
+            inherit username system scal masterPkgs;
           } // extraSpecialArgs;
         };
-
-        masterPkgsDarwin = nixmaster.legacyPackages.aarch64-darwin;
-        masterPkgsLinux = nixmaster.legacyPackages.x86_64-linux;
     in
     {
       homeConfigurations = {
@@ -65,8 +65,6 @@
           extraSpecialArgs = {
             enableGuiTools = true;
             agenticTools = false;
-
-            inherit masterPkgsDarwin;
           };
         };
         "schnow265" = mkHome {

@@ -2,7 +2,7 @@
   config,
   pkgs,
   scal,
-  masterPkgsDarwin,
+  masterPkgs,
   ...
 }:
 
