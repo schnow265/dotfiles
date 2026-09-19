@@ -7,6 +7,20 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "edit_predictions": {
+    "allow_data_collection": "no",
+    "provider": "open_ai_compatible_api",
+    "open_ai_compatible_api": {
+      "model": "prism-ml/Bonsai-8B-gguf:Q1_0",
+      "api_url": "http://localhost:9931/v1/chat/completions"
+    }
+  },
+  "language_models": {
+    "llama.cpp": {
+      "api_url": "http://localhost:9931/v1"
+    }
+  },
+  "restore_on_startup": "launchpad",
   "cli_default_open_behavior": "new_window",
   "debugger": {
     "dock": "bottom",
@@ -57,8 +71,11 @@
     "dock": "right",
   },
   "agent": {
+    "auto_compact": {
+      "threshold": "90%"
+    },
     "dock": "right",
-    "button": false,
+    "button": true,
     "sidebar_side": "right",
     "favorite_models": [],
     "model_parameters": [],
@@ -67,6 +84,7 @@
   "telemetry": {
     "diagnostics": false,
     "metrics": false,
+    "anthropic_retention": false,
   },
   "session": {
     "trust_all_worktrees": true,
