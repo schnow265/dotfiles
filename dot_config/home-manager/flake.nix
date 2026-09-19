@@ -46,6 +46,11 @@
           ++ modules;
 
           extraSpecialArgs = {
+            enableGuiTools = false;
+            agenticTools = false;
+            useLLVM = false; # provides llvm / gcc when apps/dev/langs/low_level.nix is included.
+            advancedTools = false;
+
             inherit username system scal masterPkgs;
           } // extraSpecialArgs;
         };
@@ -85,9 +90,7 @@
           modules = [
             ./homes/lite.nix
           ];
-          extraSpecialArgs = {
-            enableGuiTools = false;
-          };
+          extraSpecialArgs = {};
         };
       };
     };
