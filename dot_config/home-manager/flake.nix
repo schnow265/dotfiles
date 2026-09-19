@@ -69,7 +69,8 @@
           ];
           extraSpecialArgs = {
             enableGuiTools = true;
-            agenticTools = false;
+            agenticTools = true;
+            useLLVM = true;
           };
         };
         "schnow265" = mkHome {
