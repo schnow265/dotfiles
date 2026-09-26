@@ -64,9 +64,10 @@
           modules = [
             ./homes/macpro.nix
             ./apps/emacs.nix
-
-            ./apps/dev/everything.nix
             ./apps/sets/ai.nix
+
+            ./apps/dev/sourcebuild.nix
+            ./apps/dev/langs/nix.nix
           ];
           extraSpecialArgs = {
             enableGuiTools = true;
