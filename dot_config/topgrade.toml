@@ -18,7 +18,7 @@
 # (default: false)
 # pre_sudo = false
 
-# Periodically runs `sudo -v` or `please -w` to avoid password re-prompts during updates (default: false)
+# Periodically runs `sudo -n -v` or `please -w` to avoid password re-prompts during updates (default: false)
 # WARNING: This is a potential security risk; if you walk away from the computer while topgrade is running,
 # another person can come by, CTRL+C, and gain access to a sudo session.
 # sudo_loop = true
@@ -105,7 +105,7 @@
 #
 # this will be ignored if the binary is built without self update support
 #
-# available also via setting the environment variable TOPGRADE_NO_SELF_UPGRADE)
+# (also available by setting the environment variable TOPGRADE_NO_SELF_UPGRADE)
 # no_self_update = true
 
 # Extra tracing filter directives
@@ -171,6 +171,10 @@
 [composer]
 # self_update = true
 
+
+[sheldon]
+# quiet = false
+# verbose = false
 
 [brew]
 # For the BrewCask step
@@ -250,6 +254,9 @@
 # Extra Home Manager arguments
 # home_manager_arguments = ["--flake", "file"]
 
+# Resolve tools from the Windows PATH (drive mounts like `/mnt/c`) while inside WSL.
+# Off by default so only the distro's own tools update (default: false).
+# wsl_use_windows_path = false
 
 [mandb]
 # Enable the mandb step (to update manual entries).
@@ -284,6 +291,11 @@
 # Whether to perform a `git fetch` instead of `git pull`
 # fetch_only = false
 
+# When a repo is not on its default branch, fetch the default branch (advancing
+# its local ref) instead of failing. The remote and default branch are detected
+# per repo. Has no effect on repos already on their default branch.
+# fallback_to_fetch_default = false
+
 [windows]
 # Manually select Windows updates
 # accept_all_updates = false
@@ -298,9 +310,9 @@
 
 # wsl_update_use_web_download = true
 
-# The default for winget_install_silently is true,
-# this example turns off silent install.
-# winget_install_silently = false
+# The default for winget_silent_install is true,
+# this example turns off silent installation.
+# winget_silent_install = false
 
 # Causes Topgrade to rename itself during the run to allow package managers
 # to upgrade it. Use this only if you installed Topgrade by using a package
@@ -310,7 +322,7 @@
 # Use sudo to elevate privileges for the Windows Package Manager (winget)
 # Only use this option if you want to run the Winget step in sudo-mode.
 # Running winget in sudo-mode is generally not recommended, as not every
-# package supports installing / upgrading in sudo-mode and it may cause issues
+# package supports installing / upgrading in sudo-mode, and it may cause issues
 # with some packages or may even cause the Winget-step to fail.
 # If any problems occur, please try running Topgrade without this option first
 # before reporting an issue.
@@ -328,13 +340,25 @@
 # (default: false)
 # bump = false
 
-# Number of jobs to run in parallel
-# (default: 4)
-# jobs = 4
+# Number of jobs to run in parallel (mise's default)
+# jobs = 8
 
 # Run interactively
 # (default: false)
 # interactive = false
+
+# Suppress non-error messages
+# (default: false)
+# quiet = false
+
+# Suppress all task output and mise non-error messages
+# (default: false)
+# silent = false
+
+# Show extra output
+# (default: false)
+# verbose = false
+
 
 [go]
 # Exclude specified binaries from `gup update`
@@ -364,11 +388,19 @@
 [vim]
 # For `vim-plug`, execute `PlugUpdate!` instead of `PlugUpdate`
 # force_plug_update = true
+# For Neovim's `vim.pack`, remove inactive packages before updating
+# vim_pack_prune = true
 
 
 [firmware]
 # Offer to update firmware; if false just check for and display available updates
 # upgrade = true
+
+
+[flutter]
+# If this is set to true, the `--force` flag is added to `flutter upgrade`.
+# (default: false)
+# force = true
 
 
 [vagrant]
@@ -451,6 +483,11 @@
 # (default: this won't be set by default)
 # profile = ""
 
+# Remove extension directories listed in each VS Code-compatible editor's
+# `.obsolete` marker after a successful extension update.
+# (default: false)
+# cleanup_obsolete_extensions = true
+
 [pixi]
 # Show the release notes of the latest pixi release
 # during the pixi step
@@ -479,3 +516,19 @@
 # If set, updates only these channels.
 # (default: [] (all channels))
 # channels = ["stable"]
+
+[skills]
+# Package runner to use to run the `skills` CLI when no local `skills`
+# binary is present in PATH.
+# Allowed values:
+#   npm  (runs `npx skills`)
+#   pnpm (runs `pnpx skills`)
+#   bun  (runs `bunx skills`)
+#   yarn (runs `yarn dlx skills`)
+# (default: npm)
+# package_manager = "npm"
+
+[uv]
+# Pass --force to `uv cache prune`, useful if you have long-running `uv` processes
+# (default: false)
+# cache_force = true
