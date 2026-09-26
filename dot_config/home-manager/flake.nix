@@ -42,6 +42,7 @@
             ./homes/common.nix
             ./apps/sets/git.nix
             ./apps/nvim.nix
+            ./apps/dev/mise.nix
           ]
           ++ modules;
 
