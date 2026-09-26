@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   scal,
   masterPkgs,
@@ -17,6 +16,7 @@ in
     ffmpeg-full
     yt-dlp
 
+    blender
     bruno
     en-croissant
     mole-cleaner
