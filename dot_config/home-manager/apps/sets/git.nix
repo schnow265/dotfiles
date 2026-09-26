@@ -16,6 +16,7 @@
       git-xet
       glab
       lazygit
+      git-bug
     ]
     ++ lib.optionals enableGuiTools [
       (masterPkgs.sourcegit.overrideAttrs (oldAttrs: {
