@@ -1,8 +1,3 @@
-[".tmux/plugins/tpm"]
-type = "git-repo"
-url = "https://github.com/tmuxpack/tpack.git"
-refreshPeriod = "168h"
-
 [".local/share/external/zsh/completions/_tmuxinator"]
 type = "file"
 url = "https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh"
