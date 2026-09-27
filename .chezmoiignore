@@ -15,3 +15,5 @@
 {{ end }}
 
 README.md
+
+chezmoi.kdbx

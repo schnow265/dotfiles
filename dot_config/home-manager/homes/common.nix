@@ -30,6 +30,8 @@
     uv
     lsd
     topgrade
+
+    keepassxc
   ];
 
   home.sessionVariables = {

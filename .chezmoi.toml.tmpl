@@ -100,3 +100,6 @@
 
 [data.dotfiles]
     apply_dotfile_changes = true
+
+[keepassxc]
+    database = "{{ printf "%s/chezmoi.kdbx" .chezmoi.sourceDir }}"
