@@ -13,6 +13,7 @@ in
   home.homeDirectory = "/Users/scaletto";
 
   home.packages = with pkgs; [
+    borgbackup
     ffmpeg-full
     yt-dlp
 
