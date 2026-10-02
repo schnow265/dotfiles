@@ -5,19 +5,34 @@
 }:
 
 {
-  home.packages = with pkgs; [
-    neovim
+  programs.neovim  = {
+    enable = true;
+    defaultEditor = true;
+    autowrapRuntimeDeps = true;
 
-    lua
-    luarocks
-    tree-sitter
-    git
-  ] ++ lib.optionals enableGuiTools [
-    neovide
-  ];
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+
+    sideloadInitLua = true;
+
+    extraPackages = with pkgs; [
+      tree-sitter
+      git
+      luarocks
+    ];
+  };
+
+  programs.neovide = {
+    enable = enableGuiTools;
+
+    settings = {
+      fork = true;
+      neovim-bin = "${pkgs.neovim}/bin/nvim";
+    };
+  };
 
   home.sessionVariables = {
-    EDITOR = "nvim";
     MANPAGER = "nvim +Man!";
   };
 }
