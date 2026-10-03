@@ -1,5 +1,5 @@
 [misc]
-ignore_failures = ["nix", "pi"]
+ignore_failures = ["nix", "pi", "mise"]
 disable = ["node"]
 
 [commands]
