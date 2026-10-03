@@ -1,4 +1,6 @@
 {
+  lib,
+  pkgs,
   ...
 }:
 {
@@ -22,4 +24,10 @@
       };
     };
   };
+
+  home.activation.miseInstall =
+    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      export PATH="${pkgs.mise}/bin:$PATH"
+      mise install --yes
+    '';
 }
