@@ -66,7 +66,6 @@
             ./apps/emacs.nix
             ./apps/sets/ai.nix
 
-            ./apps/dev/sourcebuild.nix
             ./apps/dev/langs/nix.nix
           ];
           extraSpecialArgs = {

@@ -9,6 +9,10 @@
 
     enableZshIntegration = true;
     globalConfig = {
+      env = {
+        CMAKE_GENRATOR = "Ninja";
+      };
+
       settings = {
         experimental = true;
         idiomatic_version_file_enable_tools = ["python"];
@@ -21,6 +25,12 @@
 
         # latest version of funny tools
         uv = "latest";
+
+        # compiling tools
+        ninja = "latest";
+        ccache = "latest";
+        sccache = "latest";
+        meson = "latest";
       };
     };
   };
