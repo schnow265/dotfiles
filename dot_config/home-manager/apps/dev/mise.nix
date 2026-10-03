@@ -24,7 +24,14 @@
         erlang = "29.1";
 
         # latest version of funny tools
+        elixir-ls = "latest";
+        ruff = "latest";
+        ty = "latest";
         uv = "latest";
+
+        # other things
+        node = "lts";
+        pnpm = "latest";
 
         # compiling tools
         ninja = "latest";
