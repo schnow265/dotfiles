@@ -1,7 +1,6 @@
 {
   pkgs,
   enableGuiTools ? false,
-  masterPkgs,
   ...
 }:
 {
@@ -19,7 +18,7 @@
       git-bug
     ]
     ++ lib.optionals enableGuiTools [
-      (masterPkgs.sourcegit.overrideAttrs (oldAttrs: {
+      (sourcegit.overrideAttrs (oldAttrs: {
         runtimeDeps = (oldAttrs.runtimeDeps or [ ]) ++ [
           git-lfs
         ];

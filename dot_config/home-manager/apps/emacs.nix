@@ -2,8 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    emacs
-
     fd
     ripgrep
     ktlint
@@ -12,4 +10,8 @@
     shellcheck
     fontconfig
   ];
+
+  programs.emacs = {
+    enable = true;
+  };
 }

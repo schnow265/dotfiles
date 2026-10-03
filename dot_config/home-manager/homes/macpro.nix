@@ -21,10 +21,11 @@ in
     bruno
     en-croissant
     mole-cleaner
+    prismlauncher
     vlc-bin
 
     # extracted binarys
-    (binExtract android-tools "adb")
+    #(binExtract android-tools "adb")
   ];
 
   home.sessionVariables = {
