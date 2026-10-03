@@ -1,6 +1,6 @@
 [misc]
-ignore_failures = ["nix", "pi", "mise"]
-disable = ["node"]
+ignore_failures = ["nix", "pi"]
+disable = ["node", "mise"]
 
 [commands]
 "Nix Profiles" = "nix profile upgrade --all"
