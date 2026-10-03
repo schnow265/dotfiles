@@ -27,7 +27,6 @@
     direnv
     fastfetch
     tlrc
-    uv
     lsd
     topgrade
 
