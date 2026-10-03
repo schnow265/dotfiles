@@ -67,6 +67,7 @@
             ./apps/sets/ai.nix
 
             ./apps/dev/langs/nix.nix
+            ./apps/obsidian.nix
           ];
           extraSpecialArgs = {
             enableGuiTools = true;
