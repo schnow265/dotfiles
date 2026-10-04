@@ -36,7 +36,6 @@
         # compiling tools
         ninja = "latest";
         ccache = "latest";
-        sccache = "latest";
         meson = "latest";
       };
     };
