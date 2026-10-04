@@ -36,7 +36,7 @@
   home.sessionVariables = {
     # other ones
     HF_HUB_DISABLE_XET = "1";
-    UV_TORCH_BACKEND="auto";
+    UV_TORCH_BACKEND = "auto";
   };
 
   # Let Home Manager install and manage itself.
