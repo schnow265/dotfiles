@@ -1,5 +1,12 @@
-{ config, pkgs, ... }:
-
+{
+  scal,
+  pkgs,
+  enableGuiTools ? false,
+  ...
+}:
+let
+  binExtract = scal.lib.binExtract { inherit pkgs; };
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -17,21 +24,22 @@
   # release notes.
   home.stateVersion = "26.05"; # Please read the comment before changing.
 
-  home.packages = with pkgs; [
-    aria2
-    bat
-    btop
-    chezmoi
-    delta
-    devenv
-    direnv
-    fastfetch
-    tlrc
-    lsd
-    topgrade
-
-    keepassxc
-  ];
+  home.packages =
+    with pkgs;
+    [
+      aria2
+      bat
+      btop
+      chezmoi
+      delta
+      devenv
+      direnv
+      fastfetch
+      tlrc
+      lsd
+      topgrade
+    ]
+    ++ (if enableGuiTools then [ keepassxc ] else [ (binExtract pkgs.keepassxc "keepassxc-cli") ]);
 
   home.sessionVariables = {
     # other ones
