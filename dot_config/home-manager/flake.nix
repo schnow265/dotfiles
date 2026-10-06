@@ -9,9 +9,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    scal = {
-      url = "github:schnow265/scaletto.nix";
-    };
+
+    # my own stuff
+    scal.url = "github:schnow265/scaletto.nix";
   };
 
   outputs =
@@ -89,6 +89,15 @@
         "scal" = mkHome {
           system = "x86_64-linux";
           username = "scal";
+          modules = [
+            ./homes/lite.nix
+          ];
+          extraSpecialArgs = {};
+        };
+        # the aarch64-linux one
+        "sn0w" = mkHome {
+          system = "aarch64-linux";
+          username = "sn0w";
           modules = [
             ./homes/lite.nix
           ];
