@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  enableMiseInstall ? true,
   ...
 }:
 {
@@ -15,7 +16,7 @@
 
       settings = {
         experimental = true;
-        idiomatic_version_file_enable_tools = ["python"];
+        idiomatic_version_file_enable_tools = [ "python" ];
         python.uv_venv_auto = "create|source";
       };
 
@@ -33,13 +34,15 @@
         ninja = "latest";
         ccache = "latest";
         meson = "latest";
+        cmake = "latest";
       };
     };
   };
 
-  home.activation.miseInstall =
-    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  home.activation = lib.mkIf enableMiseInstall {
+    miseInstall = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       export PATH="${pkgs.mise}/bin:$PATH"
       mise install --yes
     '';
+  };
 }

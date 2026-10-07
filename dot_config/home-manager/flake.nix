@@ -51,6 +51,7 @@
             agenticTools = false;
             useLLVM = false; # provides llvm / gcc when apps/dev/langs/low_level.nix is included.
             advancedTools = false;
+            enableMiseInstall = true;
 
             inherit username system scal masterPkgs;
           } // extraSpecialArgs;
@@ -100,7 +101,9 @@
           username = "sn0w";
           modules = [
           ];
-          extraSpecialArgs = {};
+          extraSpecialArgs = {
+            enableMiseInstall = false;
+          };
         };
       };
     };
