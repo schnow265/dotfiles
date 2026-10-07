@@ -99,7 +99,6 @@
           system = "aarch64-linux";
           username = "sn0w";
           modules = [
-            ./homes/armux.nix
           ];
           extraSpecialArgs = {};
         };

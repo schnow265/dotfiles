@@ -1,19 +1,24 @@
 {
+  lib,
   scal,
   pkgs,
+  username,
+  system,
   enableGuiTools ? false,
   ...
 }:
 let
   binExtract = scal.lib.binExtract { inherit pkgs; };
+
+  path = if lib.hasSuffix "-darwin" system then "/Users" else "/home";
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   #
-  # NOTE: SET IN OTHER CONFIG
-  # home.username = "";
-  # home.homeDirectory = "";
+  # Paths set automagically
+  home.username = username;
+  home.homeDirectory = "${path}/${username}";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release

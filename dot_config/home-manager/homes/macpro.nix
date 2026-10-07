@@ -9,9 +9,6 @@ let
   binExtract = scal.lib.binExtract { inherit pkgs; };
 in
 {
-  home.username = "scaletto";
-  home.homeDirectory = "/Users/scaletto";
-
   home.packages = with pkgs; [
     borgbackup
     ffmpeg-full
