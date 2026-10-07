@@ -29,10 +29,6 @@
         ty = "latest";
         uv = "latest";
 
-        # other things
-        node = "lts";
-        pnpm = "latest";
-
         # compiling tools
         ninja = "latest";
         ccache = "latest";
