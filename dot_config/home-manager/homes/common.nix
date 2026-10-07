@@ -40,8 +40,9 @@ in
       devenv
       direnv
       fastfetch
-      tlrc
       lsd
+      ripgrep
+      tlrc
       topgrade
     ]
     ++ (if enableGuiTools then [ keepassxc ] else [ (binExtract pkgs.keepassxc "keepassxc-cli") ]);
