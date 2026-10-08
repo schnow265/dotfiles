@@ -29,6 +29,9 @@ in
   ];
 
   home.file = {
+    ".emacs-profile".text = ''
+      scapemacs
+    '';
     ".config/emacs".source = chemacs2_git;
     ".local/share/external/emacs-cfg/spacemacs".source = spacemacs_git;
   };
