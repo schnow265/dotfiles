@@ -21,13 +21,6 @@
       };
 
       tools = {
-        elixir = "1.20.4-otp-29";
-        erlang = "29.1";
-
-        # latest version of funny tools
-        elixir-ls = "latest";
-        ruff = "latest";
-        ty = "latest";
         uv = "latest";
 
         # compiling tools
