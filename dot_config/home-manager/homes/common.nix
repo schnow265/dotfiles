@@ -11,6 +11,13 @@ let
   binExtract = scal.lib.binExtract { inherit pkgs; };
 
   path = if lib.hasSuffix "-darwin" system then "/Users" else "/home";
+
+  nixos-zsh-completions = pkgs.fetchFromGitHub {
+    owner = "nix-community";
+    repo = "nix-zsh-completions";
+    rev = "d4ae06bedb9a353ac894862d1d83f60ab4e2ccce";
+    hash = "sha256-ogDhANf4MpVZn5sWZymT0EIjDMTLSHRGzNjHsw/dX8o=";
+  };
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -51,6 +58,10 @@ in
     # other ones
     HF_HUB_DISABLE_XET = "1";
     UV_TORCH_BACKEND = "auto";
+  };
+
+  home.file = {
+    ".local/share/external/zsh/nixos-completions".source = nixos-zsh-completions;
   };
 
   # Let Home Manager install and manage itself.
