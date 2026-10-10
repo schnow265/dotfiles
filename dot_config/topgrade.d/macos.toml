@@ -1,3 +1,0 @@
-[misc]
-disable = ["system", "ruby_gems", "gem", "tmux"]
-ignore_failures = ["containers", "vagrant"]

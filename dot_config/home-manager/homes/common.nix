@@ -18,6 +18,9 @@ let
     rev = "d4ae06bedb9a353ac894862d1d83f60ab4e2ccce";
     hash = "sha256-ogDhANf4MpVZn5sWZymT0EIjDMTLSHRGzNjHsw/dX8o=";
   };
+
+  isLinux = pkgs.stdenv.hostPlatform.isLinux;
+  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -50,7 +53,6 @@ in
       lsd
       ripgrep
       tlrc
-      topgrade
     ]
     ++ (if enableGuiTools then [ keepassxc ] else [ (binExtract pkgs.keepassxc "keepassxc-cli") ]);
 
@@ -62,6 +64,59 @@ in
 
   home.file = {
     ".local/share/external/zsh/nixos-completions".source = nixos-zsh-completions;
+  };
+
+  programs.topgrade = {
+    enable = true;
+    settings = {
+      misc = {
+        cleanup = true;
+        assume_yes = true;
+
+        first = [
+          "chezmoi"
+          "home_manager"
+        ];
+
+        disable = [
+          "system"
+          "shell"
+          "vim"
+          "pnpm"
+          "mise"
+          "node"
+        ]
+        ++ pkgs.lib.optionals isLinux [
+          "config_update"
+        ]
+        ++ pkgs.lib.optionals isDarwin [
+          "ruby_gems"
+          "gem"
+          "tmux"
+        ];
+
+        ignore_failures = [
+          "powershell"
+          "nix"
+          "pi"
+        ]
+        ++ pkgs.lib.optionals isDarwin [
+          "containers"
+          "vagrant"
+        ];
+      };
+
+      git = {
+        max_concurrency = 10;
+        repos = [
+          "~/Projects/*/"
+        ];
+        arguments = "--ff-only";
+      };
+      commands = {
+        "Nix Profiles" = "nix profile upgrade --all";
+      };
+    };
   };
 
   # Let Home Manager install and manage itself.
