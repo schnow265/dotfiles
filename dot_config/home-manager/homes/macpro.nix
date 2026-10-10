@@ -15,11 +15,9 @@ in
     yt-dlp
 
     blender
-    bruno
-    en-croissant
     mole-cleaner
-    prismlauncher
-    vlc-bin
+
+    zed-editor
 
     # extracted binarys
     #(binExtract android-tools "adb")
