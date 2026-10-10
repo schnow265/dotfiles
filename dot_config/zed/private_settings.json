@@ -71,12 +71,14 @@
     "dock": "right",
   },
   "agent": {
+    "threads_sidebar": {
+      "position": "right"
+    },
     "auto_compact": {
       "threshold": "90%"
     },
     "dock": "right",
     "button": true,
-    "sidebar_side": "right",
     "favorite_models": [],
     "model_parameters": [],
   },
