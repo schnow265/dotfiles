@@ -64,7 +64,6 @@
           username = "scaletto";
           modules = [
             ./homes/macpro.nix
-            ./apps/emacs.nix
             ./apps/sets/ai.nix
 
             ./apps/dev/langs/nix.nix
