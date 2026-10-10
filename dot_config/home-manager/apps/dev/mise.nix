@@ -18,6 +18,7 @@
         experimental = true;
         idiomatic_version_file_enable_tools = [ "python" ];
         python.uv_venv_auto = "create|source";
+        minimum_release_age = "7d";
       };
 
       tools = {
