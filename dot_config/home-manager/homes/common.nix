@@ -66,6 +66,24 @@ in
     ".local/share/external/zsh/nixos-completions".source = nixos-zsh-completions;
   };
 
+  programs.ghostty = {
+    enable = enableGuiTools;
+    package = (if isLinux then pkgs.ghostty else pkgs.ghostty-bin);
+
+    enableZshIntegration = true;
+    installBatSyntax = true;
+    settings = {
+      #theme = "Nvim Dark";
+      font-family = "JetBrains Mono";
+      font-family-bold = "JetBrains Mono";
+      font-family-italic = "JetBrains Mono";
+      font-family-bold-italic = "JetBrains Mono";
+      font-feature = "-calt, -liga, -dlig";
+      gtk-titlebar = false;
+      macos-secure-input-indication = false;
+    };
+  };
+
   programs.topgrade = {
     enable = true;
     settings = {
