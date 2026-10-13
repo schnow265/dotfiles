@@ -18,9 +18,6 @@ in
     mole-cleaner
 
     zed-editor
-
-    # extracted binarys
-    #(binExtract android-tools "adb")
   ];
 
   home.sessionVariables = {

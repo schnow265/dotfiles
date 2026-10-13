@@ -4,7 +4,6 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixmaster.url = "github:nixos/nixpkgs";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,7 +16,6 @@
   outputs =
     {
       nixpkgs,
-      nixmaster,
       home-manager,
       scal,
       ...
@@ -30,9 +28,6 @@
           modules,
           extraSpecialArgs ? {}
         }:
-        let
-          masterPkgs = nixmaster.legacyPackages.${system};
-        in
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             inherit system;
@@ -53,7 +48,7 @@
             advancedTools = false;
             enableMiseInstall = true;
 
-            inherit username system scal masterPkgs;
+            inherit username system scal;
           } // extraSpecialArgs;
         };
     in
