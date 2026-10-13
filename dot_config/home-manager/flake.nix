@@ -41,7 +41,7 @@
           modules = [
             ./homes/common.nix
             ./apps/sets/git.nix
-            ./apps/nvim.nix
+            ./apps/editors/nvim.nix
             ./apps/dev/mise.nix
           ]
           ++ modules;
