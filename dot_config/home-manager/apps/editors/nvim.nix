@@ -7,8 +7,8 @@ let
   nvim_config = pkgs.fetchFromGitLab {
     owner = "schnow265";
     repo = "nvim.conf";
-    rev = "28c6c40634724d8854a1078b76190c0dae1acbed";
-    hash = "sha256-XxLuX9SiJWA/B6q4sU4yaFuQbML84iIeBwnCXjWDsJQ=";
+    rev = "f0b6625d5d00e72de08bda31d0ae3d206a82a767";
+    hash = "sha256-Ub0UggywS/tHLxQK0ZYUsJIwKpmHiJHv8z9WxbFC5ZM=";
   };
 in
 {
