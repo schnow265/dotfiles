@@ -11,6 +11,10 @@
 
     # my own stuff
     scal.url = "github:schnow265/scaletto.nix";
+    nvimConfig = {
+      url = "gitlab:schnow265/nvim.conf";
+      flake = false;
+    };
   };
 
   outputs =
@@ -18,6 +22,7 @@
       nixpkgs,
       home-manager,
       scal,
+      nvimConfig,
       ...
     }:
     let
@@ -48,7 +53,7 @@
             advancedTools = false;
             enableMiseInstall = true;
 
-            inherit username system scal;
+            inherit username system scal nvimConfig;
           } // extraSpecialArgs;
         };
     in

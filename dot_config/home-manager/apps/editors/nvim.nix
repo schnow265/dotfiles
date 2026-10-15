@@ -1,18 +1,11 @@
 {
   pkgs,
   enableGuiTools ? false,
+  nvimConfig,
   ...
 }:
-let
-  nvim_config = pkgs.fetchFromGitLab {
-    owner = "schnow265";
-    repo = "nvim.conf";
-    rev = "3d64fa780302dbbbdaaa4c173db8963cfba0ca12";
-    hash = "sha256-o4SWyarc6CcGAMD+rflg+df2opQQb2ymAGqzZoTGryE=";
-  };
-in
 {
-  home.file.".config/nvim".source = nvim_config;
+  home.file.".config/nvim".source = nvimConfig;
 
   programs.neovim  = {
     enable = true;
