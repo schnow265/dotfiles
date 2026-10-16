@@ -1,6 +1,7 @@
 {
   pkgs,
   scal,
+  masterPkgs,
   ...
 }:
 
@@ -16,7 +17,7 @@ in
     blender
     mole-cleaner
 
-    zed-editor
+    masterPkgs.zed-editor
   ];
 
   home.sessionVariables = {
