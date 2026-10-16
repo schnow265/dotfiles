@@ -9,6 +9,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # !! ONLY USE IN EMERGENCIES !! (for example build failure)
+    nixmaster.url = "github:nixos/nixpkgs";
+
     # my own stuff
     scal.url = "github:schnow265/scaletto.nix";
 
@@ -40,6 +43,7 @@
     {
       nixpkgs,
       home-manager,
+      nixmaster,
       scal,
       nvimConfig,
       nixZshCompletions,
@@ -56,6 +60,9 @@
           modules,
           extraSpecialArgs ? { },
         }:
+        let
+          masterPkgs = nixmaster.legacyPackages.${system};
+        in
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             inherit system;
@@ -79,6 +86,7 @@
             inherit
               username
               system
+              masterPkgs
               scal
               nvimConfig
               nixZshCompletions

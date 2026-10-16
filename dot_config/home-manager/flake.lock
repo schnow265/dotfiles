@@ -68,6 +68,21 @@
         "type": "github"
       }
     },
+    "nixmaster": {
+      "locked": {
+        "lastModified": 1792158658,
+        "narHash": "sha256-Oy4hTJ2cC+3NUeN//HDXPWWhOntJpqj24JzVklgkom4=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "1e19e755f9f24c5bb9ec5be1efdd2caa570d11fa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1791966044,
@@ -106,6 +121,7 @@
         "home-manager": "home-manager",
         "kakoune_kaktree": "kakoune_kaktree",
         "nixZshCompletions": "nixZshCompletions",
+        "nixmaster": "nixmaster",
         "nixpkgs": "nixpkgs",
         "nvimConfig": "nvimConfig",
         "scal": "scal",
