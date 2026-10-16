@@ -11,8 +11,27 @@
 
     # my own stuff
     scal.url = "github:schnow265/scaletto.nix";
+
+    # sources from git
     nvimConfig = {
       url = "gitlab:schnow265/nvim.conf";
+      flake = false;
+    };
+
+    nixZshCompletions = {
+      url = "github:nix-community/nix-zsh-completions";
+      flake = false;
+    };
+    chemacs2_git = {
+      url = "github:plexus/chemacs2";
+      flake = false;
+    };
+    spacemacs_git = {
+      url = "github:syl20bnr/spacemacs";
+      flake = false;
+    };
+    kakoune_kaktree = {
+      url = "github:andreyorst/kaktree";
       flake = false;
     };
   };
@@ -23,6 +42,10 @@
       home-manager,
       scal,
       nvimConfig,
+      nixZshCompletions,
+      chemacs2_git,
+      spacemacs_git,
+      kakoune_kaktree,
       ...
     }:
     let
@@ -31,7 +54,7 @@
           system,
           username,
           modules,
-          extraSpecialArgs ? {}
+          extraSpecialArgs ? { },
         }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
@@ -53,8 +76,18 @@
             advancedTools = false;
             enableMiseInstall = true;
 
-            inherit username system scal nvimConfig;
-          } // extraSpecialArgs;
+            inherit
+              username
+              system
+              scal
+              nvimConfig
+              nixZshCompletions
+              chemacs2_git
+              spacemacs_git
+              kakoune_kaktree
+              ;
+          }
+          // extraSpecialArgs;
         };
     in
     {
@@ -92,7 +125,7 @@
           modules = [
             ./homes/lite.nix
           ];
-          extraSpecialArgs = {};
+          extraSpecialArgs = { };
         };
         # the aarch64-linux one
         "sn0w" = mkHome {

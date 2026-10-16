@@ -5,19 +5,13 @@
   username,
   system,
   enableGuiTools ? false,
+  nixZshCompletions,
   ...
 }:
 let
   binExtract = scal.lib.binExtract { inherit pkgs; };
 
   path = if lib.hasSuffix "-darwin" system then "/Users" else "/home";
-
-  nixos-zsh-completions = pkgs.fetchFromGitHub {
-    owner = "nix-community";
-    repo = "nix-zsh-completions";
-    rev = "d4ae06bedb9a353ac894862d1d83f60ab4e2ccce";
-    hash = "sha256-ogDhANf4MpVZn5sWZymT0EIjDMTLSHRGzNjHsw/dX8o=";
-  };
 
   isLinux = pkgs.stdenv.hostPlatform.isLinux;
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
@@ -62,7 +56,7 @@ in
   };
 
   home.file = {
-    ".local/share/external/zsh/nixos-completions".source = nixos-zsh-completions;
+    ".local/share/external/zsh/nixos-completions".source = nixZshCompletions;
   };
 
   programs.ghostty = {

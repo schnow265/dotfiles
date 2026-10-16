@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "chemacs2_git": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1674216959,
+        "narHash": "sha256-/WtacZPr45lurS0hv+W8UGzsXY3RujkU5oGGGqjqG0Q=",
+        "owner": "plexus",
+        "repo": "chemacs2",
+        "rev": "c2d700b784c793cc82131ef86323801b8d6e67bb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "plexus",
+        "repo": "chemacs2",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -7,11 +23,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791642191,
-        "narHash": "sha256-0bK0A59rVUn1SRZzo4cNi4VSqAe7vR1gL2/MZl53Frw=",
+        "lastModified": 1792098797,
+        "narHash": "sha256-u4DIIZgznEGzByxXrxWCXK19VcMtTBmi/M9gZ7Jk9bM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "c58f54c733a7894d84fa2fdff26cc12088c4b78c",
+        "rev": "640725978b99076e18e069f6e7d2959124584f8f",
         "type": "github"
       },
       "original": {
@@ -20,13 +36,45 @@
         "type": "github"
       }
     },
+    "kakoune_kaktree": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1755299856,
+        "narHash": "sha256-67MpqTI6thQxFezYUHC2nETa1honfm2BQhqC+bsmQtQ=",
+        "owner": "andreyorst",
+        "repo": "kaktree",
+        "rev": "320d0a339638452e79be2a9caef11c05e8d47bec",
+        "type": "github"
+      },
+      "original": {
+        "owner": "andreyorst",
+        "repo": "kaktree",
+        "type": "github"
+      }
+    },
+    "nixZshCompletions": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1765577512,
+        "narHash": "sha256-ogDhANf4MpVZn5sWZymT0EIjDMTLSHRGzNjHsw/dX8o=",
+        "owner": "nix-community",
+        "repo": "nix-zsh-completions",
+        "rev": "d4ae06bedb9a353ac894862d1d83f60ab4e2ccce",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nix-zsh-completions",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1791487292,
-        "narHash": "sha256-tqM7xDEsaeK1p6VvRygeZ9LkQRpUUkbRT02BHv6hnTM=",
+        "lastModified": 1791966044,
+        "narHash": "sha256-t1hT8UW97rFCWCJO7/pClvu0AhLN5V3uir2M0ic4w/Q=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "8edc0c72e3a38faf5434e40d1f19431125fe4b30",
+        "rev": "319e4cebef10cbb636c6ea392137b52ad105336a",
         "type": "github"
       },
       "original": {
@@ -39,11 +87,11 @@
     "nvimConfig": {
       "flake": false,
       "locked": {
-        "lastModified": 1792051100,
-        "narHash": "sha256-o4SWyarc6CcGAMD+rflg+df2opQQb2ymAGqzZoTGryE=",
+        "lastModified": 1792078207,
+        "narHash": "sha256-nFCrqHm8tQHFYCA26R+SEIyFPNnPH85ix6jG2EDcLgg=",
         "owner": "schnow265",
         "repo": "nvim.conf",
-        "rev": "3d64fa780302dbbbdaaa4c173db8963cfba0ca12",
+        "rev": "5388de0838c32693605d32619923eb8554aaf342",
         "type": "gitlab"
       },
       "original": {
@@ -54,10 +102,14 @@
     },
     "root": {
       "inputs": {
+        "chemacs2_git": "chemacs2_git",
         "home-manager": "home-manager",
+        "kakoune_kaktree": "kakoune_kaktree",
+        "nixZshCompletions": "nixZshCompletions",
         "nixpkgs": "nixpkgs",
         "nvimConfig": "nvimConfig",
-        "scal": "scal"
+        "scal": "scal",
+        "spacemacs_git": "spacemacs_git"
       }
     },
     "scal": {
@@ -72,6 +124,22 @@
       "original": {
         "owner": "schnow265",
         "repo": "scaletto.nix",
+        "type": "github"
+      }
+    },
+    "spacemacs_git": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791662164,
+        "narHash": "sha256-OYr8W3/0F1sLUeqC3d/SesFLbKQJhdrPa7Uf6baDl9Q=",
+        "owner": "syl20bnr",
+        "repo": "spacemacs",
+        "rev": "da13fb555ce6bba1074d5571e42db4cc11318897",
+        "type": "github"
+      },
+      "original": {
+        "owner": "syl20bnr",
+        "repo": "spacemacs",
         "type": "github"
       }
     }

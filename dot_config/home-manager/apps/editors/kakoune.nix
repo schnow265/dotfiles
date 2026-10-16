@@ -1,15 +1,8 @@
 {
   pkgs,
+  kakoune_kaktree,
   ...
 }:
-let
-  kaktree = pkgs.fetchFromGitHub {
-    owner = "andreyorst";
-    repo = "kaktree";
-    rev = "320d0a339638452e79be2a9caef11c05e8d47bec";
-    hash = "sha256-67MpqTI6thQxFezYUHC2nETa1honfm2BQhqC+bsmQtQ=";
-  };
-in
 {
   programs.kakoune = {
     enable = true;
@@ -26,6 +19,6 @@ in
   };
 
   home.file = {
-    ".config/kak/autoload/kaktree".source = kaktree;
+    ".config/kak/autoload/kaktree".source = kakoune_kaktree;
   };
 }
