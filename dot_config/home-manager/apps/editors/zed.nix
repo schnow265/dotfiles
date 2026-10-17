@@ -26,6 +26,9 @@
     ];
 
     mutableUserSettings = true;
+    mutableUserDebug = true;
+    mutableUserTasks = true;
+    mutableUserKeymaps = true;
 
     userSettings = {
       disable_ai = true;
