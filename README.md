@@ -35,12 +35,17 @@ nix run home-manager/master -- switch
 - The determinate systems nix update path is also configured since nix successfully downgraded itself on the default path on my machine
 - A matching user config [has to be set in home-manager's `flake.nix`](./dot_config/home-manager/flake.nix)
 - zsh is not installed via home-manager, it has to be provided by your system.
-- [Doom Emacs](https://github.com/doomemacs/core/tree/master#doom-emacs) has been included and is ready to set up by running `doom sync`
 
-## Configured users in Home-Manager
+## List of flake inputs
 
-| Username | OS | arch |
-| --- | --- | --- |
-| scaletto | MacOS | arm64 |
-| scal | Linux |  x86_64 |
-| schnow265 | Linux | x86_64 |
+| Name              | URL                                        | Description                                                                                          |
+| ----------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| nixpkgs           | `github:nixos/nixpkgs/nixpkgs-unstable`    | Default unstable nix pkgs                                                                            |
+| home-mamnager     | `github:nix-community/home-manager`        | home-manager path                                                                                    |
+| nixmaster         | `github:nixos/nixpkgs`                     | The latest nixpkgs commit, only used in case of build issues                                         |
+| scal              | `github:schnow265/scaletto.nix`            | my utility functions                                                                                 |
+| nvimConfig        | `gitlab:schnow265/nvim.conf`               | my [neovim config](https://gitlab.com/schnow265/nvim.conf.git) tracked via flake for easier updating |
+| nixZshCompletions | `github:nix-community/nix-zsh-completions` | zsh completions for the `nix` CLI                                                                    |
+| chemacs2_git | `github:plexus/chemacs2` | emacs profile switcher; only used when `apps/editors/emacs.nix` is included |
+| spacemacs_git | `github:syl20bnr/spacemacs` | spacemacs base. |
+| kakoune_kaktree | `github:andreyorst/kaktree` | the [kaktree plugin](https://github.com/andreyorst/kaktree). only used when kakoune is enabled |
