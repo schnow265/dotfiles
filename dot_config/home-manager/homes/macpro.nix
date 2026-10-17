@@ -1,12 +1,12 @@
 {
   pkgs,
-  scal,
   masterPkgs,
+  inputs,
   ...
 }:
 
 let
-  binExtract = scal.lib.binExtract { inherit pkgs; };
+  binExtract = inputs.scal.lib.binExtract { inherit pkgs; };
 in
 {
   home.packages = with pkgs; [

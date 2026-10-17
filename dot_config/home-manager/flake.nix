@@ -43,15 +43,8 @@
     {
       nixpkgs,
       home-manager,
-      nixmaster,
-      scal,
-      nvimConfig,
-      nixZshCompletions,
-      chemacs2_git,
-      spacemacs_git,
-      kakoune_kaktree,
       ...
-    }:
+    }@inputs:
     let
       mkHome =
         {
@@ -61,7 +54,7 @@
           extraSpecialArgs ? { },
         }:
         let
-          masterPkgs = nixmaster.legacyPackages.${system};
+          masterPkgs = inputs.nixmaster.legacyPackages.${system};
         in
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
@@ -87,12 +80,7 @@
               username
               system
               masterPkgs
-              scal
-              nvimConfig
-              nixZshCompletions
-              chemacs2_git
-              spacemacs_git
-              kakoune_kaktree
+              inputs
               ;
           }
           // extraSpecialArgs;

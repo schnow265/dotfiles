@@ -1,6 +1,6 @@
 {
   pkgs,
-  kakoune_kaktree,
+  inputs,
   ...
 }:
 {
@@ -19,6 +19,6 @@
   };
 
   home.file = {
-    ".config/kak/autoload/kaktree".source = kakoune_kaktree;
+    ".config/kak/autoload/kaktree".source = inputs.kakoune_kaktree;
   };
 }

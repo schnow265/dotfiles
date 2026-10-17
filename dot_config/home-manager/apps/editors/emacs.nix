@@ -1,7 +1,6 @@
 {
   pkgs,
-  chemacs2_git,
-  spacemacs_git,
+  inputs,
   ...
 }:
 {
@@ -16,8 +15,8 @@
   ];
 
   home.file = {
-    ".config/emacs".source = chemacs2_git;
-    ".local/share/external/emacs-cfg/spacemacs".source = spacemacs_git;
+    ".config/emacs".source = inputs.chemacs2_git;
+    ".local/share/external/emacs-cfg/spacemacs".source = inputs.spacemacs_git;
 
     ".emacs-profile".text = ''
       spacemacs

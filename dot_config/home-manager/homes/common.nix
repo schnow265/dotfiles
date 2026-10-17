@@ -5,7 +5,7 @@
   username,
   system,
   enableGuiTools ? false,
-  nixZshCompletions,
+  inputs,
   ...
 }:
 let
@@ -56,7 +56,7 @@ in
   };
 
   home.file = {
-    ".local/share/external/zsh/nixos-completions".source = nixZshCompletions;
+    ".local/share/external/zsh/nixos-completions".source = inputs.nixZshCompletions;
   };
 
   programs.ghostty = {
