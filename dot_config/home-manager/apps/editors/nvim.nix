@@ -2,6 +2,7 @@
   pkgs,
   enableGuiTools ? false,
   nvimConfig,
+  config,
   ...
 }:
 {
@@ -30,7 +31,7 @@
 
     settings = {
       fork = true;
-      neovim-bin = "${pkgs.neovim}/bin/nvim";
+      neovim-bin = "${config.programs.neovim.finalPackage}/bin/nvim";
     };
   };
 
