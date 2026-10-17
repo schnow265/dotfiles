@@ -95,6 +95,7 @@
             ./homes/macpro.nix
             ./apps/sets/ai.nix
 
+            ./apps/editors/zed.nix
             ./apps/dev/langs/nix.nix
             ./apps/nonfree/obsidian.nix
           ];
