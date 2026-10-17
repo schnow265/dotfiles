@@ -1,12 +1,12 @@
 {
   pkgs,
   enableGuiTools ? false,
-  nvimConfig,
+  inputs,
   config,
   ...
 }:
 {
-  home.file.".config/nvim".source = nvimConfig;
+  home.file.".config/nvim".source = inputs.nvimConfig;
 
   programs.neovim  = {
     enable = true;
