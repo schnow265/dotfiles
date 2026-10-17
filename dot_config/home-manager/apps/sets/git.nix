@@ -16,7 +16,7 @@
     ]
     ++ lib.optionals enableGuiTools [
       (sourcegit.overrideAttrs (oldAttrs: {
-        runtimeDeps = (oldAttrs.runtimeDeps or [ ]) ++ [
+        runtimePathDeps = (oldAttrs.runtimePathDeps or [ ]) ++ [
           git-lfs
         ];
       }))
