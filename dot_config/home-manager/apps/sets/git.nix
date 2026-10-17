@@ -7,15 +7,12 @@
   home.packages =
     with pkgs;
     [
-      git
       delta
-      gh
       git
+      git-bug
       git-lfs
       git-xet
-      glab
       lazygit
-      git-bug
     ]
     ++ lib.optionals enableGuiTools [
       (sourcegit.overrideAttrs (oldAttrs: {
