@@ -23,6 +23,9 @@
       tree-sitter
       git
       luarocks
+      lua5_1
+      wget
+      fd
     ];
   };
 
