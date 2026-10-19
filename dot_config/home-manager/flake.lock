@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "chemacs2_git": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1674216959,
-        "narHash": "sha256-/WtacZPr45lurS0hv+W8UGzsXY3RujkU5oGGGqjqG0Q=",
-        "owner": "plexus",
-        "repo": "chemacs2",
-        "rev": "c2d700b784c793cc82131ef86323801b8d6e67bb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "plexus",
-        "repo": "chemacs2",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -33,22 +17,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "kakoune_kaktree": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1755299856,
-        "narHash": "sha256-67MpqTI6thQxFezYUHC2nETa1honfm2BQhqC+bsmQtQ=",
-        "owner": "andreyorst",
-        "repo": "kaktree",
-        "rev": "320d0a339638452e79be2a9caef11c05e8d47bec",
-        "type": "github"
-      },
-      "original": {
-        "owner": "andreyorst",
-        "repo": "kaktree",
         "type": "github"
       }
     },
@@ -117,15 +85,12 @@
     },
     "root": {
       "inputs": {
-        "chemacs2_git": "chemacs2_git",
         "home-manager": "home-manager",
-        "kakoune_kaktree": "kakoune_kaktree",
         "nixZshCompletions": "nixZshCompletions",
         "nixmaster": "nixmaster",
         "nixpkgs": "nixpkgs",
         "nvimConfig": "nvimConfig",
-        "scal": "scal",
-        "spacemacs_git": "spacemacs_git"
+        "scal": "scal"
       }
     },
     "scal": {
@@ -140,22 +105,6 @@
       "original": {
         "owner": "schnow265",
         "repo": "scaletto.nix",
-        "type": "github"
-      }
-    },
-    "spacemacs_git": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1792346306,
-        "narHash": "sha256-2CLxak+6HQtUpExoP+gpJr2wAz4S/Oae4iHhi3UdOBc=",
-        "owner": "syl20bnr",
-        "repo": "spacemacs",
-        "rev": "03a29948a4ff26295c91394ed999f9c8d5c862e8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "syl20bnr",
-        "repo": "spacemacs",
         "type": "github"
       }
     }

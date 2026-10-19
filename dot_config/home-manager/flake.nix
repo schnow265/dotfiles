@@ -25,18 +25,6 @@
       url = "github:nix-community/nix-zsh-completions";
       flake = false;
     };
-    chemacs2_git = {
-      url = "github:plexus/chemacs2";
-      flake = false;
-    };
-    spacemacs_git = {
-      url = "github:syl20bnr/spacemacs";
-      flake = false;
-    };
-    kakoune_kaktree = {
-      url = "github:andreyorst/kaktree";
-      flake = false;
-    };
   };
 
   outputs =
