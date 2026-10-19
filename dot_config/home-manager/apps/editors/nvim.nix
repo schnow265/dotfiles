@@ -26,6 +26,13 @@
       lua5_1
       wget
       fd
+      ripgrep
+
+      # mason.nvim package managers
+      go
+      cargo
+      nodejs
+      ruby
     ];
   };
 
