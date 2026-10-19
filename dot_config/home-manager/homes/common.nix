@@ -1,6 +1,5 @@
 {
   lib,
-  scal,
   pkgs,
   username,
   system,
@@ -9,7 +8,7 @@
   ...
 }:
 let
-  binExtract = scal.lib.binExtract { inherit pkgs; };
+  binExtract = inputs.scal.lib.binExtract { inherit pkgs; };
 
   path = if lib.hasSuffix "-darwin" system then "/Users" else "/home";
 
