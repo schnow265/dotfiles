@@ -1,12 +1,7 @@
 {
   pkgs,
-  inputs,
   ...
 }:
-
-let
-  binExtract = inputs.scal.lib.binExtract { inherit pkgs; };
-in
 {
   home.packages = with pkgs; [
     borgbackup

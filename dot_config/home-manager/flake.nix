@@ -65,10 +65,10 @@
             enableMiseInstall = true;
 
             inherit
+              inputs
               username
               system
               masterPkgs
-              inputs
               ;
           }
           // extraSpecialArgs;
