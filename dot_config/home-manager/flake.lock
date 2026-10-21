@@ -36,6 +36,22 @@
         "type": "github"
       }
     },
+    "nixlocked": {
+      "locked": {
+        "lastModified": 1792503283,
+        "narHash": "sha256-vhe2jyvRCgufWPqDuDq1S3t3ypE+ka46IFutV02xKso=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "cd4ea8d57de16f4810bc5f14207bac45fbf19f67",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-26.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixmaster": {
       "locked": {
         "lastModified": 1792423245,
@@ -87,6 +103,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "nixZshCompletions": "nixZshCompletions",
+        "nixlocked": "nixlocked",
         "nixmaster": "nixmaster",
         "nixpkgs": "nixpkgs",
         "nvimConfig": "nvimConfig",
