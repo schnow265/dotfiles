@@ -13,6 +13,12 @@
     nixmaster.url = "github:nixos/nixpkgs";
     nixlocked.url = "github:nixos/nixpkgs/nixos-26.05";
 
+    # third party flakes
+    qmd = {
+      url = "github:tobi/qmd";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # my own stuff
     scal.url = "github:schnow265/scaletto.nix";
 
