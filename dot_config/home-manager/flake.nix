@@ -91,6 +91,7 @@
           modules = [
             ./homes/macpro.nix
             ./apps/sets/ai.nix
+            ./apps/sets/shell_tools.nix
 
             ./apps/editors/zed.nix
             ./apps/dev/langs/nix.nix
