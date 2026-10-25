@@ -32,20 +32,7 @@
 
     userSettings = {
       disable_ai = true;
-      language_models = {
-        "llama.cpp" = {
-          api_url = "http://localhost:9931/v1";
-        };
-      };
       restore_on_startup = "launchpad";
-      edit_predictions = {
-        allow_data_collection = "no";
-        provider = "open_ai_compatible_api";
-        open_ai_compatible_api = {
-          model = "prism-ml/Bonsai-8B-gguf:Q1_0";
-          api_url = "http://localhost:9931/v1/chat/completions";
-        };
-      };
       document_symbols = "on";
       document_folding_ranges = "on";
       diagnostics.inline.enabled = true;
