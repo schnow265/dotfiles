@@ -8,6 +8,10 @@
 {
   home.file.".config/nvim".source = inputs.nvimConfig;
 
+  home.packages = with pkgs; [
+    nvimpager
+  ];
+
   programs.neovim  = {
     enable = true;
     defaultEditor = true;
@@ -47,5 +51,6 @@
 
   home.sessionVariables = {
     MANPAGER = "nvim +Man!";
+    PAGER = "nvimpager";
   };
 }
