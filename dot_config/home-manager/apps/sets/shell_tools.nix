@@ -17,4 +17,8 @@
   programs.bat = {
     enable = true;
   };
+
+  programs.zk.settings.tool = {
+    fzf-preview = "bat -p --color always {-1}";
+  };
 }

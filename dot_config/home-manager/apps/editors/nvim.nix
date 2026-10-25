@@ -53,4 +53,9 @@
     MANPAGER = "nvim +Man!";
     PAGER = "nvimpager";
   };
+
+  programs.zk.settings.tool = {
+    editor = "${config.programs.neovim.finalPackage}/bin/nvim";
+    pager = "${pkgs.nvimpager}/bin/nvimpager";
+  };
 }
