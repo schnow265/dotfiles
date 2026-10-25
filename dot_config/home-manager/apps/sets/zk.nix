@@ -9,10 +9,10 @@
       note = {
         default-title = "Untitled";
         extension = "md";
-        filename = "{{id}}-{{slug title}}-{{format-date now '%Y-%m-%d'}}";
+        filename = "{{format-date now '%Y'}}/{{format-date now '%m'}}/{{format-date now '%d'}}/{{id}}";
         id-case = "lower";
-        id-charset = "alphanum";
-        id-length = 4;
+        id-charset = "hex";
+        id-length = 6;
       };
       notebook.dir = "${config.home.homeDirectory}/zk/";
     };
