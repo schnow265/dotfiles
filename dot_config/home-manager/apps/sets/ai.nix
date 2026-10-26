@@ -2,6 +2,8 @@
   pkgs,
   agenticTools ? false,
   inputs,
+  config,
+  lib,
   ...
 }:
 {
@@ -39,4 +41,10 @@
   programs.qmd = {
     enable = true;
   };
+
+  home.activation.qmdEmbeddings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    export PATH="${config.programs.qmd.package}/bin:$PATH"
+    qmd update
+    qmd embed
+  '';
 }
