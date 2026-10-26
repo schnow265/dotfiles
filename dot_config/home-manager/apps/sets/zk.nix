@@ -23,6 +23,6 @@
 
   home.activation.zkIndex = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     export PATH="${pkgs.zk}/bin:$PATH"
-    zk index
+    zk index $VERBOSE_ARG
   '';
 }

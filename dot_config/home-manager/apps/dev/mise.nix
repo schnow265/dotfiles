@@ -36,12 +36,12 @@
   home.activation = lib.mkIf enableMiseInstall {
     miseInstall = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       export PATH="${pkgs.mise}/bin:$PATH"
-      mise install --yes
+      mise install --yes $VERBOSE_ARG
     '';
 
     miseUpdate = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       export PATH="${pkgs.mise}/bin:$PATH"
-      mise upgrade
+      mise upgrade $VERBOSE_ARG
     '';
   };
 }
