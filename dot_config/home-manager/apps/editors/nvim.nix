@@ -51,7 +51,6 @@
 
   home.sessionVariables = {
     MANPAGER = "nvim +Man!";
-    PAGER = "nvimpager";
   };
 
   programs.zk.settings.tool = {
