@@ -1,5 +1,7 @@
 {
   config,
+  lib,
+  pkgs,
   ...
 }:
 {
@@ -18,4 +20,9 @@
     };
     exportNotebookDir = true;
   };
+
+  home.activation.zkIndex = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    export PATH="${pkgs.zk}/bin:$PATH"
+    zk index
+  '';
 }
