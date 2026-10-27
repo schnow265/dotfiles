@@ -97,6 +97,8 @@
             ./apps/editors/zed.nix
             ./apps/dev/langs/nix.nix
             ./apps/nonfree/obsidian.nix
+
+            ./apps/dev/radare2.nix
           ];
           extraSpecialArgs = {
             enableGuiTools = true;
