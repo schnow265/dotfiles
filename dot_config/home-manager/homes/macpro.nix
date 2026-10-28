@@ -5,10 +5,8 @@
 {
   home.packages = with pkgs; [
     borgbackup
-    ffmpeg-full
-    yt-dlp
+    ffmpeg
 
-    blender
     mole-cleaner
   ];
 

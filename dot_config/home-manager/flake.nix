@@ -71,6 +71,7 @@
             useLLVM = false; # provides llvm / gcc when apps/dev/langs/low_level.nix is included.
             advancedTools = false;
             enableMiseInstall = true;
+            aiAdditions = false; # funny haha ai stuff.
 
             inherit
               inputs
@@ -90,19 +91,21 @@
           username = "scaletto";
           modules = [
             ./homes/macpro.nix
+
             ./apps/sets/ai.nix
-            ./apps/sets/zk.nix
+            ./apps/sets/markdown.nix
             ./apps/sets/shell_tools.nix
 
             ./apps/editors/zed.nix
-            ./apps/dev/langs/nix.nix
-            ./apps/nonfree/obsidian.nix
 
-            ./apps/dev/radare2.nix
+            ./apps/dev/langs/nix.nix
+
+            ./apps/nonfree/obsidian.nix
           ];
           extraSpecialArgs = {
             enableGuiTools = true;
-            agenticTools = true;
+            agenticTools = false;
+            aiAdditions = true;
           };
         };
         "schnow265" = mkHome {
