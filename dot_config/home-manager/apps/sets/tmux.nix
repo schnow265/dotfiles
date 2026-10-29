@@ -7,6 +7,8 @@
     tmuxinator
   ];
 
+  programs.zsh.shellAliases.mux = "tmuxinator";
+
   programs.tmux = {
     enable = true;
 
