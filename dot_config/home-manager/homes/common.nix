@@ -73,6 +73,7 @@ in
       font-feature = "-calt, -liga, -dlig";
       gtk-titlebar = false;
       macos-secure-input-indication = false;
+      auto-update = "off";
     };
   };
 
