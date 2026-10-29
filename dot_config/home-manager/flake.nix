@@ -54,6 +54,7 @@
             ./apps/sets/git.nix
             ./apps/editors/nvim.nix
             ./apps/dev/mise.nix
+            ./apps/sets/shell_tools.nix
           ]
           ++ modules;
 
@@ -84,7 +85,6 @@
 
             ./apps/sets/ai.nix
             ./apps/sets/markdown.nix
-            ./apps/sets/shell_tools.nix
 
             ./apps/editors/zed.nix
 
