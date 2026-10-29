@@ -1,4 +1,5 @@
 {
+  config,
   ...
 }:
 {
@@ -54,6 +55,20 @@
     enable = true;
     enableZshIntegration = true;
   };
+
+  programs.direnv = {
+    enable = true;
+    mise.enable = config.programs.mise.enable;
+    nix-direnv.enable = true;
+    enableGitIntegration = true;
+    enableZshIntegration = true;
+  };
+
+  programs.devenv = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
   programs.fastfetch = {
     enable = true;
     settings = {

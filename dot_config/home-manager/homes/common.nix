@@ -38,8 +38,6 @@ in
       btop
       chezmoi
       delta
-      devenv
-      direnv
       lsd
       ripgrep
       tlrc
