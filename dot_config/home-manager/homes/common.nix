@@ -1,8 +1,6 @@
 {
-  lib,
   pkgs,
   username,
-  system,
   enableGuiTools ? false,
   inputs,
   ...
@@ -10,10 +8,10 @@
 let
   binExtract = inputs.scal.lib.binExtract { inherit pkgs; };
 
-  path = if lib.hasSuffix "-darwin" system then "/Users" else "/home";
-
   isLinux = pkgs.stdenv.hostPlatform.isLinux;
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+
+  path = if isDarwin then "/Users" else "/home";
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
