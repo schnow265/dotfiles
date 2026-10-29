@@ -1,8 +1,95 @@
 {
   config,
+  pkgs,
   ...
 }:
 {
+  programs.zsh = {
+    enable = true;
+    initContent = ''
+      # Keybindings
+      bindkey " " magic-space
+
+      autoload -Uz edit-command-line
+      zle -N edit-command-line
+      bindkey '^X^E' edit-command-line
+
+      bindkey '^[.' insert-last-word
+      bindkey '^[_' copy-prev-word
+
+      bindkey '^[[1;5C' forward-word
+      bindkey '^[[1;5D' backward-word
+
+      bindkey '^A' beginning-of-line
+      bindkey '^E' end-of-line
+
+      bindkey '^W' backward-kill-word
+      bindkey '^H' backward-delete-char
+      bindkey '^K' kill-line
+      bindkey '^U' backward-kill-line
+
+      bindkey '^/' undo
+      bindkey '^?' backward-delete-char
+      bindkey '^[/' redo
+
+      source "$HOME/.config/zsh/config.zsh"
+
+      fastfetch
+
+      case ":$PATH:" in *":$HOME/.local/bin:"*) ;; *) export PATH="$HOME/.local/bin:$PATH" ;; esac
+      [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
+    '';
+    envExtra = ''
+      export PATH="/Users/scaletto/.local/bin:$PATH"
+    '';
+    profileExtra = ''
+      # Added by Toolbox App
+      export PATH="$PATH:/Users/scaletto/Library/Scripts/JB_Toolbox/"
+
+      eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+
+      case ":$PATH:" in *":$HOME/.local/bin:"*) ;; *) export PATH="$HOME/.local/bin:$PATH" ;; esac
+    '';
+
+    # History
+    history = {
+      path = "$HOME/.zsh_history";
+      size = 50000;
+      save = 50000;
+
+      ignoreDups = true;
+      ignoreSpace = true;
+
+      share = true;
+    };
+
+    # Shell options
+    setOptions = [
+      "INC_APPEND_HISTORY"
+    ];
+
+    # Dedicated Home Manager integrations
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+
+    # Additional plugins
+    plugins = [
+      {
+        name = "zsh-completions";
+        src = pkgs.zsh-completions;
+      }
+    ];
+    shellAliases = {
+      cls = "clear";
+
+      ls = "lsd";
+      ll = "lsd -Al";
+
+      cat = "bat";
+      nvy = "neovide";
+    };
+  };
+
   programs.fzf = {
     enable = true;
 
