@@ -9,10 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # !! ONLY USE IN EMERGENCIES !! (for example build failure)
-    nixmaster.url = "github:nixos/nixpkgs";
-    nixlocked.url = "github:nixos/nixpkgs/nixos-26.05";
-
     # third party flakes
     qmd = {
       url = "github:tobi/qmd";
@@ -48,10 +44,6 @@
           modules,
           extraSpecialArgs ? { },
         }:
-        let
-          masterPkgs = inputs.nixmaster.legacyPackages.${system};
-          lockedPkgs = inputs.nixlocked.legacyPackages.${system};
-        in
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             inherit system;
@@ -77,8 +69,6 @@
               inputs
               username
               system
-              masterPkgs
-              lockedPkgs
               ;
           }
           // extraSpecialArgs;

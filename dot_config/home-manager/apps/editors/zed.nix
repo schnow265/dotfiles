@@ -1,11 +1,9 @@
 {
-  lockedPkgs,
   ...
 }:
 {
   programs.zed-editor = {
     enable = true;
-    # package = lockedPkgs.zed-editor;
 
     extensions = [
       "csharp"
