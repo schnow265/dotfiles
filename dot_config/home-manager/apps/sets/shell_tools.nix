@@ -22,6 +22,33 @@
     fzf-preview = "bat -p --color always {-1}";
   };
 
+  programs.starship = {
+    enable = true;
+    presets = [
+      "bracketed-segments"
+    ];
+    enableZshIntegration = true;
+    validateFiles.config = true;
+
+    settings = {
+      battery.disabled = true;
+      dotnet.detect_extensions = [
+        "csproj"
+        "fsproj"
+        "xproj"
+        "sln"
+        "slnx"
+      ];
+      elixir = {
+        format = "\[[$symbol($version-otp-$otp_version)]($style)\]";
+        version_format = "$\{raw}";
+      };
+      nix_shell = {
+        symbol = "❄️";
+        format = "[$symbol]";
+      };
+    };
+  };
   programs.fastfetch = {
     enable = true;
     settings = {
