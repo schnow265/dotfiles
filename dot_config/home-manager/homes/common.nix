@@ -6,8 +6,6 @@
   ...
 }:
 let
-  binExtract = inputs.scal.lib.binExtract { inherit pkgs; };
-
   isLinux = pkgs.stdenv.hostPlatform.isLinux;
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
 
@@ -30,20 +28,17 @@ in
   # release notes.
   home.stateVersion = "26.05"; # Please read the comment before changing.
 
-  home.packages =
-    with pkgs;
-    [
-      aria2
-      btop
-      chezmoi
-      delta
-      lsd
-      ripgrep
-      tlrc
+  home.packages = with pkgs; [
+    aria2
+    btop
+    chezmoi
+    delta
+    lsd
+    ripgrep
+    tlrc
 
-      python314Packages.httpie
-    ]
-    ++ (if enableGuiTools then [ keepassxc ] else [ (binExtract pkgs.keepassxc "keepassxc-cli") ]);
+    python314Packages.httpie
+  ];
 
   home.sessionVariables = {
     # other ones
