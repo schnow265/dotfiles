@@ -40,6 +40,8 @@ in
       lsd
       ripgrep
       tlrc
+
+      python314Packages.httpie
     ]
     ++ (if enableGuiTools then [ keepassxc ] else [ (binExtract pkgs.keepassxc "keepassxc-cli") ]);
 

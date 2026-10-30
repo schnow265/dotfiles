@@ -3,10 +3,15 @@
   agenticTools ? false,
   ...
 }:
+let
+  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+in
 {
   home.packages = with pkgs; [
     llama-cpp
     python314Packages.huggingface-hub # hf cli
+  ] ++ lib.optionals isDarwin [
+    python314Packages.mlx-lm
   ];
 
   programs.pi-coding-agent = {
