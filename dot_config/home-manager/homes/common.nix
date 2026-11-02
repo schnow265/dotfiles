@@ -104,6 +104,7 @@ in
           "powershell"
           "nix"
           "pi"
+          "vcpkg"
         ]
         ++ pkgs.lib.optionals isDarwin [
           "containers"

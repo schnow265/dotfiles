@@ -15,5 +15,6 @@
     HF_HUB_CACHE = "/Users/scaletto/LLama";
     CC = "/usr/bin/clang";
     CXX = "/usr/bin/clang++";
+    HOMEBREW_CASK_OPTS = "--appdir='/Users/scaletto/Applications/Homebrew'";
   };
 }
