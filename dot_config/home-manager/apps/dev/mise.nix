@@ -8,7 +8,6 @@
   programs.mise = {
     enable = true;
 
-    enableZshIntegration = true;
     globalConfig = {
       env = {
         CMAKE_GENRATOR = "Ninja";

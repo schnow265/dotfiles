@@ -56,7 +56,6 @@ in
     enable = enableGuiTools;
     package = (if isLinux then pkgs.ghostty else pkgs.ghostty-bin);
 
-    enableZshIntegration = true;
     installBatSyntax = true;
     settings = {
       #theme = "Nvim Dark";

@@ -93,7 +93,6 @@
   programs.fzf = {
     enable = true;
 
-    enableZshIntegration = true;
     historyWidget.options = [
       "--reverse"
       "--preview 'echo {}'"
@@ -115,7 +114,6 @@
     presets = [
       "bracketed-segments"
     ];
-    enableZshIntegration = true;
     validateFiles.config = true;
 
     settings = {
@@ -140,7 +138,6 @@
 
   programs.zoxide = {
     enable = true;
-    enableZshIntegration = true;
   };
 
   programs.direnv = {
@@ -148,7 +145,6 @@
     mise.enable = config.programs.mise.enable;
     nix-direnv.enable = true;
     enableGitIntegration = true;
-    enableZshIntegration = true;
   };
 
   programs.devenv = {
