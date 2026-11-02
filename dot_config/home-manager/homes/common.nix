@@ -32,9 +32,6 @@ in
     aria2
     btop
     chezmoi
-    delta
-    lsd
-    ripgrep
     tlrc
 
     python314Packages.httpie
@@ -126,6 +123,11 @@ in
 
   programs.keepassxc = {
     enable = enableGuiTools;
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
   };
 
   # Let Home Manager install and manage itself.

@@ -46,7 +46,7 @@
       # Added by Toolbox App
       export PATH="$PATH:/Users/scaletto/Library/Scripts/JB_Toolbox/"
 
-      eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+      [[ -f /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 
       case ":$PATH:" in *":$HOME/.local/bin:"*) ;; *) export PATH="$HOME/.local/bin:$PATH" ;; esac
     '';
@@ -81,9 +81,6 @@
     ];
     shellAliases = {
       cls = "clear";
-
-      ls = "lsd";
-      ll = "lsd -Al";
 
       cat = "bat";
       nvy = "neovide";
@@ -131,7 +128,7 @@
       };
       nix_shell = {
         symbol = "❄️";
-        format = "[$symbol]";
+        format = "[$symbol$state]($style)";
       };
     };
   };
@@ -150,6 +147,14 @@
   programs.devenv = {
     enable = true;
     enableFishIntegration = true;
+  };
+
+  programs.ripgrep = {
+    enable = true;
+  };
+
+  programs.lsd = {
+    enable = true;
   };
 
   programs.fastfetch = {
