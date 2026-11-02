@@ -3,10 +3,6 @@
   ...
 }:
 {
-  home.packages = with pkgs; [
-    tmuxinator
-  ];
-
   programs.zsh.shellAliases.mux = "tmuxinator";
 
   programs.tmux = {
@@ -34,5 +30,9 @@
       set -g status-right-length 100
       set -g status-interval 2
     '';
+
+    tmuxinator = {
+      enable = true;
+    };
   };
 }
