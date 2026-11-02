@@ -75,6 +75,7 @@ in
         assume_yes = true;
 
         first = [
+          "nix"
           "chezmoi"
           "home_manager"
         ];
@@ -86,6 +87,7 @@ in
           "pnpm"
           "mise"
           "node"
+          "tmux"
         ]
         ++ pkgs.lib.optionals isLinux [
           "config_update"
@@ -93,7 +95,6 @@ in
         ++ pkgs.lib.optionals isDarwin [
           "ruby_gems"
           "gem"
-          "tmux"
         ];
 
         ignore_failures = [
