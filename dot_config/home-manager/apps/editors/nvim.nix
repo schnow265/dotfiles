@@ -35,9 +35,11 @@
       # mason.nvim package managers
       go
       cargo
-      nodejs
-      ruby
     ];
+
+    withNodeJs = true;
+    withPython3 = true;
+    withRuby = true;
   };
 
   programs.neovide = {
