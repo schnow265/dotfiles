@@ -6,6 +6,7 @@
 {
   programs.zsh = {
     enable = true;
+    package = null;
     initContent = ''
       # Keybindings
       bindkey " " magic-space
