@@ -83,7 +83,6 @@ in
         disable = [
           "system"
           "shell"
-          "vim"
           "pnpm"
           "mise"
           "node"
@@ -100,7 +99,6 @@ in
         ignore_failures = [
           "powershell"
           "nix"
-          "pi"
           "vcpkg"
         ]
         ++ pkgs.lib.optionals isDarwin [
