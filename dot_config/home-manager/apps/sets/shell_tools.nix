@@ -124,12 +124,13 @@
         "slnx"
       ];
       elixir = {
-        format = "\[[$symbol($version-otp-$otp_version)]($style)\]";
-        version_format = "$\{raw}";
+        format = "\\[[$symbol($version-otp-$otp_version)]($style)\\]";
+        version_format = "\${raw}";
+        symbol = " ";
       };
       nix_shell = {
-        symbol = "❄️";
-        format = "[$symbol$state]($style)";
+        symbol = "󱄅 ";
+        format = "\\[[$symbol$state]($style)\\]";
       };
     };
   };
