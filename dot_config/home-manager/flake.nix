@@ -4,6 +4,9 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixlocked.url = "github:nixos/nixpkgs/nixos-26.05";
+    nixmaster.url = "github:nixos/nixpkgs";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,6 +47,10 @@
           modules,
           extraSpecialArgs ? { },
         }:
+        let
+          lockedPkgs = inputs.nixlocked.legacyPackages.${system};
+          masterPkgs = inputs.nixmaster.legacyPackages.${system};
+        in
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             inherit system;
@@ -67,6 +74,8 @@
             aiAdditions = false; # funny haha ai stuff.
 
             inherit
+              lockedPkgs
+              masterPkgs
               inputs
               username
               system
