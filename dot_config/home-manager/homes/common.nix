@@ -1,5 +1,6 @@
 {
   pkgs,
+  masterPkgs,
   username,
   enableGuiTools ? false,
   inputs,
@@ -122,6 +123,7 @@ in
 
   programs.keepassxc = {
     enable = enableGuiTools;
+    package = masterPkgs.keepassxc;
   };
 
   programs.delta = {
