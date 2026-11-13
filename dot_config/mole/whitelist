@@ -1,7 +1,0 @@
-# Mole Whitelist - Protected paths won't be deleted
-# Default protections: Playwright browsers, Ollama models, Surge Mac, R renv, Finder metadata
-# Add one pattern per line to keep items safe.
-
-~/.cache/huggingface/*
-~/Library/Application Support/JetBrains*
-~/LLama/*

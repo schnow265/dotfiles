@@ -17,4 +17,12 @@
     CXX = "/usr/bin/clang++";
     HOMEBREW_CASK_OPTS = "--appdir='/Users/scaletto/Applications/Homebrew'";
   };
+
+  home.file = {
+    ".config/mole/whitelist".text = ''
+      ~/.cache/huggingface/*
+      ~/Library/Application Support/JetBrains*
+      ~/LLama/*
+    '';
+  };
 }
