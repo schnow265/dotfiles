@@ -18,6 +18,7 @@
       (sourcegit.overrideAttrs (oldAttrs: {
         runtimePathDeps = (oldAttrs.runtimePathDeps or [ ]) ++ [
           git-lfs
+          git-xet
         ];
       }))
     ];
